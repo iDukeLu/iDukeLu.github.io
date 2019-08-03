@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="List 接口简介 对于 List 接口，Java的官方文档这样提到：  A List is an ordered Collection (sometimes called a sequence). Lists may contain duplicate elements. In addition to the operations inherited from Collection, the">
+<meta name="keywords" content="Java,Collections">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 集合框架(List 接口)">
+<meta property="og:url" content="http://yoursite.com/Java-集合框架(List-接口)/index.html">
+<meta property="og:site_name" content="山外小楼">
+<meta property="og:description" content="List 接口简介 对于 List 接口，Java的官方文档这样提到：  A List is an ordered Collection (sometimes called a sequence). Lists may contain duplicate elements. In addition to the operations inherited from Collection, the">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-03T09:36:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 集合框架(List 接口)">
+<meta name="twitter:description" content="List 接口简介 对于 List 接口，Java的官方文档这样提到：  A List is an ordered Collection (sometimes called a sequence). Lists may contain duplicate elements. In addition to the operations inherited from Collection, the">
+  <link rel="canonical" href="http://yoursite.com/Java-集合框架(List-接口)/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java 集合框架(List 接口) | 山外小楼</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">山外小楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Duke'Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+    
+
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java-集合框架(List-接口)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Java 集合框架(List 接口)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-02 19:11:24" itemprop="dateCreated datePublished" datetime="2017-09-02T19:11:24+08:00">2017-09-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="list-接口简介"><a class="header-anchor" href="#list-接口简介"></a>List 接口简介</h2>
+<p>对于 List 接口，Java的官方文档这样提到：</p>
+<blockquote>
+<p>A List is an ordered Collection (sometimes called a sequence). Lists may contain duplicate elements. In addition to the operations inherited from Collection, the List interface includes operations for the following:</p>
+<ul>
+<li>Positional access — manipulates elements based on their numerical position in the list. This includes methods such as get, set, add, addAll, and remove.</li>
+<li>Search — searches for a specified object in the list and returns its numerical position. Search methods include indexOf and lastIndexOf.</li>
+<li>Iteration — extends Iterator semantics to take advantage of the list’s sequential nature. The listIterator methods provide this behavior.</li>
+<li>Range-view — The sublist method performs arbitrary range operations on the list.</li>
+</ul>
+</blockquote>
+<p>大概讲的就是：</p>
+<ul>
+<li><code>List</code> 表示可以包含重复元素的有序集合</li>
+<li><code>List</code> 额外提供了以下操作：
+<ul>
+<li>位置访问(Positional access)：根据索引访问元素</li>
+<li>搜索(Search)：搜索元素，返回其索引</li>
+<li>迭代(Iteration)：提供额外操作的迭代器 <code>listIterator</code></li>
+<li>范围视图(Range-view)：提供 <code>sublist</code> 方法对任意范围操作</li>
+</ul>
+</li>
+</ul>
+<p>然后讲 <code>List</code> 的实现：</p>
+<blockquote>
+<p>The Java platform contains two general-purpose <code>List</code> implementations. <code>ArrayList</code>, which is usually the better-performing implementation, and <code>LinkedList</code> which offers better performance under certain circumstances.</p>
+</blockquote>
+<p>这里讲的很简单，概括下就几句话：</p>
+<ul>
+<li><code>List</code> 接口包含了2个通用实现(general-purpose implements)：<code>ArrayList</code>、<code>LinkedList</code></li>
+<li><code>ArrayList</code>：性能最好的实现</li>
+<li><code>LinkedList</code>：在某些情况下性能更好</li>
+</ul>
+<hr>
+<h2 id="list-接口相关操作"><a class="header-anchor" href="#list-接口相关操作"></a>List 接口相关操作</h2>
+<p><code>List</code> 接口的方法除了继承自 <code>Collection</code> 接口的操作：<br>
+    <strong>基础操作</strong>、<strong>批量操作</strong>、<strong>数组操作</strong>、以及 JDK1.8 后提供的<strong>聚合操作</strong><br>
+还包括前面提到的额外操作：<br>
+    <strong>位置访问</strong>、<strong>搜索</strong>、<strong>迭代</strong>、<strong>范围视图</strong></p>
+<p>继承自 <code>Collection</code> 接口的操作:</p>
+<ul>
+<li>基础操作(Basic Operations)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int size() // 返回集合中元素的个数</span><br><span class="line">boolean isEmpty() // 判断集合是否存在元素</span><br><span class="line">boolean contains(Object element) // 判断集合是否包含</span><br><span class="line">boolean add(E element) // 添加元素</span><br><span class="line">boolean remove(Object element) // 删除元素</span><br><span class="line">Iterator&lt;E&gt; iterator() // 获取该集合的迭代器</span><br></pre></td></tr></table></figure>
+<ul>
+<li>批量操作(Bulk Operations)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">boolean containsAll(Collection&lt;?&gt; c) // 包含</span><br><span class="line">boolean addAll(Collection&lt;? extends E&gt; c) //并集</span><br><span class="line">boolean removeAll(Collection&lt;?&gt; c) // 差集</span><br><span class="line">boolean retainAll(Collection&lt;?&gt; c) // 交集</span><br><span class="line">void clear() // 清空</span><br></pre></td></tr></table></figure>
+<ul>
+<li>数组操作(Array Operations)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object[] toArray() // 集合转换为数组</span><br><span class="line">&lt;T&gt; T[] toArray(T[] a)  // 集合转换为指定类型的数组</span><br></pre></td></tr></table></figure>
+<p><code>List</code> 接口提供的额外操作：</p>
+<ul>
+<li>位置访问(Array Operations)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object[] toArray() // 集合转换为数组</span><br><span class="line">&lt;T&gt; T[] toArray(T[] a)  // 集合转换为指定类型的数组</span><br></pre></td></tr></table></figure>
+<ul>
+<li>位置访问(Positional access)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">E get(int index)</span><br><span class="line">E set(int index, E element)</span><br><span class="line">void add(int index, E element)</span><br><span class="line">E remove(int index)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>搜索(Search)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int indexOf(Object o)</span><br><span class="line">int lastIndexOf(Object o)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>迭代(Iteration)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ListIterator&lt;E&gt; listIterator();</span><br><span class="line">ListIterator&lt;E&gt; listIterator(int index);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>范围视图(Range-view)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;E&gt; subList(int fromIndex, int toIndex)</span><br></pre></td></tr></table></figure>
+<p>最后简单说两点，关于迭代和范围视图：</p>
+<ul>
+<li>关于迭代(Iteration)<br>
+<code>List</code> 接口提供了专门的迭代器 <code>ListIterator</code>，用于迭代 <code>List</code> 集合。<br>
+<code>ListIterator</code> 接口如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public interface ListIterator&lt;E&gt; extends Iterator&lt;E&gt; &#123;</span><br><span class="line">    boolean hasNext();</span><br><span class="line">    E next();</span><br><span class="line">    boolean hasPrevious();</span><br><span class="line">    E previous();</span><br><span class="line">    int nextIndex();</span><br><span class="line">    int previousIndex();</span><br><span class="line">    void remove();</span><br><span class="line">    void set(E e);</span><br><span class="line">    void add(E e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，这个专门的迭代器 <code>ListIterator</code> 提供了很多额外的方法：</p>
+<ul>
+<li>支持向前向后进行<strong>迭代</strong>和<strong>获取索引</strong>操作</li>
+<li>以及<strong>增</strong>、<strong>删</strong>、<strong>改</strong>操作</li>
+</ul>
+<p>这些方法大大增强了迭代器，使得我们能更好的操作 <code>List</code> 集合。关于这些操作，这里就不做演示了，有兴趣的朋友可以试着自己写点小 Demo。</p>
+<ul>
+<li>范围视图(Range-view)<br>
+范围视图，顾名思义，指的就是 <code>subList()</code> 这个方法返回的子集合。<br>
+需要注意一点的是：<code>subList()</code> 返回的子集合是依赖于原集合的，故，在操作子集合的时候不能改变原集合的结构(即，原集合的大小)。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(1, 2, 3, 4, 5, 6, 7));</span><br><span class="line">List&lt;Integer&gt; subListt = list.subList(1, 4);</span><br><span class="line">list.add(8); // 改变了原集合的结构</span><br><span class="line">subListt.add(9); // 抛出异常 ConcurrentModificationException</span><br></pre></td></tr></table></figure>
+<hr>
+<p>更多参考：<a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/list.html" target="_blank" rel="noopener">The List Interface (The Java™ Tutorials &gt; Collections &gt; Interfaces)</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Collections/" rel="tag"># Collections</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/Java-集合框架(Set-接口)/" rel="next" title="Java 集合框架(Set 接口)">
+                <i class="fa fa-chevron-left"></i> Java 集合框架(Set 接口)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/Java-集合框架(Queue-接口)/" rel="prev" title="Java 集合框架(Queue 接口)">
+                Java 集合框架(Queue 接口) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Duke Lu</p>
+  <div class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish. Think Different.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#list-接口简介"><span class="nav-number">1.</span> <span class="nav-text">List 接口简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-接口相关操作"><span class="nav-number">2.</span> <span class="nav-text">List 接口相关操作</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Duke Lu</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

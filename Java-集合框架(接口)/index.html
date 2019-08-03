@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="核心集合接口概述 Java 集合框架的核心接口，主要由两颗树组成：java.util.Collection、java.util.Map 它们层次结构关系，如下图：  Java 官方文档中提到：  The core collection interfaces encapsulate different types of collections. These interfaces allow col">
+<meta name="keywords" content="Java,Collections">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 集合框架(接口)">
+<meta property="og:url" content="http://yoursite.com/Java-集合框架(接口)/index.html">
+<meta property="og:site_name" content="山外小楼">
+<meta property="og:description" content="核心集合接口概述 Java 集合框架的核心接口，主要由两颗树组成：java.util.Collection、java.util.Map 它们层次结构关系，如下图：  Java 官方文档中提到：  The core collection interfaces encapsulate different types of collections. These interfaces allow col">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12158715-be8f156110044441.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-08-03T09:36:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 集合框架(接口)">
+<meta name="twitter:description" content="核心集合接口概述 Java 集合框架的核心接口，主要由两颗树组成：java.util.Collection、java.util.Map 它们层次结构关系，如下图：  Java 官方文档中提到：  The core collection interfaces encapsulate different types of collections. These interfaces allow col">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/12158715-be8f156110044441.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  <link rel="canonical" href="http://yoursite.com/Java-集合框架(接口)/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java 集合框架(接口) | 山外小楼</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">山外小楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Duke'Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+    
+
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java-集合框架(接口)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Java 集合框架(接口)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-12 20:11:24" itemprop="dateCreated datePublished" datetime="2017-08-12T20:11:24+08:00">2017-08-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="核心集合接口概述"><a class="header-anchor" href="#核心集合接口概述"></a>核心集合接口概述</h2>
+<p>Java 集合框架的核心接口，主要由两颗树组成：java.util.Collection、java.util.Map<br>
+它们层次结构关系，如下图：<br>
+<img src="https://upload-images.jianshu.io/upload_images/12158715-be8f156110044441.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Java 集合框架核心接口"></p>
+<p>Java 官方文档中提到：</p>
+<blockquote>
+<p>The core collection interfaces encapsulate different types of collections. These interfaces allow collections to be manipulated independently of the details of their representation. Core collection interfaces are the foundation of the Java Collections Framework. As you can see in the following figure, the core collection interfaces form a hierarchy.</p>
+</blockquote>
+<p>大致是在说，这些核心集合接口：</p>
+<ul>
+<li>封装了不同类型的集合</li>
+<li>允许独立于其表示的细节来操纵集合(多态)</li>
+<li>是Java集合框架的基础</li>
+</ul>
+<p>当然还提到了最重要的一点：</p>
+<blockquote>
+<p>To keep the number of core collection interfaces manageable, the Java platform doesn’t provide separate interfaces for each variant of each collection type. (Such variants might include immutable, fixed-size, and append-only.) Instead, the modification operations in each interface are designated <em>optional</em> — a given implementation may elect not to support all operations. If an unsupported operation is invoked, a collection throws an <code>UnsupportedOperationException</code>. Implementations are responsible for documenting which of the optional operations they support. All of the Java platform’s general-purpose implementations support all of the optional operations.</p>
+</blockquote>
+<p>这里主要讲的是：<br>
+Java 平台为控制核心集合接口的数量，不会为特殊实现(即：变体)提供单独的接口，而是采取另一种方式：每个接口的修改方法都是可选的(optional)。<br>
+怎么理解呢，说白了，就是实现类在实现接口的时候，可以选择性的实现这些方法。若调用了没有实现的方法，就会抛出异常：<code>UnsupportedOperationException</code>。<br>
+(在提一点：在阅读源码的时候，如果你看到 <code>optional operation</code> 这样的文字，就是在说明，该方法是一个可选方法)</p>
+<hr>
+<h2 id="核心集合接口描述"><a class="header-anchor" href="#核心集合接口描述"></a>核心集合接口描述</h2>
+<p>Java 官方文档中的描述：</p>
+<blockquote>
+<p>The following list describes the core collection interfaces:</p>
+<ul>
+<li><code>Collection</code> — the root of the collection hierarchy. A collection represents a group of objects known as its <em>elements</em>. The <code>Collection</code> interface is the least common denominator that all collections implement and is used to pass collections around and to manipulate them when maximum generality is desired. Some types of collections allow duplicate elements, and others do not. Some are ordered and others are unordered. The Java platform doesn’t provide any direct implementations of this interface but provides implementations of more specific subinterfaces, such as <code>Set</code> and <code>List</code>.</li>
+<li><code>Set</code> — a collection that cannot contain duplicate elements. This interface models the mathematical set abstraction and is used to represent sets, such as the cards comprising a poker hand, the courses making up a student’s schedule, or the processes running on a machine.</li>
+<li><code>List</code> — an ordered collection (sometimes called a <em>sequence</em>). <code>List</code>s can contain duplicate elements. The user of a <code>List</code> generally has precise control over where in the list each element is inserted and can access elements by their integer index (position). If you’ve used <code>Vector</code>, you’re familiar with the general flavor of <code>List</code>.</li>
+<li><code>Queue</code> — a collection used to hold multiple elements prior to processing. Besides basic <code>Collection</code> operations, a <code>Queue</code> provides additional insertion, extraction, and inspection operations.<br>
+Queues typically, but do not necessarily, order elements in a FIFO (first-in, first-out) manner. Among the exceptions are priority queues, which order elements according to a supplied comparator or the elements’ natural ordering. Whatever the ordering used, the head of the queue is the element that would be removed by a call to <code>remove</code> or <code>poll</code>. In a FIFO queue, all new elements are inserted at the tail of the queue. Other kinds of queues may use different placement rules. Every <code>Queue</code> implementation must specify its ordering properties.</li>
+<li><code>Deque</code> — a collection used to hold multiple elements prior to processing. Besides basic <code>Collection</code> operations, a <code>Deque</code> provides additional insertion, extraction, and inspection operations.<br>
+Deques can be used both as FIFO (first-in, first-out) and LIFO (last-in, first-out). In a deque all new elements can be inserted, retrieved and removed at both ends.</li>
+<li><code>Map</code> — an object that maps keys to values. A <code>Map</code> cannot contain duplicate keys; each key can map to at most one value. If you’ve used <code>Hashtable</code>, you’re already familiar with the basics of <code>Map</code>.</li>
+</ul>
+</blockquote>
+<p>精简一下，差不多就这个意思：</p>
+<ul>
+<li><code>Collection</code>：集合层次结构的根。</li>
+<li><code>Set</code>：不能包含重复元素的集合。</li>
+<li><code>List</code>：有序集合(有时称为序列)。可以包含重复的元素。</li>
+<li><code>Queues</code>：用于在处理之前保存多个元素的集合。除了基本的收集操作之外，队列还提供额外的插入、提取和检查操作。<code>Queues</code>通常(但不一定)以FIFO(先入先出)的方式对元素进行排序。</li>
+<li><code>Deque</code>：用于在处理之前保存多个元素的集合。除了基本的收集操作之外，队列还提供额外的插入、提取和检查操作。<code>Deques</code> 可以同时用作FIFO(先入先出)和LIFO(后入先出)。在Deques中，所有新元素都可以在两端插入、检索和删除。</li>
+<li><code>Map</code>：将键映射到值的对象。<code>Map</code> 不能包含重复的键；每个键最多可以映射到一个值。</li>
+</ul>
+<p>还有两个排序的版本：</p>
+<blockquote>
+<p>The last two core collection interfaces are merely sorted versions of <code>Set</code> and <code>Map</code>:</p>
+<ul>
+<li><code>SortedSet</code> — a <code>Set</code> that maintains its elements in ascending order. Several additional operations are provided to take advantage of the ordering. Sorted sets are used for naturally ordered sets, such as word lists and membership rolls.</li>
+<li><code>SortedMap</code> — a <code>Map</code> that maintains its mappings in ascending key order. This is the <code>Map</code> analog of <code>SortedSet</code>. Sorted maps are used for naturally ordered collections of key/value pairs, such as dictionaries and telephone directories.</li>
+</ul>
+</blockquote>
+<p>讲的是 <code>Set</code> 和 <code>Map</code> 的排序版本:</p>
+<ul>
+<li><code>SortedSet</code>：以升序维护其元素的集合。还提供了一些额外的操作来利用排序。排序集用于自然排序集，例如单词列表和成员列表。</li>
+<li><code>SortedMap</code>：以升序键顺序维护映射的映射。这是SortedSet的映射模拟。排序映射用于自然排序的键/值对集合。</li>
+</ul>
+<hr>
+<p>更多参考：<br>
+<a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/index.html" target="_blank" rel="noopener">Interfaces (The Java™ Tutorials &gt; Collections)</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Collections/" rel="tag"># Collections</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/Java-集合框架简介/" rel="next" title="Java 集合框架简介">
+                <i class="fa fa-chevron-left"></i> Java 集合框架简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/Java-集合框架(Collection-接口)/" rel="prev" title="Java 集合框架(Collection 接口)">
+                Java 集合框架(Collection 接口) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Duke Lu</p>
+  <div class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish. Think Different.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心集合接口概述"><span class="nav-number">1.</span> <span class="nav-text">核心集合接口概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心集合接口描述"><span class="nav-number">2.</span> <span class="nav-text">核心集合接口描述</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Duke Lu</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

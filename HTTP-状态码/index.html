@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="HTTP 响应状态代码：指示特定 HTTP 请求是否已成功完成。 响应分为五类：  信息响应 成功响应 重定向 客户端错误 服务器错误  状态代码由 section 10 of RFC 2616  1、信息响应 100 Continue 这个临时响应表明，迄今为止的所有内容都是可行的，客户端应该继续请求，如果已经完成，则忽略它。 101 Switching Protocol 该代码是响应客户">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 状态码">
+<meta property="og:url" content="http://yoursite.com/HTTP-状态码/index.html">
+<meta property="og:site_name" content="山外小楼">
+<meta property="og:description" content="HTTP 响应状态代码：指示特定 HTTP 请求是否已成功完成。 响应分为五类：  信息响应 成功响应 重定向 客户端错误 服务器错误  状态代码由 section 10 of RFC 2616  1、信息响应 100 Continue 这个临时响应表明，迄今为止的所有内容都是可行的，客户端应该继续请求，如果已经完成，则忽略它。 101 Switching Protocol 该代码是响应客户">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-03T09:36:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP 状态码">
+<meta name="twitter:description" content="HTTP 响应状态代码：指示特定 HTTP 请求是否已成功完成。 响应分为五类：  信息响应 成功响应 重定向 客户端错误 服务器错误  状态代码由 section 10 of RFC 2616  1、信息响应 100 Continue 这个临时响应表明，迄今为止的所有内容都是可行的，客户端应该继续请求，如果已经完成，则忽略它。 101 Switching Protocol 该代码是响应客户">
+  <link rel="canonical" href="http://yoursite.com/HTTP-状态码/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HTTP 状态码 | 山外小楼</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">山外小楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Duke'Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+    
+
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/HTTP-状态码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">HTTP 状态码
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-19 17:51:24" itemprop="dateCreated datePublished" datetime="2018-05-19T17:51:24+08:00">2018-05-19</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>HTTP 响应状态代码：指示特定 <code>HTTP</code> 请求是否已成功完成。</p>
+<p>响应分为五类：</p>
+<ol>
+<li>信息响应</li>
+<li>成功响应</li>
+<li>重定向</li>
+<li>客户端错误</li>
+<li>服务器错误</li>
+</ol>
+<p>状态代码由 <code>section 10 of RFC 2616</code></p>
+<hr>
+<h2 id="1-信息响应"><a class="header-anchor" href="#1-信息响应"></a>1、信息响应</h2>
+<h3 id="100-continue"><a class="header-anchor" href="#100-continue"></a>100 Continue</h3>
+<p>这个临时响应表明，迄今为止的所有内容都是可行的，客户端应该继续请求，如果已经完成，则忽略它。</p>
+<h3 id="101-switching-protocol"><a class="header-anchor" href="#101-switching-protocol"></a>101 Switching Protocol</h3>
+<p>该代码是响应客户端的 Upgrade 标头发送的，并且指示服务器也正在切换的协议。</p>
+<h3 id="102-processing-webdav"><a class="header-anchor" href="#102-processing-webdav"></a>102 Processing (WebDAV)</h3>
+<p>此代码表示服务器已收到并正在处理该请求，但没有响应可用。</p>
+<hr>
+<h2 id="2-成功响应"><a class="header-anchor" href="#2-成功响应"></a>2、成功响应</h2>
+<h3 id="200-ok"><a class="header-anchor" href="#200-ok"></a>200 OK</h3>
+<p>请求成功。成功的含义取决于HTTP方法：<br>
+GET：资源已被提取并在消息正文中传输。<br>
+HEAD：实体标头位于消息正文中。<br>
+POST：描述动作结果的资源在消息体中传输。<br>
+TRACE：消息正文包含服务器收到的请求消息</p>
+<h3 id="201-created"><a class="header-anchor" href="#201-created"></a>201 Created</h3>
+<p>该请求已成功，并因此创建了一个新的资源。这通常是在PUT请求之后发送的响应。</p>
+<h3 id="202-accepted"><a class="header-anchor" href="#202-accepted"></a>202 Accepted</h3>
+<p>请求已经接收到，但还未响应，没有结果。意味着不会有一个异步的响应去表明当前请求的结果，预期另外的进程和服务去处理请求，或者批处理。</p>
+<h3 id="203-non-authoritative-information"><a class="header-anchor" href="#203-non-authoritative-information"></a>203 Non-Authoritative Information</h3>
+<p>服务器已成功处理了请求，但返回的实体头部元信息不是在原始服务器上有效的确定集合，而是来自本地或者第三方的拷贝。当前的信息可能是原始版本的子集或者超集。例如，包含资源的元数据可能导致原始服务器知道元信息的超集。使用此状态码不是必须的，而且只有在响应不使用此状态码便会返回200 OK的情况下才是合适的。</p>
+<h3 id="204-no-content"><a class="header-anchor" href="#204-no-content"></a>204 No Content</h3>
+<p>服务器成功处理了请求，但不需要返回任何实体内容，并且希望返回更新了的元信息。响应可能通过实体头部的形式，返回新的或更新后的元信息。如果存在这些头部信息，则应当与所请求的变量相呼应。如果客户端是浏览器的话，那么用户浏览器应保留发送了该请求的页面，而不产生任何文档视图上的变化，即使按照规范新的或更新后的元信息应当被应用到用户浏览器活动视图中的文档。由于204响应被禁止包含任何消息体，因此它始终以消息头后的第一个空行结尾。</p>
+<h3 id="205-reset-content"><a class="header-anchor" href="#205-reset-content"></a>205 Reset Content</h3>
+<p>服务器成功处理了请求，且没有返回任何内容。但是与204响应不同，返回此状态码的响应要求请求者重置文档视图。该响应主要是被用于接受用户输入后，立即重置表单，以便用户能够轻松地开始另一次输入。与204响应一样，该响应也被禁止包含任何消息体，且以消息头后的第一个空行结束。</p>
+<h3 id="206-partial-content"><a class="header-anchor" href="#206-partial-content"></a>206 Partial Content</h3>
+<p>服务器已经成功处理了部分 GET 请求。类似于 FlashGet 或者迅雷这类的 HTTP 下载工具都是使用此类响应实现断点续传或者将一个大文档分解为多个下载段同时下载。该请求必须包含 Range 头信息来指示客户端希望得到的内容范围，并且可能包含 If-Range 来作为请求条件。</p>
+<h3 id="207-multi-status-webdav"><a class="header-anchor" href="#207-multi-status-webdav"></a>207 Multi-Status (WebDAV)</h3>
+<p>由WebDAV(RFC 2518)扩展的状态码，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。</p>
+<h3 id="208-multi-status-webdav"><a class="header-anchor" href="#208-multi-status-webdav"></a>208 Multi-Status (WebDAV)</h3>
+<p>在 DAV 里面使用: propstat 响应元素以避免重复枚举多个绑定的内部成员到同一个集合。</p>
+<h3 id="226-im-used-http-delta-encoding"><a class="header-anchor" href="#226-im-used-http-delta-encoding"></a>226 IM Used (HTTP Delta encoding)</h3>
+<p>服务器已经完成了对资源的 GET 请求，并且响应是对当前实例应用的一个或多个实例操作结果的表示。</p>
+<hr>
+<h2 id="3-重定向"><a class="header-anchor" href="#3-重定向"></a>3、重定向</h2>
+<h3 id="300-multiple-choice"><a class="header-anchor" href="#300-multiple-choice"></a>300 Multiple Choice</h3>
+<p>被请求的资源有一系列可供选择的回馈信息，每个都有自己特定的地址和浏览器驱动的商议信息。用户或浏览器能够自行选择一个首选的地址进行重定向。</p>
+<h3 id="301-moved-permanently"><a class="header-anchor" href="#301-moved-permanently"></a>301 Moved Permanently</h3>
+<p>被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个 URI 之一。如果可能，拥有链接编辑功能的客户端应当自动把请求的地址修改为从服务器反馈回来的地址。除非额外指定，否则这个响应也是可缓存的。</p>
+<h3 id="302-found"><a class="header-anchor" href="#302-found"></a>302 Found</h3>
+<p>请求的资源现在临时从不同的 URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。</p>
+<h3 id="303-see-other"><a class="header-anchor" href="#303-see-other"></a>303 See Other</h3>
+<p>对应当前请求的响应可以在另一个 URI 上被找到，而且客户端应当采用 GET 的方式访问那个资源。这个方法的存在主要是为了允许由脚本激活的POST请求输出重定向到一个新的资源。</p>
+<h3 id="304-not-modified"><a class="header-anchor" href="#304-not-modified"></a>304 Not Modified</h3>
+<p>如果客户端发送了一个带条件的 GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个状态码。304 响应禁止包含消息体，因此始终以消息头后的第一个空行结尾。</p>
+<h3 id="305-use-proxy"><a class="header-anchor" href="#305-use-proxy"></a>305 Use Proxy</h3>
+<p>被请求的资源必须通过指定的代理才能被访问。Location 域中将给出指定的代理所在的 URI 信息，接收者需要重复发送一个单独的请求，通过这个代理才能访问相应资源。只有原始服务器才能建立305响应。</p>
+<h3 id="306-unused"><a class="header-anchor" href="#306-unused"></a>306 unused</h3>
+<p>在最新版的规范中，306 状态码已经不再被使用。</p>
+<h3 id="307-temporary-redirect"><a class="header-anchor" href="#307-temporary-redirect"></a>307 Temporary Redirect</h3>
+<p>请求的资源现在临时从不同的URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。</p>
+<h3 id="308-permanent-redirect"><a class="header-anchor" href="#308-permanent-redirect"></a>308 Permanent Redirect</h3>
+<p>这意味着资源现在永久位于由 Location: HTTP Response 标头指定的另一个 URI。 这与 301 Moved Permanently HTTP 响应代码具有相同的语义，但用户代理不能更改所使用的 HTTP 方法：如果在第一个请求中使用 POST，则必须在第二个请求中使用 POST。</p>
+<hr>
+<h2 id="4-客户端响应"><a class="header-anchor" href="#4-客户端响应"></a>4、客户端响应</h2>
+<h3 id="400-bad-request"><a class="header-anchor" href="#400-bad-request"></a>400 Bad Request</h3>
+<p>1、语义有误，当前请求无法被服务器理解。除非进行修改，否则客户端不应该重复提交这个请求。<br>
+2、请求参数有误。</p>
+<h3 id="401-unauthorized"><a class="header-anchor" href="#401-unauthorized"></a>401 Unauthorized</h3>
+<p>当前请求需要用户验证。该响应必须包含一个适用于被请求资源的 WWW-Authenticate 信息头用以询问用户信息。客户端可以重复提交一个包含恰当的 Authorization 头信息的请求。如果当前请求已经包含了 Authorization 证书，那么401响应代表着服务器验证已经拒绝了那些证书。如果401响应包含了与前一个响应相同的身份验证询问，且浏览器已经至少尝试了一次验证，那么浏览器应当向用户展示响应中包含的实体信息，因为这个实体信息中可能包含了相关诊断信息。</p>
+<h3 id="402-payment-required"><a class="header-anchor" href="#402-payment-required"></a>402 Payment Required</h3>
+<p>此响应码保留以便将来使用，创造此响应码的最初目的是用于数字支付系统，然而现在并未使用。</p>
+<h3 id="403-forbidden"><a class="header-anchor" href="#403-forbidden"></a>403 Forbidden</h3>
+<p>服务器已经理解请求，但是拒绝执行它。与 401 响应不同的是，身份验证并不能提供任何帮助，而且这个请求也不应该被重复提交。如果这不是一个 HEAD 请求，而且服务器希望能够讲清楚为何请求不能被执行，那么就应该在实体内描述拒绝的原因。当然服务器也可以返回一个 404 响应，假如它不希望让客户端获得任何信息。</p>
+<h3 id="404-not-found"><a class="header-anchor" href="#404-not-found"></a>404 Not Found</h3>
+<p>请求失败，请求所希望得到的资源未被在服务器上发现。没有信息能够告诉用户这个状况到底是暂时的还是永久的。假如服务器知道情况的话，应当使用410状态码来告知旧资源因为某些内部的配置机制问题，已经永久的不可用，而且没有任何可以跳转的地址。404这个状态码被广泛应用于当服务器不想揭示到底为何请求被拒绝或者没有其他适合的响应可用的情况下。</p>
+<h3 id="405-method-not-allowed"><a class="header-anchor" href="#405-method-not-allowed"></a>405 Method Not Allowed</h3>
+<p>请求行中指定的请求方法不能被用于请求相应的资源。该响应必须返回一个Allow 头信息用以表示出当前资源能够接受的请求方法的列表。 　　鉴于 PUT，DELETE 方法会对服务器上的资源进行写操作，因而绝大部分的网页服务器都不支持或者在默认配置下不允许上述请求方法，对于此类请求均会返回405错误。</p>
+<h3 id="406-not-acceptable"><a class="header-anchor" href="#406-not-acceptable"></a>406 Not Acceptable</h3>
+<p>请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体。</p>
+<h3 id="407-proxy-authentication-required"><a class="header-anchor" href="#407-proxy-authentication-required"></a>407 Proxy Authentication Required</h3>
+<p>与401响应类似，只不过客户端必须在代理服务器上进行身份验证。代理服务器必须返回一个 Proxy-Authenticate 用以进行身份询问。客户端可以返回一个 Proxy-Authorization 信息头用以验证。</p>
+<h3 id="408-request-timeout"><a class="header-anchor" href="#408-request-timeout"></a>408 Request Timeout</h3>
+<p>请求超时。客户端没有在服务器预备等待的时间内完成一个请求的发送。客户端可以随时再次提交这一请求而无需进行任何更改。</p>
+<h3 id="409-conflict"><a class="header-anchor" href="#409-conflict"></a>409 Conflict</h3>
+<p>由于和被请求的资源的当前状态之间存在冲突，请求无法完成。这个代码只允许用在这样的情况下才能被使用：用户被认为能够解决冲突，并且会重新提交新的请求。该响应应当包含足够的信息以便用户发现冲突的源头。</p>
+<h3 id="410-gone"><a class="header-anchor" href="#410-gone"></a>410 Gone</h3>
+<p>被请求的资源在服务器上已经不再可用，而且没有任何已知的转发地址。这样的状况应当被认为是永久性的。如果可能，拥有链接编辑功能的客户端应当在获得用户许可后删除所有指向这个地址的引用。如果服务器不知道或者无法确定这个状况是否是永久的，那么就应该使用 404 状态码。除非额外说明，否则这个响应是可缓存的。</p>
+<h3 id="411-length-required"><a class="header-anchor" href="#411-length-required"></a>411 Length Required</h3>
+<p>服务器拒绝在没有定义 Content-Length 头的情况下接受请求。在添加了表明请求消息体长度的有效 Content-Length 头之后，客户端可以再次提交该请求。</p>
+<h3 id="412-precondition-failed"><a class="header-anchor" href="#412-precondition-failed"></a>412 Precondition Failed</h3>
+<p>服务器在验证在请求的头字段中给出先决条件时，没能满足其中的一个或多个。这个状态码允许客户端在获取资源时在请求的元信息（请求头字段数据）中设置先决条件，以此避免该请求方法被应用到其希望的内容以外的资源上。</p>
+<h3 id="413-payload-too-large"><a class="header-anchor" href="#413-payload-too-large"></a>413 Payload Too Large</h3>
+<p>服务器拒绝处理当前请求，因为该请求提交的实体数据大小超过了服务器愿意或者能够处理的范围。此种情况下，服务器可以关闭连接以免客户端继续发送此请求。如果这个状况是临时的，服务器应当返回一个 Retry-After 的响应头，以告知客户端可以在多少时间以后重新尝试。</p>
+<h3 id="414-uri-too-long"><a class="header-anchor" href="#414-uri-too-long"></a>414 URI Too Long</h3>
+<p>请求的URI 长度超过了服务器能够解释的长度，因此服务器拒绝对该请求提供服务。这比较少见，通常的情况包括：本应使用POST方法的表单提交变成了GET方法，导致查询字符串（Query String）过长。</p>
+<h3 id="415-unsupported-media-type"><a class="header-anchor" href="#415-unsupported-media-type"></a>415 Unsupported Media Type</h3>
+<p>对于当前请求的方法和所请求的资源，请求中提交的实体并不是服务器中所支持的格式，因此请求被拒绝。</p>
+<h3 id="416-requested-range-not-satisfiable"><a class="header-anchor" href="#416-requested-range-not-satisfiable"></a>416 Requested Range Not Satisfiable</h3>
+<p>如果请求中包含了 Range 请求头，并且 Range 中指定的任何数据范围都与当前资源的可用范围不重合，同时请求中又没有定义 If-Range 请求头，那么服务器就应当返回416状态码。</p>
+<h3 id="417-expectation-failed"><a class="header-anchor" href="#417-expectation-failed"></a>417 Expectation Failed</h3>
+<p>此响应代码意味着服务器无法满足 Expect 请求标头字段指示的期望值。</p>
+<h3 id="418-i-m-a-teapot"><a class="header-anchor" href="#418-i-m-a-teapot"></a>418 I’m a teapot</h3>
+<p>服务器拒绝尝试用 “茶壶冲泡咖啡”。</p>
+<h3 id="421-misdirected-request"><a class="header-anchor" href="#421-misdirected-request"></a>421 Misdirected Request</h3>
+<p>该请求针对的是无法产生响应的服务器。 这可以由服务器发送，该服务器未配置为针对包含在请求 URI 中的方案和权限的组合产生响应。</p>
+<h3 id="422-unprocessable-entity-webdav"><a class="header-anchor" href="#422-unprocessable-entity-webdav"></a>422 Unprocessable Entity (WebDAV)</h3>
+<p>请求格式良好，但由于语义错误而无法遵循。</p>
+<h3 id="423-locked-webdav"><a class="header-anchor" href="#423-locked-webdav"></a>423 Locked (WebDAV)</h3>
+<p>正在访问的资源被锁定。</p>
+<h3 id="424-failed-dependency-webdav"><a class="header-anchor" href="#424-failed-dependency-webdav"></a>424 Failed Dependency (WebDAV)</h3>
+<p>由于先前的请求失败，所以此次请求失败。</p>
+<h3 id="426-upgrade-required"><a class="header-anchor" href="#426-upgrade-required"></a>426 Upgrade Required</h3>
+<p>服务器拒绝使用当前协议执行请求，但可能在客户机升级到其他协议后愿意这样做。 服务器在 426 响应中发送 Upgrade 头以指示所需的协议。</p>
+<h3 id="428-precondition-required"><a class="header-anchor" href="#428-precondition-required"></a>428 Precondition Required</h3>
+<p>原始服务器要求该请求是有条件的。 旨在防止“丢失更新”问题，即客户端获取资源状态，修改该状态并将其返回服务器，同时第三方修改服务器上的状态，从而导致冲突。</p>
+<h3 id="429-too-many-requests"><a class="header-anchor" href="#429-too-many-requests"></a>429 Too Many Requests</h3>
+<p>用户在给定的时间内发送了太多请求（“限制请求速率”）。</p>
+<h3 id="431-request-header-fields-too-large"><a class="header-anchor" href="#431-request-header-fields-too-large"></a>431 Request Header Fields Too Large</h3>
+<p>服务器不愿意处理请求，因为它的 请求头字段太大（ Request Header Fields Too Large）。 请求可以在减小请求头字段的大小后重新提交。</p>
+<h3 id="451-unavailable-for-legal-reasons"><a class="header-anchor" href="#451-unavailable-for-legal-reasons"></a>451 Unavailable For Legal Reasons</h3>
+<p>用户请求非法资源，例如：由政府审查的网页。</p>
+<hr>
+<h2 id="5-服务端响应节"><a class="header-anchor" href="#5-服务端响应节"></a>5、服务端响应节</h2>
+<h3 id="500-internal-server-error"><a class="header-anchor" href="#500-internal-server-error"></a>500 Internal Server Error</h3>
+<p>服务器遇到了不知道如何处理的情况。</p>
+<h3 id="501-not-implemented"><a class="header-anchor" href="#501-not-implemented"></a>501 Not Implemented</h3>
+<p>此请求方法不被服务器支持且无法被处理。只有GET和HEAD是要求服务器支持的，它们必定不会返回此错误代码。</p>
+<h3 id="502-bad-gateway"><a class="header-anchor" href="#502-bad-gateway"></a>502 Bad Gateway</h3>
+<p>此错误响应表明服务器作为网关需要得到一个处理这个请求的响应，但是得到一个错误的响应。</p>
+<h3 id="503-service-unavailable"><a class="header-anchor" href="#503-service-unavailable"></a>503 Service Unavailable</h3>
+<p>服务器没有准备好处理请求。 常见原因是服务器因维护或重载而停机。 请注意，与此响应一起，应发送解释问题的用户友好页面。 这个响应应该用于临时条件和 Retry-After：如果可能的话，HTTP头应该包含恢复服务之前的估计时间。 网站管理员还必须注意与此响应一起发送的与缓存相关的标头，因为这些临时条件响应通常不应被缓存。</p>
+<h3 id="504-gateway-timeout"><a class="header-anchor" href="#504-gateway-timeout"></a>504 Gateway Timeout</h3>
+<p>当服务器作为网关，不能及时得到响应时返回此错误代码。</p>
+<h3 id="505-http-version-not-supported"><a class="header-anchor" href="#505-http-version-not-supported"></a>505 HTTP Version Not Supported</h3>
+<p>服务器不支持请求中所使用的HTTP协议版本。</p>
+<h3 id="506-variant-also-negotiates"><a class="header-anchor" href="#506-variant-also-negotiates"></a>506 Variant Also Negotiates</h3>
+<p>服务器有一个内部配置错误：对请求的透明内容协商导致循环引用。</p>
+<h3 id="507-insufficient-storage"><a class="header-anchor" href="#507-insufficient-storage"></a>507 Insufficient Storage</h3>
+<p>服务器有内部配置错误：所选的变体资源被配置为参与透明内容协商本身，因此不是协商过程中的适当端点。</p>
+<h3 id="508-loop-detected-webdav"><a class="header-anchor" href="#508-loop-detected-webdav"></a>508 Loop Detected (WebDAV)</h3>
+<p>服务器在处理请求时检测到无限循环。</p>
+<h3 id="510-not-extended"><a class="header-anchor" href="#510-not-extended"></a>510 Not Extended</h3>
+<p>服务器需要对请求进一步扩展才能实现它。</p>
+<h3 id="511-network-authentication-required"><a class="header-anchor" href="#511-network-authentication-required"></a>511 Network Authentication Required</h3>
+<p>511 状态码指示客户端需要进行身份验证才能获得网络访问权限。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/ASCII-码表/" rel="next" title="ASCII 码表">
+                <i class="fa fa-chevron-left"></i> ASCII 码表
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/Hexo-中表格宽度调整/" rel="prev" title="Hexo 中表格宽度调整">
+                Hexo 中表格宽度调整 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Duke Lu</p>
+  <div class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish. Think Different.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-信息响应"><span class="nav-number">1.</span> <span class="nav-text">1、信息响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#100-continue"><span class="nav-number">1.1.</span> <span class="nav-text">100 Continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#101-switching-protocol"><span class="nav-number">1.2.</span> <span class="nav-text">101 Switching Protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#102-processing-webdav"><span class="nav-number">1.3.</span> <span class="nav-text">102 Processing (WebDAV)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-成功响应"><span class="nav-number">2.</span> <span class="nav-text">2、成功响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#200-ok"><span class="nav-number">2.1.</span> <span class="nav-text">200 OK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#201-created"><span class="nav-number">2.2.</span> <span class="nav-text">201 Created</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#202-accepted"><span class="nav-number">2.3.</span> <span class="nav-text">202 Accepted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#203-non-authoritative-information"><span class="nav-number">2.4.</span> <span class="nav-text">203 Non-Authoritative Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#204-no-content"><span class="nav-number">2.5.</span> <span class="nav-text">204 No Content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#205-reset-content"><span class="nav-number">2.6.</span> <span class="nav-text">205 Reset Content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#206-partial-content"><span class="nav-number">2.7.</span> <span class="nav-text">206 Partial Content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#207-multi-status-webdav"><span class="nav-number">2.8.</span> <span class="nav-text">207 Multi-Status (WebDAV)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#208-multi-status-webdav"><span class="nav-number">2.9.</span> <span class="nav-text">208 Multi-Status (WebDAV)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#226-im-used-http-delta-encoding"><span class="nav-number">2.10.</span> <span class="nav-text">226 IM Used (HTTP Delta encoding)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-重定向"><span class="nav-number">3.</span> <span class="nav-text">3、重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#300-multiple-choice"><span class="nav-number">3.1.</span> <span class="nav-text">300 Multiple Choice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#301-moved-permanently"><span class="nav-number">3.2.</span> <span class="nav-text">301 Moved Permanently</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#302-found"><span class="nav-number">3.3.</span> <span class="nav-text">302 Found</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#303-see-other"><span class="nav-number">3.4.</span> <span class="nav-text">303 See Other</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#304-not-modified"><span class="nav-number">3.5.</span> <span class="nav-text">304 Not Modified</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#305-use-proxy"><span class="nav-number">3.6.</span> <span class="nav-text">305 Use Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#306-unused"><span class="nav-number">3.7.</span> <span class="nav-text">306 unused</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#307-temporary-redirect"><span class="nav-number">3.8.</span> <span class="nav-text">307 Temporary Redirect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#308-permanent-redirect"><span class="nav-number">3.9.</span> <span class="nav-text">308 Permanent Redirect</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-客户端响应"><span class="nav-number">4.</span> <span class="nav-text">4、客户端响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#400-bad-request"><span class="nav-number">4.1.</span> <span class="nav-text">400 Bad Request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#401-unauthorized"><span class="nav-number">4.2.</span> <span class="nav-text">401 Unauthorized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#402-payment-required"><span class="nav-number">4.3.</span> <span class="nav-text">402 Payment Required</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-forbidden"><span class="nav-number">4.4.</span> <span class="nav-text">403 Forbidden</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#404-not-found"><span class="nav-number">4.5.</span> <span class="nav-text">404 Not Found</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#405-method-not-allowed"><span class="nav-number">4.6.</span> <span class="nav-text">405 Method Not Allowed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#406-not-acceptable"><span class="nav-number">4.7.</span> <span class="nav-text">406 Not Acceptable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#407-proxy-authentication-required"><span class="nav-number">4.8.</span> <span class="nav-text">407 Proxy Authentication Required</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#408-request-timeout"><span class="nav-number">4.9.</span> <span class="nav-text">408 Request Timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#409-conflict"><span class="nav-number">4.10.</span> <span class="nav-text">409 Conflict</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#410-gone"><span class="nav-number">4.11.</span> <span class="nav-text">410 Gone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#411-length-required"><span class="nav-number">4.12.</span> <span class="nav-text">411 Length Required</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#412-precondition-failed"><span class="nav-number">4.13.</span> <span class="nav-text">412 Precondition Failed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#413-payload-too-large"><span class="nav-number">4.14.</span> <span class="nav-text">413 Payload Too Large</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#414-uri-too-long"><span class="nav-number">4.15.</span> <span class="nav-text">414 URI Too Long</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#415-unsupported-media-type"><span class="nav-number">4.16.</span> <span class="nav-text">415 Unsupported Media Type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#416-requested-range-not-satisfiable"><span class="nav-number">4.17.</span> <span class="nav-text">416 Requested Range Not Satisfiable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#417-expectation-failed"><span class="nav-number">4.18.</span> <span class="nav-text">417 Expectation Failed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#418-i-m-a-teapot"><span class="nav-number">4.19.</span> <span class="nav-text">418 I’m a teapot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#421-misdirected-request"><span class="nav-number">4.20.</span> <span class="nav-text">421 Misdirected Request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#422-unprocessable-entity-webdav"><span class="nav-number">4.21.</span> <span class="nav-text">422 Unprocessable Entity (WebDAV)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#423-locked-webdav"><span class="nav-number">4.22.</span> <span class="nav-text">423 Locked (WebDAV)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#424-failed-dependency-webdav"><span class="nav-number">4.23.</span> <span class="nav-text">424 Failed Dependency (WebDAV)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#426-upgrade-required"><span class="nav-number">4.24.</span> <span class="nav-text">426 Upgrade Required</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#428-precondition-required"><span class="nav-number">4.25.</span> <span class="nav-text">428 Precondition Required</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#429-too-many-requests"><span class="nav-number">4.26.</span> <span class="nav-text">429 Too Many Requests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#431-request-header-fields-too-large"><span class="nav-number">4.27.</span> <span class="nav-text">431 Request Header Fields Too Large</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#451-unavailable-for-legal-reasons"><span class="nav-number">4.28.</span> <span class="nav-text">451 Unavailable For Legal Reasons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-服务端响应节"><span class="nav-number">5.</span> <span class="nav-text">5、服务端响应节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#500-internal-server-error"><span class="nav-number">5.1.</span> <span class="nav-text">500 Internal Server Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#501-not-implemented"><span class="nav-number">5.2.</span> <span class="nav-text">501 Not Implemented</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#502-bad-gateway"><span class="nav-number">5.3.</span> <span class="nav-text">502 Bad Gateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#503-service-unavailable"><span class="nav-number">5.4.</span> <span class="nav-text">503 Service Unavailable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#504-gateway-timeout"><span class="nav-number">5.5.</span> <span class="nav-text">504 Gateway Timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#505-http-version-not-supported"><span class="nav-number">5.6.</span> <span class="nav-text">505 HTTP Version Not Supported</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#506-variant-also-negotiates"><span class="nav-number">5.7.</span> <span class="nav-text">506 Variant Also Negotiates</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#507-insufficient-storage"><span class="nav-number">5.8.</span> <span class="nav-text">507 Insufficient Storage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#508-loop-detected-webdav"><span class="nav-number">5.9.</span> <span class="nav-text">508 Loop Detected (WebDAV)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#510-not-extended"><span class="nav-number">5.10.</span> <span class="nav-text">510 Not Extended</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#511-network-authentication-required"><span class="nav-number">5.11.</span> <span class="nav-text">511 Network Authentication Required</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Duke Lu</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="简介 Hombrew 是 macOS系统下的一款缺失软件包的管理器。  完全基于 Git 和 Ruby 将软件包安装到独立目录，并将其文件软链接至 /usr/local/bin 安装到独立目录，使得软件包易于卸载 通过软链接的方式，意味着不用再去配置环境变量 易于管理软件包，省去安装配置繁琐的过程   在Homebrew中，软件包分为 CLI 软件包和 GUI 软件包：   CLI 的软件包称为">
+<meta name="keywords" content="Homebrew,Mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Homebrew 入门及常用命令">
+<meta property="og:url" content="http://yoursite.com/Homebrew-入门及常用命令/index.html">
+<meta property="og:site_name" content="山外小楼">
+<meta property="og:description" content="简介 Hombrew 是 macOS系统下的一款缺失软件包的管理器。  完全基于 Git 和 Ruby 将软件包安装到独立目录，并将其文件软链接至 /usr/local/bin 安装到独立目录，使得软件包易于卸载 通过软链接的方式，意味着不用再去配置环境变量 易于管理软件包，省去安装配置繁琐的过程   在Homebrew中，软件包分为 CLI 软件包和 GUI 软件包：   CLI 的软件包称为">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-03T09:36:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Homebrew 入门及常用命令">
+<meta name="twitter:description" content="简介 Hombrew 是 macOS系统下的一款缺失软件包的管理器。  完全基于 Git 和 Ruby 将软件包安装到独立目录，并将其文件软链接至 /usr/local/bin 安装到独立目录，使得软件包易于卸载 通过软链接的方式，意味着不用再去配置环境变量 易于管理软件包，省去安装配置繁琐的过程   在Homebrew中，软件包分为 CLI 软件包和 GUI 软件包：   CLI 的软件包称为">
+  <link rel="canonical" href="http://yoursite.com/Homebrew-入门及常用命令/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Homebrew 入门及常用命令 | 山外小楼</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">山外小楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Duke'Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+    
+
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Homebrew-入门及常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Homebrew 入门及常用命令
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-21 14:24:48" itemprop="dateCreated datePublished" datetime="2018-04-21T14:24:48+08:00">2018-04-21</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="简介"><a class="header-anchor" href="#简介"></a>简介</h2>
+<p><code>Hombrew</code> 是 macOS系统下的一款缺失软件包的管理器。</p>
+<ul>
+<li>完全基于 Git 和 Ruby</li>
+<li>将软件包安装到独立目录，并将其文件软链接至 /usr/local/bin</li>
+<li>安装到独立目录，使得软件包易于卸载</li>
+<li>通过软链接的方式，意味着不用再去配置环境变量</li>
+<li>易于管理软件包，省去安装配置繁琐的过程</li>
+</ul>
+<blockquote>
+<p>在Homebrew中，软件包分为 CLI 软件包和 GUI 软件包：<br>
+  CLI 的软件包称为 <code>formula</code>，被安装至 <code>/usr/local/Cellar</code>，如 git、maven 等<br>
+  GUI 的软件包称为 <code>cask</code>，被安装至 <code>/usr/local/Caskroom</code>，如 QQ、WeChat 等</p>
+</blockquote>
+<hr>
+<h2 id="安装和卸载"><a class="header-anchor" href="#安装和卸载"></a>安装和卸载</h2>
+<p>Mac 默认集成了 Ruby，直接运行以下 Ruby 脚步即可</p>
+<ul>
+<li>安装</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+<p>安装之后，<code>Homebrew</code> 会为你自动设置环境变量，以使用提供的命令</p>
+<ul>
+<li>卸载</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</span><br></pre></td></tr></table></figure>
+<p>卸载之后，<code>Homebrew</code> 在安装时创建的目录、下载的软件包及软件包的软链接均会被删除</p>
+<hr>
+<h2 id="基本使用"><a class="header-anchor" href="#基本使用"></a>基本使用</h2>
+<p>Homebrew 最常用的几个操作便是软件包的搜索、下载、卸载、更新以及查看</p>
+<h3 id="通用操作"><a class="header-anchor" href="#通用操作"></a>通用操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 搜索查询</span><br><span class="line">brew search [text | /regex/] // 无参：查找所有可安装的软件包；有参：根据字符串搜索软件包，/regex/表示正则</span><br><span class="line"></span><br><span class="line">// 清理</span><br><span class="line">brew cleanup [formula | cask] // 无参：删除所有 formula 和 cask 过时版本；无参：删除指定 formula 或 cask 过时版本；</span><br><span class="line"></span><br><span class="line">// 更新</span><br><span class="line">brew update // 更新 Homebrew</span><br></pre></td></tr></table></figure>
+<h3 id="对-formula-的操作"><a class="header-anchor" href="#对-formula-的操作"></a>对 <code>formula</code> 的操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 安装、卸载、重装、更新</span><br><span class="line">brew install (formula) // 安装指定 formula</span><br><span class="line">brew reinstall (formula) // 重装指定 formula</span><br><span class="line">brew uninstall (formula) // 卸载指定 formula</span><br><span class="line">brew upgrade [formula] // 无参：更新所有已安装 formula；有参：更新指定 formula</span><br><span class="line"></span><br><span class="line">// 查看</span><br><span class="line">brew list [formula] // 无参：列出所有已安装 formula；有参：列出指定 formula 的相关列表</span><br><span class="line">brew info [formula] // 无参：列出已安装 formula 综合信息；有参：列出指定 formula 的信息</span><br><span class="line">brew home [formula] // 无参: 打开 Homebrew 官网；有参：列出指定 formula 的官网</span><br><span class="line">brew outdated // 列出已过时的 formula</span><br><span class="line">brew deps (formula) // 列出指定 formula 的依赖项</span><br><span class="line"></span><br><span class="line">brew doctor 检查配置问题</span><br></pre></td></tr></table></figure>
+<h3 id="对-cask-的操作"><a class="header-anchor" href="#对-cask-的操作"></a>对 <code>cask</code> 的操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 安装、卸载、重装、更新</span><br><span class="line">brew cask install (formula) // 安装指定 cask</span><br><span class="line">brew cask reinstall (formula) // 重装指定 cask</span><br><span class="line">brew cask uninstall (formula) // 卸载指定 cask</span><br><span class="line">brew cask upgrade [formula] // 无参：更新所有已安装 cask；有参：更新指定 cask</span><br><span class="line"></span><br><span class="line">// 查看</span><br><span class="line">brew cask list [formula] // 无参：列出所有已安装 cask；有参：列出指定 cask 的相关列表</span><br><span class="line">brew cask info [formula] // 无参：列出已安装 cask 综合信息；有参：列出指定 cask 的信息</span><br><span class="line">brew cask home [formula] // 无参: 打开 Homebrew 官网；有参：列出指定 cask 的官网</span><br><span class="line">brew cask outdated // 列出已过时的 cask</span><br><span class="line"></span><br><span class="line">brew cask doctor 检查配置问题</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="关于-homebrew-的目录"><a class="header-anchor" href="#关于-homebrew-的目录"></a>关于 Homebrew 的目录</h2>
+<ul>
+<li><code>/usr/local/Homebrew</code>：<code>Homebrew</code> 程序本身的安装目录</li>
+<li><code>/usr/local/Cellar</code>：存放<code>formula</code> 的目录</li>
+<li><code>/usr/local/Caskroom</code>：存放<code>cask</code> 的目录</li>
+<li><code>/usr/local/opt</code>：所有包忽略版本的存放目录</li>
+<li><code>/usr/local/bin</code>：所有包二进制目录</li>
+<li><code>/usr/local/etc</code>：所有包配置文件目录</li>
+<li><code>/usr/local/lib</code>：所有包依赖库目录</li>
+<li><code>/usr/local/share</code>：所有包文档文件目录</li>
+</ul>
+<hr>
+<h2 id="解决-homebrew-每次命令自动更新"><a class="header-anchor" href="#解决-homebrew-每次命令自动更新"></a>解决 Homebrew 每次命令自动更新</h2>
+<p>在环境变量文件（.bash_profile 或者 .zshrc）中设置：<code>export HOMEBREW_NO_AUTO_UPDATE=true</code></p>
+<hr>
+<p>更多参考：<br>
+<a href="https://brew.sh" target="_blank" rel="noopener">https://brew.sh</a><br>
+<a href="https://docs.brew.sh/Manpage" target="_blank" rel="noopener">https://docs.brew.sh/Manpage</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/Homebrew/" rel="tag"># Homebrew</a>
+          
+            <a href="/tags/Mac/" rel="tag"># Mac</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/阿里巴巴-Java-开发手册/" rel="next" title="阿里巴巴 Java 开发手册">
+                <i class="fa fa-chevron-left"></i> 阿里巴巴 Java 开发手册
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/hexo-renderer-markdown-it-插件-快速配置/" rel="prev" title="hexo-renderer-markdown-it 插件 快速配置">
+                hexo-renderer-markdown-it 插件 快速配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Duke Lu</p>
+  <div class="site-description motion-element" itemprop="description">Stay Hungry. Stay Foolish. Think Different.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和卸载"><span class="nav-number">2.</span> <span class="nav-text">安装和卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用"><span class="nav-number">3.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用操作"><span class="nav-number">3.1.</span> <span class="nav-text">通用操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对-formula-的操作"><span class="nav-number">3.2.</span> <span class="nav-text">对 formula 的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对-cask-的操作"><span class="nav-number">3.3.</span> <span class="nav-text">对 cask 的操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-homebrew-的目录"><span class="nav-number">4.</span> <span class="nav-text">关于 Homebrew 的目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-homebrew-每次命令自动更新"><span class="nav-number">5.</span> <span class="nav-text">解决 Homebrew 每次命令自动更新</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Duke Lu</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

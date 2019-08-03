@@ -231,7 +231,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Kubernetes-v1-15-0-集群的安装部署（详细版）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Duke Lu">
@@ -248,7 +248,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+                <a href="/Kubernetes-v1-15-0-集群的安装部署（详细版）/" class="post-title-link" itemprop="url">Kubernetes v1.15.0 集群的安装部署（详细版）</a>
               
             
           </h1>
@@ -267,8 +267,22 @@
                 
               
 
-              <time title="创建时间：2019-08-03 01:00:33" itemprop="dateCreated datePublished" datetime="2019-08-03T01:00:33+08:00">2019-08-03</time>
+              <time title="创建时间：2019-07-29 21:11:24" itemprop="dateCreated datePublished" datetime="2019-07-29T21:11:24+08:00">2019-07-29</time>
             </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
           
 
           <br>
@@ -283,20 +297,2100 @@
 
       
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="quick-start"><a class="header-anchor" href="#quick-start"></a>Quick Start</h2>
-<h3 id="create-a-new-post"><a class="header-anchor" href="#create-a-new-post"></a>Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server"><a class="header-anchor" href="#run-server"></a>Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files"><a class="header-anchor" href="#generate-static-files"></a>Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="header-anchor" href="#deploy-to-remote-sites"></a>Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <h2 id="软硬件要求"><a class="header-anchor" href="#软硬件要求"></a>软硬件要求</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">软硬件</th>
+<th style="text-align:left">最低配置</th>
+<th style="text-align:left">推荐配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CPU 和 内存</td>
+<td style="text-align:left">Master：至少2核4G、<br>Node：至少4核16G</td>
+<td style="text-align:left">Master：4核16G、<br>Node：根据运行的容器数量进行配置</td>
+</tr>
+<tr>
+<td style="text-align:left">Linux 操作系统</td>
+<td style="text-align:left">基于 x86_64 架构的各种Linux 发行版，Kernel 3.10 以上</td>
+<td style="text-align:left">Red Hat Linux 7<br>CentOS 7</td>
+</tr>
+<tr>
+<td style="text-align:left">etcd</td>
+<td style="text-align:left">3.0 版本及以上</td>
+<td style="text-align:left">3.3 版本</td>
+</tr>
+<tr>
+<td style="text-align:left">Docker</td>
+<td style="text-align:left">18.03 版本及以上</td>
+<td style="text-align:left">18.09 版本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="机器准备"><a class="header-anchor" href="#机器准备"></a>机器准备</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">角色</th>
+<th style="text-align:left">主机名称</th>
+<th style="text-align:left">内网 IP</th>
+<th style="text-align:left">配置</th>
+<th style="text-align:left">系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Master</td>
+<td style="text-align:left">KubernetesMaster</td>
+<td style="text-align:left">192.168.0.123</td>
+<td style="text-align:left">2 核 4 G</td>
+<td style="text-align:left">CentOS 7.6.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Node</td>
+<td style="text-align:left">KubernetesNode1</td>
+<td style="text-align:left">192.168.0.122</td>
+<td style="text-align:left">2 核 4 G</td>
+<td style="text-align:left">CentOS 7.6.5</td>
+</tr>
+<tr>
+<td style="text-align:left">Node</td>
+<td style="text-align:left">KubernetesNode2</td>
+<td style="text-align:left">192.168.0.121</td>
+<td style="text-align:left">2 核 4 G</td>
+<td style="text-align:left">CentOS 7.6.5</td>
+</tr>
+</tbody>
+</table>
+<p>注：这里只是做环境测试，故只满足了官方要求的最低 2 核 2 G</p>
+<h2 id="部署步骤"><a class="header-anchor" href="#部署步骤"></a>部署步骤</h2>
+<p>使用 kubeadm 部署 kubernetes 主要有以下四个步骤：</p>
+<blockquote>
+<ol>
+<li>安装 Docker （所有主机）</li>
+<li>安装 Kubeadm（所有主机）</li>
+<li>基础环境配置（所有主机）</li>
+<li>创建 Kubernetes 集群</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="一-安装-docker-所有主机"><a class="header-anchor" href="#一-安装-docker-所有主机"></a>一. 安装 Docker（所有主机）</h3>
+<p>安装 Docker 引擎，主要执行以下步骤：</p>
+<blockquote>
+<ol>
+<li>安装 Docker 需要的一些系统工具</li>
+<li>设置 Docker 的 yum 仓库源</li>
+<li>安装并启动 Docker</li>
+<li>调整 Docker 部分参数（主要是配合 Kubernetes 的一些配置）</li>
+</ol>
+</blockquote>
+<h4 id="1-安装必要的一些系统工具"><a class="header-anchor" href="#1-安装必要的一些系统工具"></a>1. 安装必要的一些系统工具</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+<h4 id="2-设置-docker-的-yum-仓库源-稳定存储库"><a class="header-anchor" href="#2-设置-docker-的-yum-仓库源-稳定存储库"></a>2. 设置 Docker 的 yum 仓库源（稳定存储库）</h4>
+<ul>
+<li>官方源（二选一）：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+<ul>
+<li>阿里云源（二选一）：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+<h4 id="3-安装并启动-docker"><a class="header-anchor" href="#3-安装并启动-docker"></a>3. 安装并启动 Docker</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y docker-ce</span><br><span class="line">systemctl start docker &amp;&amp; systemctl enable docker</span><br></pre></td></tr></table></figure>
+<h4 id="4-调整-docker-部分参数"><a class="header-anchor" href="#4-调整-docker-部分参数"></a>4. 调整 Docker 部分参数</h4>
+<p>这里主要做两点调整：</p>
+<ul>
+<li>配置国内镜像加速 (国内的各种原因，可能导致拉取镜像像蜗牛一样。。。)</li>
+<li>修改 cgroup 驱动 (Docker 默认使用 cgroupfs，Kubernetes 官方推荐 systemd)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/docker</span><br><span class="line">tee /etc/docker/daemon.json &lt;&lt;-&apos;EOF&apos;</span><br><span class="line">&#123;</span><br><span class="line"> &quot;registry-mirrors&quot;: [&quot;https://pcy9sknd.mirror.aliyuncs.com&quot;],</span><br><span class="line"> &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">systemctl daemon-reload &amp;&amp; systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>注：这里采用的是阿里云的镜像源，当然你也可以选择：中科大、网易、DaoCloud（还有个号称中国官方的源，但实测好像没什么卵用）</p>
+<hr>
+<h3 id="二-安装-kubeadm-所有主机"><a class="header-anchor" href="#二-安装-kubeadm-所有主机"></a>二. 安装 Kubeadm（所有主机）</h3>
+<p>安装 Kubeadm 主要有以下三个步骤：</p>
+<blockquote>
+<ol>
+<li>配置 Kubernetes 的 yum 仓库源（这里选用阿里的源，你懂的）</li>
+<li>安装 Kubeadm 和相关工具</li>
+<li>启动 Kubelet</li>
+</ol>
+</blockquote>
+<h4 id="1-设置-kubernetes-的-yum-仓库源"><a class="header-anchor" href="#1-设置-kubernetes-的-yum-仓库源"></a>1. 设置 Kubernetes 的 yum 仓库源</h4>
+<ul>
+<li>阿里云源（推荐）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tee /etc/yum.repos.d/kubernetes.repo &lt;&lt;-&apos;EOF&apos;</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<ul>
+<li>官方源（不推荐）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tee /etc/yum.repos.d/kubernetes.repo &lt;&lt;-&apos;EOF&apos;</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span><br><span class="line">exclude=kube*</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h4 id="2-安装-kubeadm-和相关工具"><a class="header-anchor" href="#2-安装-kubeadm-和相关工具"></a>2. 安装 Kubeadm 和相关工具</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y kubelet kubeadm kubectl</span><br></pre></td></tr></table></figure>
+<h4 id="3-启动-kubelet"><a class="header-anchor" href="#3-启动-kubelet"></a>3. 启动 Kubelet</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start kubelet &amp;&amp; systemctl enable kubelet</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="三-基础环境配置-所有主机"><a class="header-anchor" href="#三-基础环境配置-所有主机"></a>三. 基础环境配置（所有主机）</h3>
+<p>基础环境配置，主要执行以下步骤：</p>
+<blockquote>
+<ol>
+<li>设置各节点时间精确同步</li>
+<li>关闭 firewalld/iptables 防火墙</li>
+<li>关闭 SElinux 安全模组</li>
+<li>关闭 Swap 交换分区</li>
+<li>导入 IPVS 模块</li>
+<li>修改 Bridge 桥接规则</li>
+<li>开启 iptables 的 FORWARD 转发链</li>
+<li>配置 Hosts 解析</li>
+</ol>
+</blockquote>
+<h4 id="1-设置各节点时间精确同步"><a class="header-anchor" href="#1-设置各节点时间精确同步"></a>1. 设置各节点时间精确同步</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start chronyd.service &amp;&amp; systemctl enable chronyd.service</span><br></pre></td></tr></table></figure>
+<h4 id="2-关闭-firewalld-防火墙-允许-master-和-node-的网络通信"><a class="header-anchor" href="#2-关闭-firewalld-防火墙-允许-master-和-node-的网络通信"></a>2. 关闭 firewalld 防火墙（允许 master 和 node 的网络通信）</h4>
+<p>由于 Master 和 Node 存在大量网络交互，需对防火墙进行相关配置</p>
+<ul>
+<li>外网环境：在防火墙上配置各组件相互通信的端口</li>
+<li>内网环境：直接关闭防火墙，减少防火墙规则的维护工作</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld &amp;&amp; systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+<h4 id="3-关闭-selinux-安全模组-让容器可以读取主机的文件系统"><a class="header-anchor" href="#3-关闭-selinux-安全模组-让容器可以读取主机的文件系统"></a>3. 关闭 SElinux 安全模组（让容器可以读取主机的文件系统）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0 &amp;&amp; sed -i &quot;s/SELINUX=enforcing$/SELINUX=disabled/g&quot; /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<h4 id="4-关闭-swap-交换分区-启用了-swap-则-qos-策略可能会失效"><a class="header-anchor" href="#4-关闭-swap-交换分区-启用了-swap-则-qos-策略可能会失效"></a>4.  关闭 Swap 交换分区（启用了 Swap，则 Qos 策略可能会失效）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a &amp;&amp; sed -i &quot;s/\/dev\/mapper\/centos-swap/\#\/dev\/mapper\/centos-swap/g&quot; /etc/fstab</span><br></pre></td></tr></table></figure>
+<h4 id="5-导入-ipvs-模块-用来为大量服务进行负载均衡"><a class="header-anchor" href="#5-导入-ipvs-模块-用来为大量服务进行负载均衡"></a>5. 导入 IPVS 模块（用来为大量服务进行负载均衡）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/sysconfig/modules/ipvs.modules &lt;&lt;EOF</span><br><span class="line">#!/bin/bash</span><br><span class="line">modprobe -- ip_vs</span><br><span class="line">modprobe -- ip_vs_rr</span><br><span class="line">modprobe -- ip_vs_wrr</span><br><span class="line">modprobe -- ip_vs_sh</span><br><span class="line">modprobe -- nf_conntrack_ipv4</span><br><span class="line">EOF</span><br><span class="line">chmod 755 /etc/sysconfig/modules/ipvs.modules &amp;&amp; bash /etc/sysconfig/modules/ipvs.modules &amp;&amp; lsmod | grep -e ip_vs -e nf_conntrack_ipv4</span><br></pre></td></tr></table></figure>
+<h4 id="6-修改-bridge-桥接规则-部分-docker-安装时会为我们修改-这里统一进行手动修改"><a class="header-anchor" href="#6-修改-bridge-桥接规则-部分-docker-安装时会为我们修改-这里统一进行手动修改"></a>6.  修改 Bridge 桥接规则（部分 Docker 安装时会为我们修改，这里统一进行手动修改）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt; EOF</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">vm.swappiness=0</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
+<h4 id="7-开启-iptables-的-forward-转发链-docker-1-13-后禁用了-forward-链-这可能会引起-pod-间无法通信"><a class="header-anchor" href="#7-开启-iptables-的-forward-转发链-docker-1-13-后禁用了-forward-链-这可能会引起-pod-间无法通信"></a>7. 开启 iptables 的 FORWARD 转发链（Docker 1.13 后禁用了 FORWARD 链，这可能会引起 Pod 间无法通信）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -P FORWARD ACCEPT</span><br><span class="line">sed -i &apos;/ExecStart/a ExecStartPost=/sbin/iptables -P FORWARD ACCEPT&apos; /usr/</span><br><span class="line">lib/systemd/system/docker.service</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<h4 id="8-配置-hosts-解析-添加-k8s-所有节点的-ip-和对应主机名-否则初始化的时候会出现告警甚至错误"><a class="header-anchor" href="#8-配置-hosts-解析-添加-k8s-所有节点的-ip-和对应主机名-否则初始化的时候会出现告警甚至错误"></a>8.  配置 Hosts 解析（添加 k8s 所有节点的 IP 和对应主机名，否则初始化的时候会出现告警甚至错误）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tee /etc/hosts &lt;&lt;-&apos;EOF&apos;</span><br><span class="line">::1     localhost       localhost.localdomain   localhost6      localhost6.localdomain6</span><br><span class="line">127.0.0.1       localhost       localhost.localdomain   localhost4      localhost4.localdomain4</span><br><span class="line">192.168.0.123 kube-master</span><br><span class="line">192.168.0.122 kube-node1</span><br><span class="line">192.168.0.121 kube-node2</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h4 id="9-安装一些必要的工具-这些工具在以后的命令中会用到"><a class="header-anchor" href="#9-安装一些必要的工具-这些工具在以后的命令中会用到"></a>9. 安装一些必要的工具（这些工具在以后的命令中会用到）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y ipset</span><br><span class="line">yum install -y ipvsadm</span><br><span class="line">yum install -y bind-utils</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="四-创建-kubernetes-集群"><a class="header-anchor" href="#四-创建-kubernetes-集群"></a>四. 创建 Kubernetes 集群</h3>
+<p>创建 Kubernetes 集群主要有两个步骤：</p>
+<blockquote>
+<ol>
+<li>初始化 Master 节点</li>
+<li>初始化 Node 节点</li>
+</ol>
+</blockquote>
+<h4 id="1-初始化-master-节点"><a class="header-anchor" href="#1-初始化-master-节点"></a>1. 初始化 Master 节点</h4>
+<p>初始化 Master 节点，主要有四个步骤：</p>
+<blockquote>
+<ol>
+<li>执行初始化</li>
+<li>复制(分发)配置文件</li>
+<li>安装 CNI 网络插件</li>
+<li>检查 Master 的 Pod 及 集群状态</li>
+</ol>
+</blockquote>
+<h5 id="1-执行初始化"><a class="header-anchor" href="#1-执行初始化"></a>1. 执行初始化</h5>
+<p>自定义配置较少时：推荐使用 <code>命令行加配置参数</code> 的方式进行初始化<br>
+自定义配置较多时：<br>
+-&gt; 1. 使用 <code>kubeadm config print init-defaults &gt; kubeadm-init.yaml</code> 获取初始配置文件进行相应的自定义修改<br>
+-&gt;  2. 然后使用 <code>kubeadm init --config kubeadm-init.yaml</code>，通过配置文件进行初始化</p>
+<ul>
+<li>较少自定义配置时，采用第一种方式进行初始化</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --kubernetes-version=v1.15.0 \</span><br><span class="line">--pod-network-cidr=&lt;network-segment&gt; \</span><br><span class="line">--image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers</span><br></pre></td></tr></table></figure>
+<ul>
+<li>较多自定义配置时，采用第二种方式进行初始化</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 修改初始化配置文件</span><br><span class="line">cat &gt; master-init.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta2</span><br><span class="line">kind: InitConfiguration</span><br><span class="line">localAPIEndpoint:</span><br><span class="line"> advertiseAddress: 192.168.0.123</span><br><span class="line"> bindPort: 6443</span><br><span class="line">---</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta2</span><br><span class="line">imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers</span><br><span class="line">kind: ClusterConfiguration</span><br><span class="line">kubernetesVersion: v1.15.0</span><br><span class="line">networking:</span><br><span class="line"> dnsDomain: cluster.local</span><br><span class="line"> podSubnet: &lt;network-segment&gt;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">执行初始化</span><br><span class="line">kubedam init --master-init.yaml</span><br></pre></td></tr></table></figure>
+<p>注意：<br>
+初始化之后会安装网络插件，由于各个网络插件使用的网段不一样，<br>
+故需对 命令中的<code>--pod-network-cidr=&lt;network-segment&gt;</code> 或文件中的 <code>podSubnet: &lt;network-segment&gt;</code> 进行自定义配置，<br>
+Calico 的默认网段：192.168.0.0/16，Flannel 的默认网段：10.244.0.0/16</p>
+<p>输出以下内容表示成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Your Kubernetes control-plane has initialized successfully!</span><br><span class="line"></span><br><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p $HOME/.kube</span><br><span class="line">  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">  sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:</span><br><span class="line">  https://kubernetes.io/docs/concepts/cluster-administration/addons/</span><br><span class="line"></span><br><span class="line">Then you can join any number of worker nodes by running the following on each as root:</span><br><span class="line"></span><br><span class="line">kubeadm join 192.168.0.123:6443 --token b0syjo.7q877s663mc1rbni \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:cdbcbb721002cac7a7b347295922eabe65342e111a67d7f7acce50d0d9d8f27f</span><br><span class="line">// 上面一句是 Node 节点加入集群的命令，记得保存一下</span><br></pre></td></tr></table></figure>
+<h5 id="2-按照提示-复制配置文件到普通用户目录"><a class="header-anchor" href="#2-按照提示-复制配置文件到普通用户目录"></a>2. 按照提示，复制配置文件到普通用户目录</h5>
+<ul>
+<li>非 root 用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 拷贝配置文件到 Master 节点</span><br><span class="line">mkdir -p $HOME/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line"></span><br><span class="line"># 分发配置文件到各 Node 节点（让 Node 节点使用 `kubectl`）</span><br><span class="line">scp /etc/kubernetes/admin.conf KubernetesNode1:~/.kube/config</span><br><span class="line">scp /etc/kubernetes/admin.conf KubernetesNode2:~/.kube/config</span><br><span class="line"># 记得在 Node 上进行授权，sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br></pre></td></tr></table></figure>
+<ul>
+<li>root 用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 拷贝配置文件到 Master 节点</span><br><span class="line">mkdir /root/.kube</span><br><span class="line">cp -i /etc/kubernetes/admin.conf /root/.kube/config</span><br><span class="line"></span><br><span class="line"># 分发配置文件到各 Node 节点（让 Node 节点使用 `kubectl`）</span><br><span class="line">scp /etc/kubernetes/admin.conf KubernetesNode1:/root/.kube/config</span><br><span class="line">scp /etc/kubernetes/admin.conf KubernetesNode2:/root/.kube/config</span><br></pre></td></tr></table></figure>
+<h5 id="3-安装-cni-网络插件"><a class="header-anchor" href="#3-安装-cni-网络插件"></a>3. 安装 CNI 网络插件</h5>
+<ul>
+<li>Flannel 插件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Calico 插件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml</span><br></pre></td></tr></table></figure>
+<p>CNI 插件参考：</p>
+<ul>
+<li>Flannel Github - <a href="%5Bhttps://github.com/coreos/flannel/%5D(https://github.com/coreos/flannel/)">README.md</a></li>
+<li>Calico 官方文档 - <a href="https://docs.projectcalico.org/v3.8/getting-started/kubernetes/" target="_blank" rel="noopener">Quickstart for Calico on Kubernetes</a></li>
+<li>更多可以参考：Kubernetes 官方文档提供的教程 - <a href="https://kubernetes.io/docs/concepts/cluster-administration/addons/" target="_blank" rel="noopener"> Installing Addons</a></li>
+</ul>
+<h5 id="4-检查-master-的-pod-及-集群状态"><a class="header-anchor" href="#4-检查-master-的-pod-及-集群状态"></a>4. 检查 Master 的 Pod 及 集群状态</h5>
+<ul>
+<li>使用 <code>kubectl get pod -n kube-system -o wide</code>，查看 Pod 状态均为 <code>Runing</code> 即可</li>
+<li>使用 <code>kubectl get node -o wide</code>，查看 Node 状态为 <code>Ready</code> 表示 Master 初始化完成</li>
+</ul>
+<hr>
+<h4 id="2-初始化-node-节点"><a class="header-anchor" href="#2-初始化-node-节点"></a>2. 初始化 Node 节点</h4>
+<p>初始化 Node 节点就比较简单了，只有两步，即：</p>
+<blockquote>
+<ol>
+<li>执行初始化</li>
+<li>检查 Node 的 Pod 及 集群状态</li>
+</ol>
+</blockquote>
+<h5 id="1-初始化-node"><a class="header-anchor" href="#1-初始化-node"></a>1. 初始化 Node</h5>
+<p>使用 Master 初始化时的命令进行初始化即可，Node 节点初始化后，就直接加入了集群</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join &lt;master-ip&gt;:6443 --token &lt;token&gt; --discovery-token-ca-cert-hash sha256:&lt;sha256&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：没有记录集群 join 命令的可以通过以下方式重新获取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo kubeadm token create --print-join-command --ttl=0</span><br></pre></td></tr></table></figure>
+<h5 id="2-检查-node-的-pod-及-集群状态"><a class="header-anchor" href="#2-检查-node-的-pod-及-集群状态"></a>2. 检查 Node 的 Pod 及 集群状态</h5>
+<ul>
+<li>使用 <code>kubectl get pod -n kube-system -o wide</code>，查看 Pod 状态均为 <code>Runing</code> 即可</li>
+<li>使用 <code>kubectl get node -o wide</code>，查看 所有节点 状态均为 <code>Ready</code> 表示 Master 初始化完成</li>
+</ul>
+<hr>
+<h3 id="五-重置-kubernetes-集群"><a class="header-anchor" href="#五-重置-kubernetes-集群"></a>五. 重置 Kubernetes 集群</h3>
+<p>在集群安装失败，或者出现一些无法解决的问题时，可以重置集群，再重新安装<br>
+重置 Kubernetes 集群，主要的执行步骤如下：</p>
+<blockquote>
+<ol>
+<li>kubeadm 集群重置</li>
+<li>iptables 规则清理</li>
+<li>ipvs 规则清理</li>
+<li>kubernetes 配置文件清理</li>
+<li>etcd 配置清理</li>
+<li>cni 网络插件清理</li>
+</ol>
+</blockquote>
+<p>废话不多说，直接撸代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">kubeadm reset</span><br><span class="line">iptables -F &amp;&amp; iptables -t nat -F &amp;&amp; iptables -t mangle -F &amp;&amp; iptables -X</span><br><span class="line">ipvsadm --clear</span><br><span class="line">rm -rf ~/.kube</span><br><span class="line">rm -rf /var/lib/etcd</span><br><span class="line">ifconfig cni0 down</span><br><span class="line">ip link delete cni0</span><br><span class="line">ifconfig flannel.1 down</span><br><span class="line">ip link delete flannel.1</span><br><span class="line">rm -rf /var/lib/cni/</span><br></pre></td></tr></table></figure>
+<hr>
+<p>参考：<br>
+<a href="https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/" target="_blank" rel="noopener">https://kubernetes.io/zh/docs/setup/independent/install-kubeadm/</a><br>
+<a href="https://k8smeetup.github.io/docs/reference/setup-tools/kubeadm/kubeadm-init/" target="_blank" rel="noopener">https://k8smeetup.github.io/docs/reference/setup-tools/kubeadm/kubeadm-init/</a><br>
+<a href="https://www.cnblogs.com/ding2016/p/10784620.html" target="_blank" rel="noopener">centos7使用kubeadm安装部署kubernetes 1.14 - Adrian·Ding - 博客园</a><br>
+<a href="https://yq.aliyun.com/articles/626118" target="_blank" rel="noopener">CentOS7中用kubeadm安装Kubernetes-云栖社区-阿里云</a></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/MySQL-8-0-安装（CentOS-7）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/MySQL-8-0-安装（CentOS-7）/" class="post-title-link" itemprop="url">MySQL 8.0 安装（CentOS 7）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-18 19:28:43" itemprop="dateCreated datePublished" datetime="2019-03-18T19:28:43+08:00">2019-03-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="下载-mysql-压缩包并上传服务器"><a class="header-anchor" href="#下载-mysql-压缩包并上传服务器"></a>下载 MySQL 压缩包并上传服务器</h2>
+<p>下载地址：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">MySQL :: Download MySQL Community Server</a></p>
+<h2 id="安装-mysql"><a class="header-anchor" href="#安装-mysql"></a>安装 MySQL</h2>
+<ol>
+<li>为系统创建 MySQL 用户组</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd mysql</span><br><span class="line">useradd -r -g mysql -s /bin/false mysql</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>创建 MySQL 安装目录、数据目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/local/mysql</span><br><span class="line">mkdir -p /usr/local/mysql/data</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>解压 MySQL 压缩包至安装目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf mysql-8.0.15-linux-glibc2.12-x86_64.tar.xz -C /usr/local/mysql --strip-components 1</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>进入 MySQL 安装目录，初始化 MySQL （设置 user、basedir、datadir）</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/mysql </span><br><span class="line">./bin/mysqld --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --initialize</span><br></pre></td></tr></table></figure>
+<p>注意：初始化后，记得记录 MySQL 的初始密码</p>
+<ol start="5">
+<li>创建 MySQL 命令软链接</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/mysql/bin/mysql /usr/bin/mysql</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>修改相关配置文件</li>
+</ol>
+<ul>
+<li>修改 <code>/etc/my.conf</code> 配置文件，内容如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">basedir=/usr/local/mysql</span><br><span class="line">datadir=/usr/local/mysql/data</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line"># Disabling symbolic-links is recommended to prevent assorted security risks</span><br><span class="line">symbolic-links=0</span><br><span class="line"># Settings user and group are ignored when systemd is used.</span><br><span class="line"># If you need to run mysqld under a different user or group,</span><br><span class="line"># customize your systemd unit file for mariadb according to the</span><br><span class="line"># instructions in http://fedoraproject.org/wiki/Systemd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[mysqld_safe]</span><br><span class="line">log-error=/var/log/mysql/mysql.log</span><br><span class="line">pid-file=/var/run/mysql/mysql.pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#</span><br><span class="line"># include all files from the config directory</span><br><span class="line">#</span><br><span class="line">!includedir /etc/my.cnf.d</span><br></pre></td></tr></table></figure>
+<ul>
+<li>拷贝并修改 <code>/etc/init.d/mysqld</code> 文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld</span><br></pre></td></tr></table></figure>
+<p>修改以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">basedir=/usr/local/mysql</span><br><span class="line">datadir=/usr/local/mysql/data</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>创建 MySQL 日志文件、进程文件，并进行相关赋权<br>
+创建 /var/log/mysql/mysql.log 、 /var/run/mysql/mysql.pid</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /var/log/mysql</span><br><span class="line">mkdir -p /var/run/mysql</span><br><span class="line">touch /var/log/mysql/mysql.log</span><br><span class="line">touch /var/run/mysql/mysql.pid</span><br><span class="line"></span><br><span class="line">chown -R mysql:mysql /var/log/mysql</span><br><span class="line">chown -R mysql:mysql /var/run/mysql</span><br><span class="line">chmod 750 /var/log/mysql/mysql.log</span><br><span class="line">chmod 750 /var/run/mysql/mysql.pid</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>为 mysql.sock 文件创建软链接，并为相应文件夹赋权</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R mysql:mysql /var/lib/mysql</span><br><span class="line">ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock</span><br></pre></td></tr></table></figure>
+<p>到这里，MySQL 的安装就完成了，可以启动 MySQL 了，相关命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service mysqld start --启动mysql</span><br><span class="line">service mysqld stop --关闭mysql</span><br><span class="line">service mysqld restart --重启mysql</span><br></pre></td></tr></table></figure>
+<h2 id="对-mysql-进行初始配置"><a class="header-anchor" href="#对-mysql-进行初始配置"></a>对 MySQL 进行初始配置</h2>
+<ol>
+<li>登陆 mysql，用到初始化时记录的密码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>修改 root 用户密码为： root</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED WITH mysql_native_password BY &apos;root&apos;;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>开启远程访问</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* TO &apos;root&apos;@&apos;%&apos;;</span><br></pre></td></tr></table></figure>
+<p>报错：创建一个 root 用户，并开启远程访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;root&apos;; --创建root用户，host为%</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+<p>将刚刚创建的 root 用户，密码修改为：root</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &apos;root&apos;@&apos;%&apos; IDENTIFIED WITH mysql_native_password BY &apos;root&apos;;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>刷新权限</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+<h2 id="防火墙设置"><a class="header-anchor" href="#防火墙设置"></a>防火墙设置</h2>
+<ul>
+<li>内网环境，可以直接考虑关闭防火墙</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service --关闭防火墙</span><br></pre></td></tr></table></figure>
+<ul>
+<li>外网环境，建议开启 3306 端口即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd —zone=public —add-port=3306/tcp —permanent -—添加3306端口</span><br><span class="line">firewall-cmd —reload --重启防火墙规则</span><br></pre></td></tr></table></figure>
+<hr>
+<p>参考：<a href="https://blog.csdn.net/baidu_27055141/article/details/80974701" target="_blank" rel="noopener">Centos7安装Mysql8.0.11 - baidu_27055141的博客 - CSDN博客</a></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/访问-Redis，提示进入保护模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/访问-Redis，提示进入保护模式/" class="post-title-link" itemprop="url">MySQL 8.0 安装（CentOS 7）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-18 19:28:43" itemprop="dateCreated datePublished" datetime="2019-03-18T19:28:43+08:00">2019-03-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="问题"><a class="header-anchor" href="#问题"></a>问题</h2>
+<p>Redis protected-mode 是3.2 之后加入的新特性，通过参考配置文件上的说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># When protected mode is on and if:</span><br><span class="line"># 1) The server is not binding explicitly to a set of addresses using the &quot;bind&quot; directive.</span><br><span class="line"># 2) No password is configured.</span><br></pre></td></tr></table></figure>
+<p>可以知道，以下两种情况回开启保护模式：</p>
+<ol>
+<li>服务器没有使用“bind”指令显式绑定到一组地址</li>
+<li>没有配置密码</li>
+</ol>
+<p>而不能进行远程连接，否则就会有以下提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-DENIED Redis is running in protected mode because protected mode is enabled, no bind address was specified, no authentication password is requested to clients. In this mode connections are only accepted from the loopback interface. If you want to connect from external computers to Redis you may adopt one of the following solutions: 1) Just disable protected mode sending the command &apos;CONFIG SET protected-mode no&apos; from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. 2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to &apos;no&apos;, and then restarting the server. 3) If you started the server manually just for testing, restart it with the &apos;--protected-mode no&apos; option. 4) Setup a bind address or an authentication password. NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside.</span><br><span class="line">Connection closed by foreign host.</span><br></pre></td></tr></table></figure>
+<h2 id="解决"><a class="header-anchor" href="#解决"></a>解决</h2>
+<p>在问题描述中，已经给出了相应的解决方案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1) Just disable protected mode sending the command &apos;CONFIG SET protected-mode no&apos; from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. </span><br><span class="line">2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to &apos;no&apos;, and then restarting the server. </span><br><span class="line">3) If you started the server manually just for testing, restart it with the &apos;--protected-mode no&apos; option. </span><br><span class="line">4) Setup a bind address or an authentication password. </span><br><span class="line">NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>发送命令 <code>CONFIG SET protected-mode no</code> ，但这种设置不上永久的，可以修改配置文件使之永久生效（这个…发送命令，我也不知道怎么弄）</li>
+<li>修改配置文件 <code>/etc/redis.conf</code> ，将 <code>protected-mode yes</code> 设置为 <code>no</code></li>
+<li>启动时添加选项 <code>--protected-mode no</code></li>
+<li>绑定地址或者设置认证密码<br>
+提示：您只需要执行上述操作之一，服务器就可以开始接受来自外部的连接</li>
+</ol>
+</blockquote>
+<p>其实有用的就 2 和 4 两种方式：</p>
+<ol>
+<li>修改配置文件 <code>/etc/redis.conf</code> ，将 <code>protected-mode yes</code> 设置为 <code>no</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protected-mode no</span><br></pre></td></tr></table></figure>
+<p>注意：若设置了绑定地址或者认证密码，即使关闭保护模式，仍需满足绑定地址和认证密码的条件，才能访问 redis 服务</p>
+<ol start="2">
+<li>绑定地址或者设置认证密码</li>
+</ol>
+<ul>
+<li>绑定地址：不设置，默认均可访问</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># bind 可绑定多个主机地址，类似过滤器的作用</span><br><span class="line"># 当配置为 0.0.0.0 时，允许任何主机访问</span><br><span class="line">bind 127.0.0.1 # 允许本机访问</span><br><span class="line">bind 45.123.77.99 # 允许 45.123.77.99 的主机访问</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置认证密码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 官方提示：密码应该足够强壮，不然很容易被破解</span><br><span class="line">requirepass idukelu</span><br></pre></td></tr></table></figure>
+<p>注意：即绑定了地址，又设置了认证密码，需要满足两者才能访问 redis 服务</p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Hexo-中表格宽度调整/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Hexo-中表格宽度调整/" class="post-title-link" itemprop="url">Hexo 中表格宽度调整</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-17 20:02:43" itemprop="dateCreated datePublished" datetime="2019-02-17T20:02:43+08:00">2019-02-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>Markdown 语法中，默认的表格样式为：每列等分，这样不仅影响美观，还会因为某列过长而把表格挤变形<br>
+<strong>解决办法</strong>很简单：在 md 文件中添加 css 样式来即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">table th:nth-of-type(1)&#123;</span><br><span class="line">width: 20%;</span><br><span class="line">&#125;</span><br><span class="line">table th:nth-of-type(2)&#123;</span><br><span class="line">width: 20%</span><br><span class="line">;</span><br><span class="line">&#125;</span><br><span class="line">table th:nth-of-type(3)&#123;</span><br><span class="line">width: 60%;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">*Java Reference Documentation*</span><br><span class="line">| RELEASE | CODENAME | DOCUMENTATION |</span><br><span class="line">| :-: | :-: | :-: |</span><br><span class="line">| 10 | - | [JDK Documentation](https://docs.oracle.com/javase/10/) &amp;emsp;&amp;#124;&amp;emsp; [Java SE API](https://docs.oracle.com/javase/10/docs/api/) &amp;emsp;&amp;#124;&amp;emsp; Java EE API |</span><br></pre></td></tr></table></figure>
+<p>这段代码的效果如下：</p>
+<style>
+table th:nth-of-type(1){
+width: 20%;
+}
+table th:nth-of-type(2){
+width: 20%
+;
+}
+table th:nth-of-type(3){
+width: 60%;
+}
+</style>
+<p><em>Java Reference Documentation</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">RELEASE</th>
+<th style="text-align:center">CODENAME</th>
+<th style="text-align:center">DOCUMENTATION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center"><a href="https://docs.oracle.com/javase/10/" target="_blank" rel="noopener">JDK Documentation</a>  |  <a href="https://docs.oracle.com/javase/10/docs/api/" target="_blank" rel="noopener">Java SE API</a>  |  Java EE API</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/HTTP-状态码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/HTTP-状态码/" class="post-title-link" itemprop="url">HTTP 状态码</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-19 17:51:24" itemprop="dateCreated datePublished" datetime="2018-05-19T17:51:24+08:00">2018-05-19</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>HTTP 响应状态代码：指示特定 <code>HTTP</code> 请求是否已成功完成。</p>
+<p>响应分为五类：</p>
+<ol>
+<li>信息响应</li>
+<li>成功响应</li>
+<li>重定向</li>
+<li>客户端错误</li>
+<li>服务器错误</li>
+</ol>
+<p>状态代码由 <code>section 10 of RFC 2616</code></p>
+<hr>
+<h2 id="1-信息响应"><a class="header-anchor" href="#1-信息响应"></a>1、信息响应</h2>
+<h3 id="100-continue"><a class="header-anchor" href="#100-continue"></a>100 Continue</h3>
+<p>这个临时响应表明，迄今为止的所有内容都是可行的，客户端应该继续请求，如果已经完成，则忽略它。</p>
+<h3 id="101-switching-protocol"><a class="header-anchor" href="#101-switching-protocol"></a>101 Switching Protocol</h3>
+<p>该代码是响应客户端的 Upgrade 标头发送的，并且指示服务器也正在切换的协议。</p>
+<h3 id="102-processing-webdav"><a class="header-anchor" href="#102-processing-webdav"></a>102 Processing (WebDAV)</h3>
+<p>此代码表示服务器已收到并正在处理该请求，但没有响应可用。</p>
+<hr>
+<h2 id="2-成功响应"><a class="header-anchor" href="#2-成功响应"></a>2、成功响应</h2>
+<h3 id="200-ok"><a class="header-anchor" href="#200-ok"></a>200 OK</h3>
+<p>请求成功。成功的含义取决于HTTP方法：<br>
+GET：资源已被提取并在消息正文中传输。<br>
+HEAD：实体标头位于消息正文中。<br>
+POST：描述动作结果的资源在消息体中传输。<br>
+TRACE：消息正文包含服务器收到的请求消息</p>
+<h3 id="201-created"><a class="header-anchor" href="#201-created"></a>201 Created</h3>
+<p>该请求已成功，并因此创建了一个新的资源。这通常是在PUT请求之后发送的响应。</p>
+<h3 id="202-accepted"><a class="header-anchor" href="#202-accepted"></a>202 Accepted</h3>
+<p>请求已经接收到，但还未响应，没有结果。意味着不会有一个异步的响应去表明当前请求的结果，预期另外的进程和服务去处理请求，或者批处理。</p>
+<h3 id="203-non-authoritative-information"><a class="header-anchor" href="#203-non-authoritative-information"></a>203 Non-Authoritative Information</h3>
+<p>服务器已成功处理了请求，但返回的实体头部元信息不是在原始服务器上有效的确定集合，而是来自本地或者第三方的拷贝。当前的信息可能是原始版本的子集或者超集。例如，包含资源的元数据可能导致原始服务器知道元信息的超集。使用此状态码不是必须的，而且只有在响应不使用此状态码便会返回200 OK的情况下才是合适的。</p>
+<h3 id="204-no-content"><a class="header-anchor" href="#204-no-content"></a>204 No Content</h3>
+<p>服务器成功处理了请求，但不需要返回任何实体内容，并且希望返回更新了的元信息。响应可能通过实体头部的形式，返回新的或更新后的元信息。如果存在这些头部信息，则应当与所请求的变量相呼应。如果客户端是浏览器的话，那么用户浏览器应保留发送了该请求的页面，而不产生任何文档视图上的变化，即使按照规范新的或更新后的元信息应当被应用到用户浏览器活动视图中的文档。由于204响应被禁止包含任何消息体，因此它始终以消息头后的第一个空行结尾。</p>
+<h3 id="205-reset-content"><a class="header-anchor" href="#205-reset-content"></a>205 Reset Content</h3>
+<p>服务器成功处理了请求，且没有返回任何内容。但是与204响应不同，返回此状态码的响应要求请求者重置文档视图。该响应主要是被用于接受用户输入后，立即重置表单，以便用户能够轻松地开始另一次输入。与204响应一样，该响应也被禁止包含任何消息体，且以消息头后的第一个空行结束。</p>
+<h3 id="206-partial-content"><a class="header-anchor" href="#206-partial-content"></a>206 Partial Content</h3>
+<p>服务器已经成功处理了部分 GET 请求。类似于 FlashGet 或者迅雷这类的 HTTP 下载工具都是使用此类响应实现断点续传或者将一个大文档分解为多个下载段同时下载。该请求必须包含 Range 头信息来指示客户端希望得到的内容范围，并且可能包含 If-Range 来作为请求条件。</p>
+<h3 id="207-multi-status-webdav"><a class="header-anchor" href="#207-multi-status-webdav"></a>207 Multi-Status (WebDAV)</h3>
+<p>由WebDAV(RFC 2518)扩展的状态码，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。</p>
+<h3 id="208-multi-status-webdav"><a class="header-anchor" href="#208-multi-status-webdav"></a>208 Multi-Status (WebDAV)</h3>
+<p>在 DAV 里面使用: propstat 响应元素以避免重复枚举多个绑定的内部成员到同一个集合。</p>
+<h3 id="226-im-used-http-delta-encoding"><a class="header-anchor" href="#226-im-used-http-delta-encoding"></a>226 IM Used (HTTP Delta encoding)</h3>
+<p>服务器已经完成了对资源的 GET 请求，并且响应是对当前实例应用的一个或多个实例操作结果的表示。</p>
+<hr>
+<h2 id="3-重定向"><a class="header-anchor" href="#3-重定向"></a>3、重定向</h2>
+<h3 id="300-multiple-choice"><a class="header-anchor" href="#300-multiple-choice"></a>300 Multiple Choice</h3>
+<p>被请求的资源有一系列可供选择的回馈信息，每个都有自己特定的地址和浏览器驱动的商议信息。用户或浏览器能够自行选择一个首选的地址进行重定向。</p>
+<h3 id="301-moved-permanently"><a class="header-anchor" href="#301-moved-permanently"></a>301 Moved Permanently</h3>
+<p>被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个 URI 之一。如果可能，拥有链接编辑功能的客户端应当自动把请求的地址修改为从服务器反馈回来的地址。除非额外指定，否则这个响应也是可缓存的。</p>
+<h3 id="302-found"><a class="header-anchor" href="#302-found"></a>302 Found</h3>
+<p>请求的资源现在临时从不同的 URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。</p>
+<h3 id="303-see-other"><a class="header-anchor" href="#303-see-other"></a>303 See Other</h3>
+<p>对应当前请求的响应可以在另一个 URI 上被找到，而且客户端应当采用 GET 的方式访问那个资源。这个方法的存在主要是为了允许由脚本激活的POST请求输出重定向到一个新的资源。</p>
+<h3 id="304-not-modified"><a class="header-anchor" href="#304-not-modified"></a>304 Not Modified</h3>
+<p>如果客户端发送了一个带条件的 GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个状态码。304 响应禁止包含消息体，因此始终以消息头后的第一个空行结尾。</p>
+<h3 id="305-use-proxy"><a class="header-anchor" href="#305-use-proxy"></a>305 Use Proxy</h3>
+<p>被请求的资源必须通过指定的代理才能被访问。Location 域中将给出指定的代理所在的 URI 信息，接收者需要重复发送一个单独的请求，通过这个代理才能访问相应资源。只有原始服务器才能建立305响应。</p>
+<h3 id="306-unused"><a class="header-anchor" href="#306-unused"></a>306 unused</h3>
+<p>在最新版的规范中，306 状态码已经不再被使用。</p>
+<h3 id="307-temporary-redirect"><a class="header-anchor" href="#307-temporary-redirect"></a>307 Temporary Redirect</h3>
+<p>请求的资源现在临时从不同的URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。</p>
+<h3 id="308-permanent-redirect"><a class="header-anchor" href="#308-permanent-redirect"></a>308 Permanent Redirect</h3>
+<p>这意味着资源现在永久位于由 Location: HTTP Response 标头指定的另一个 URI。 这与 301 Moved Permanently HTTP 响应代码具有相同的语义，但用户代理不能更改所使用的 HTTP 方法：如果在第一个请求中使用 POST，则必须在第二个请求中使用 POST。</p>
+<hr>
+<h2 id="4-客户端响应"><a class="header-anchor" href="#4-客户端响应"></a>4、客户端响应</h2>
+<h3 id="400-bad-request"><a class="header-anchor" href="#400-bad-request"></a>400 Bad Request</h3>
+<p>1、语义有误，当前请求无法被服务器理解。除非进行修改，否则客户端不应该重复提交这个请求。<br>
+2、请求参数有误。</p>
+<h3 id="401-unauthorized"><a class="header-anchor" href="#401-unauthorized"></a>401 Unauthorized</h3>
+<p>当前请求需要用户验证。该响应必须包含一个适用于被请求资源的 WWW-Authenticate 信息头用以询问用户信息。客户端可以重复提交一个包含恰当的 Authorization 头信息的请求。如果当前请求已经包含了 Authorization 证书，那么401响应代表着服务器验证已经拒绝了那些证书。如果401响应包含了与前一个响应相同的身份验证询问，且浏览器已经至少尝试了一次验证，那么浏览器应当向用户展示响应中包含的实体信息，因为这个实体信息中可能包含了相关诊断信息。</p>
+<h3 id="402-payment-required"><a class="header-anchor" href="#402-payment-required"></a>402 Payment Required</h3>
+<p>此响应码保留以便将来使用，创造此响应码的最初目的是用于数字支付系统，然而现在并未使用。</p>
+<h3 id="403-forbidden"><a class="header-anchor" href="#403-forbidden"></a>403 Forbidden</h3>
+<p>服务器已经理解请求，但是拒绝执行它。与 401 响应不同的是，身份验证并不能提供任何帮助，而且这个请求也不应该被重复提交。如果这不是一个 HEAD 请求，而且服务器希望能够讲清楚为何请求不能被执行，那么就应该在实体内描述拒绝的原因。当然服务器也可以返回一个 404 响应，假如它不希望让客户端获得任何信息。</p>
+<h3 id="404-not-found"><a class="header-anchor" href="#404-not-found"></a>404 Not Found</h3>
+<p>请求失败，请求所希望得到的资源未被在服务器上发现。没有信息能够告诉用户这个状况到底是暂时的还是永久的。假如服务器知道情况的话，应当使用410状态码来告知旧资源因为某些内部的配置机制问题，已经永久的不可用，而且没有任何可以跳转的地址。404这个状态码被广泛应用于当服务器不想揭示到底为何请求被拒绝或者没有其他适合的响应可用的情况下。</p>
+<h3 id="405-method-not-allowed"><a class="header-anchor" href="#405-method-not-allowed"></a>405 Method Not Allowed</h3>
+<p>请求行中指定的请求方法不能被用于请求相应的资源。该响应必须返回一个Allow 头信息用以表示出当前资源能够接受的请求方法的列表。 　　鉴于 PUT，DELETE 方法会对服务器上的资源进行写操作，因而绝大部分的网页服务器都不支持或者在默认配置下不允许上述请求方法，对于此类请求均会返回405错误。</p>
+<h3 id="406-not-acceptable"><a class="header-anchor" href="#406-not-acceptable"></a>406 Not Acceptable</h3>
+<p>请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体。</p>
+<h3 id="407-proxy-authentication-required"><a class="header-anchor" href="#407-proxy-authentication-required"></a>407 Proxy Authentication Required</h3>
+<p>与401响应类似，只不过客户端必须在代理服务器上进行身份验证。代理服务器必须返回一个 Proxy-Authenticate 用以进行身份询问。客户端可以返回一个 Proxy-Authorization 信息头用以验证。</p>
+<h3 id="408-request-timeout"><a class="header-anchor" href="#408-request-timeout"></a>408 Request Timeout</h3>
+<p>请求超时。客户端没有在服务器预备等待的时间内完成一个请求的发送。客户端可以随时再次提交这一请求而无需进行任何更改。</p>
+<h3 id="409-conflict"><a class="header-anchor" href="#409-conflict"></a>409 Conflict</h3>
+<p>由于和被请求的资源的当前状态之间存在冲突，请求无法完成。这个代码只允许用在这样的情况下才能被使用：用户被认为能够解决冲突，并且会重新提交新的请求。该响应应当包含足够的信息以便用户发现冲突的源头。</p>
+<h3 id="410-gone"><a class="header-anchor" href="#410-gone"></a>410 Gone</h3>
+<p>被请求的资源在服务器上已经不再可用，而且没有任何已知的转发地址。这样的状况应当被认为是永久性的。如果可能，拥有链接编辑功能的客户端应当在获得用户许可后删除所有指向这个地址的引用。如果服务器不知道或者无法确定这个状况是否是永久的，那么就应该使用 404 状态码。除非额外说明，否则这个响应是可缓存的。</p>
+<h3 id="411-length-required"><a class="header-anchor" href="#411-length-required"></a>411 Length Required</h3>
+<p>服务器拒绝在没有定义 Content-Length 头的情况下接受请求。在添加了表明请求消息体长度的有效 Content-Length 头之后，客户端可以再次提交该请求。</p>
+<h3 id="412-precondition-failed"><a class="header-anchor" href="#412-precondition-failed"></a>412 Precondition Failed</h3>
+<p>服务器在验证在请求的头字段中给出先决条件时，没能满足其中的一个或多个。这个状态码允许客户端在获取资源时在请求的元信息（请求头字段数据）中设置先决条件，以此避免该请求方法被应用到其希望的内容以外的资源上。</p>
+<h3 id="413-payload-too-large"><a class="header-anchor" href="#413-payload-too-large"></a>413 Payload Too Large</h3>
+<p>服务器拒绝处理当前请求，因为该请求提交的实体数据大小超过了服务器愿意或者能够处理的范围。此种情况下，服务器可以关闭连接以免客户端继续发送此请求。如果这个状况是临时的，服务器应当返回一个 Retry-After 的响应头，以告知客户端可以在多少时间以后重新尝试。</p>
+<h3 id="414-uri-too-long"><a class="header-anchor" href="#414-uri-too-long"></a>414 URI Too Long</h3>
+<p>请求的URI 长度超过了服务器能够解释的长度，因此服务器拒绝对该请求提供服务。这比较少见，通常的情况包括：本应使用POST方法的表单提交变成了GET方法，导致查询字符串（Query String）过长。</p>
+<h3 id="415-unsupported-media-type"><a class="header-anchor" href="#415-unsupported-media-type"></a>415 Unsupported Media Type</h3>
+<p>对于当前请求的方法和所请求的资源，请求中提交的实体并不是服务器中所支持的格式，因此请求被拒绝。</p>
+<h3 id="416-requested-range-not-satisfiable"><a class="header-anchor" href="#416-requested-range-not-satisfiable"></a>416 Requested Range Not Satisfiable</h3>
+<p>如果请求中包含了 Range 请求头，并且 Range 中指定的任何数据范围都与当前资源的可用范围不重合，同时请求中又没有定义 If-Range 请求头，那么服务器就应当返回416状态码。</p>
+<h3 id="417-expectation-failed"><a class="header-anchor" href="#417-expectation-failed"></a>417 Expectation Failed</h3>
+<p>此响应代码意味着服务器无法满足 Expect 请求标头字段指示的期望值。</p>
+<h3 id="418-i-m-a-teapot"><a class="header-anchor" href="#418-i-m-a-teapot"></a>418 I’m a teapot</h3>
+<p>服务器拒绝尝试用 “茶壶冲泡咖啡”。</p>
+<h3 id="421-misdirected-request"><a class="header-anchor" href="#421-misdirected-request"></a>421 Misdirected Request</h3>
+<p>该请求针对的是无法产生响应的服务器。 这可以由服务器发送，该服务器未配置为针对包含在请求 URI 中的方案和权限的组合产生响应。</p>
+<h3 id="422-unprocessable-entity-webdav"><a class="header-anchor" href="#422-unprocessable-entity-webdav"></a>422 Unprocessable Entity (WebDAV)</h3>
+<p>请求格式良好，但由于语义错误而无法遵循。</p>
+<h3 id="423-locked-webdav"><a class="header-anchor" href="#423-locked-webdav"></a>423 Locked (WebDAV)</h3>
+<p>正在访问的资源被锁定。</p>
+<h3 id="424-failed-dependency-webdav"><a class="header-anchor" href="#424-failed-dependency-webdav"></a>424 Failed Dependency (WebDAV)</h3>
+<p>由于先前的请求失败，所以此次请求失败。</p>
+<h3 id="426-upgrade-required"><a class="header-anchor" href="#426-upgrade-required"></a>426 Upgrade Required</h3>
+<p>服务器拒绝使用当前协议执行请求，但可能在客户机升级到其他协议后愿意这样做。 服务器在 426 响应中发送 Upgrade 头以指示所需的协议。</p>
+<h3 id="428-precondition-required"><a class="header-anchor" href="#428-precondition-required"></a>428 Precondition Required</h3>
+<p>原始服务器要求该请求是有条件的。 旨在防止“丢失更新”问题，即客户端获取资源状态，修改该状态并将其返回服务器，同时第三方修改服务器上的状态，从而导致冲突。</p>
+<h3 id="429-too-many-requests"><a class="header-anchor" href="#429-too-many-requests"></a>429 Too Many Requests</h3>
+<p>用户在给定的时间内发送了太多请求（“限制请求速率”）。</p>
+<h3 id="431-request-header-fields-too-large"><a class="header-anchor" href="#431-request-header-fields-too-large"></a>431 Request Header Fields Too Large</h3>
+<p>服务器不愿意处理请求，因为它的 请求头字段太大（ Request Header Fields Too Large）。 请求可以在减小请求头字段的大小后重新提交。</p>
+<h3 id="451-unavailable-for-legal-reasons"><a class="header-anchor" href="#451-unavailable-for-legal-reasons"></a>451 Unavailable For Legal Reasons</h3>
+<p>用户请求非法资源，例如：由政府审查的网页。</p>
+<hr>
+<h2 id="5-服务端响应节"><a class="header-anchor" href="#5-服务端响应节"></a>5、服务端响应节</h2>
+<h3 id="500-internal-server-error"><a class="header-anchor" href="#500-internal-server-error"></a>500 Internal Server Error</h3>
+<p>服务器遇到了不知道如何处理的情况。</p>
+<h3 id="501-not-implemented"><a class="header-anchor" href="#501-not-implemented"></a>501 Not Implemented</h3>
+<p>此请求方法不被服务器支持且无法被处理。只有GET和HEAD是要求服务器支持的，它们必定不会返回此错误代码。</p>
+<h3 id="502-bad-gateway"><a class="header-anchor" href="#502-bad-gateway"></a>502 Bad Gateway</h3>
+<p>此错误响应表明服务器作为网关需要得到一个处理这个请求的响应，但是得到一个错误的响应。</p>
+<h3 id="503-service-unavailable"><a class="header-anchor" href="#503-service-unavailable"></a>503 Service Unavailable</h3>
+<p>服务器没有准备好处理请求。 常见原因是服务器因维护或重载而停机。 请注意，与此响应一起，应发送解释问题的用户友好页面。 这个响应应该用于临时条件和 Retry-After：如果可能的话，HTTP头应该包含恢复服务之前的估计时间。 网站管理员还必须注意与此响应一起发送的与缓存相关的标头，因为这些临时条件响应通常不应被缓存。</p>
+<h3 id="504-gateway-timeout"><a class="header-anchor" href="#504-gateway-timeout"></a>504 Gateway Timeout</h3>
+<p>当服务器作为网关，不能及时得到响应时返回此错误代码。</p>
+<h3 id="505-http-version-not-supported"><a class="header-anchor" href="#505-http-version-not-supported"></a>505 HTTP Version Not Supported</h3>
+<p>服务器不支持请求中所使用的HTTP协议版本。</p>
+<h3 id="506-variant-also-negotiates"><a class="header-anchor" href="#506-variant-also-negotiates"></a>506 Variant Also Negotiates</h3>
+<p>服务器有一个内部配置错误：对请求的透明内容协商导致循环引用。</p>
+<h3 id="507-insufficient-storage"><a class="header-anchor" href="#507-insufficient-storage"></a>507 Insufficient Storage</h3>
+<p>服务器有内部配置错误：所选的变体资源被配置为参与透明内容协商本身，因此不是协商过程中的适当端点。</p>
+<h3 id="508-loop-detected-webdav"><a class="header-anchor" href="#508-loop-detected-webdav"></a>508 Loop Detected (WebDAV)</h3>
+<p>服务器在处理请求时检测到无限循环。</p>
+<h3 id="510-not-extended"><a class="header-anchor" href="#510-not-extended"></a>510 Not Extended</h3>
+<p>服务器需要对请求进一步扩展才能实现它。</p>
+<h3 id="511-network-authentication-required"><a class="header-anchor" href="#511-network-authentication-required"></a>511 Network Authentication Required</h3>
+<p>511 状态码指示客户端需要进行身份验证才能获得网络访问权限。</p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/ASCII-码表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/ASCII-码表/" class="post-title-link" itemprop="url">ASCII 码表</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-12 17:51:24" itemprop="dateCreated datePublished" datetime="2018-05-12T17:51:24+08:00">2018-05-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="可显示字符"><a class="header-anchor" href="#可显示字符"></a>可显示字符</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ASCII 值</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:left">ASCII 值</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">ASCII 值</th>
+<th style="text-align:center">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">33</td>
+<td style="text-align:center">!</td>
+<td style="text-align:left">66</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">99</td>
+<td style="text-align:center">c</td>
+</tr>
+<tr>
+<td style="text-align:center">34</td>
+<td style="text-align:center">&quot;</td>
+<td style="text-align:left">67</td>
+<td style="text-align:center">C</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">d</td>
+</tr>
+<tr>
+<td style="text-align:center">35</td>
+<td style="text-align:center">#</td>
+<td style="text-align:left">68</td>
+<td style="text-align:center">D</td>
+<td style="text-align:center">101</td>
+<td style="text-align:center">e</td>
+</tr>
+<tr>
+<td style="text-align:center">36</td>
+<td style="text-align:center">$</td>
+<td style="text-align:left">69</td>
+<td style="text-align:center">E</td>
+<td style="text-align:center">102</td>
+<td style="text-align:center">f</td>
+</tr>
+<tr>
+<td style="text-align:center">37</td>
+<td style="text-align:center">%</td>
+<td style="text-align:left">70</td>
+<td style="text-align:center">F</td>
+<td style="text-align:center">103</td>
+<td style="text-align:center">g</td>
+</tr>
+<tr>
+<td style="text-align:center">38</td>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:left">71</td>
+<td style="text-align:center">G</td>
+<td style="text-align:center">104</td>
+<td style="text-align:center">h</td>
+</tr>
+<tr>
+<td style="text-align:center">39</td>
+<td style="text-align:center">’</td>
+<td style="text-align:left">72</td>
+<td style="text-align:center">H</td>
+<td style="text-align:center">105</td>
+<td style="text-align:center">i</td>
+</tr>
+<tr>
+<td style="text-align:center">40</td>
+<td style="text-align:center">(</td>
+<td style="text-align:left">73</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">106</td>
+<td style="text-align:center">j</td>
+</tr>
+<tr>
+<td style="text-align:center">41</td>
+<td style="text-align:center">)</td>
+<td style="text-align:left">74</td>
+<td style="text-align:center">J</td>
+<td style="text-align:center">107</td>
+<td style="text-align:center">k</td>
+</tr>
+<tr>
+<td style="text-align:center">42</td>
+<td style="text-align:center">*</td>
+<td style="text-align:left">75</td>
+<td style="text-align:center">K</td>
+<td style="text-align:center">108</td>
+<td style="text-align:center">l</td>
+</tr>
+<tr>
+<td style="text-align:center">43</td>
+<td style="text-align:center">+</td>
+<td style="text-align:left">76</td>
+<td style="text-align:center">L</td>
+<td style="text-align:center">109</td>
+<td style="text-align:center">m</td>
+</tr>
+<tr>
+<td style="text-align:center">44</td>
+<td style="text-align:center">,</td>
+<td style="text-align:left">77</td>
+<td style="text-align:center">M</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">n</td>
+</tr>
+<tr>
+<td style="text-align:center">45</td>
+<td style="text-align:center">-</td>
+<td style="text-align:left">78</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">111</td>
+<td style="text-align:center">o</td>
+</tr>
+<tr>
+<td style="text-align:center">46</td>
+<td style="text-align:center">.</td>
+<td style="text-align:left">79</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">112</td>
+<td style="text-align:center">p</td>
+</tr>
+<tr>
+<td style="text-align:center">47</td>
+<td style="text-align:center">/</td>
+<td style="text-align:left">80</td>
+<td style="text-align:center">P</td>
+<td style="text-align:center">113</td>
+<td style="text-align:center">q</td>
+</tr>
+<tr>
+<td style="text-align:center">48</td>
+<td style="text-align:center">0</td>
+<td style="text-align:left">81</td>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">114</td>
+<td style="text-align:center">r</td>
+</tr>
+<tr>
+<td style="text-align:center">49</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">82</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">115</td>
+<td style="text-align:center">s</td>
+</tr>
+<tr>
+<td style="text-align:center">50</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">83</td>
+<td style="text-align:center">S</td>
+<td style="text-align:center">116</td>
+<td style="text-align:center">t</td>
+</tr>
+<tr>
+<td style="text-align:center">51</td>
+<td style="text-align:center">3</td>
+<td style="text-align:left">84</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">117</td>
+<td style="text-align:center">u</td>
+</tr>
+<tr>
+<td style="text-align:center">52</td>
+<td style="text-align:center">4</td>
+<td style="text-align:left">85</td>
+<td style="text-align:center">U</td>
+<td style="text-align:center">118</td>
+<td style="text-align:center">v</td>
+</tr>
+<tr>
+<td style="text-align:center">53</td>
+<td style="text-align:center">5</td>
+<td style="text-align:left">86</td>
+<td style="text-align:center">V</td>
+<td style="text-align:center">119</td>
+<td style="text-align:center">w</td>
+</tr>
+<tr>
+<td style="text-align:center">54</td>
+<td style="text-align:center">6</td>
+<td style="text-align:left">87</td>
+<td style="text-align:center">W</td>
+<td style="text-align:center">120</td>
+<td style="text-align:center">x</td>
+</tr>
+<tr>
+<td style="text-align:center">55</td>
+<td style="text-align:center">7</td>
+<td style="text-align:left">88</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">121</td>
+<td style="text-align:center">y</td>
+</tr>
+<tr>
+<td style="text-align:center">56</td>
+<td style="text-align:center">8</td>
+<td style="text-align:left">89</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">122</td>
+<td style="text-align:center">z</td>
+</tr>
+<tr>
+<td style="text-align:center">57</td>
+<td style="text-align:center">9</td>
+<td style="text-align:left">90</td>
+<td style="text-align:center">Z</td>
+<td style="text-align:center">123</td>
+<td style="text-align:center">{</td>
+</tr>
+<tr>
+<td style="text-align:center">58</td>
+<td style="text-align:center">:</td>
+<td style="text-align:left">91</td>
+<td style="text-align:center">[</td>
+<td style="text-align:center">124</td>
+<td style="text-align:center">|</td>
+</tr>
+<tr>
+<td style="text-align:center">59</td>
+<td style="text-align:center">;</td>
+<td style="text-align:left">92</td>
+<td style="text-align:center">\</td>
+<td style="text-align:center">125</td>
+<td style="text-align:center">}</td>
+</tr>
+<tr>
+<td style="text-align:center">60</td>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:left">93</td>
+<td style="text-align:center">]</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">61</td>
+<td style="text-align:center">=</td>
+<td style="text-align:left">94</td>
+<td style="text-align:center">^</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">62</td>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:left">95</td>
+<td style="text-align:center">_</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">63</td>
+<td style="text-align:center">?</td>
+<td style="text-align:left">96</td>
+<td style="text-align:center">`</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">64</td>
+<td style="text-align:center">@</td>
+<td style="text-align:left">97</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">65</td>
+<td style="text-align:center">A</td>
+<td style="text-align:left">98</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>更多参考：<br>
+<a href="https://zh.wikipedia.org/wiki/ASCII" target="_blank" rel="noopener">维基百科</a></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Markdown-备忘录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Markdown-备忘录/" class="post-title-link" itemprop="url">Markdown 备忘录</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-05 20:11:24" itemprop="dateCreated datePublished" datetime="2018-05-05T20:11:24+08:00">2018-05-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="基础语法"><a class="header-anchor" href="#基础语法"></a>基础语法</h2>
+<p>基础语法是John Gruber的原始设计文档中概述的元素。<br>
+所有Markdown应用程序都支持这些元素。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">元素</th>
+<th style="text-align:left">Markdown 语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">标题</td>
+<td style="text-align:left"># H1<br>## H2<br>### H3</td>
+</tr>
+<tr>
+<td style="text-align:left">粗体</td>
+<td style="text-align:left">**bold text**</td>
+</tr>
+<tr>
+<td style="text-align:left">斜体</td>
+<td style="text-align:left">*italicized text*</td>
+</tr>
+<tr>
+<td style="text-align:left">引用</td>
+<td style="text-align:left">&gt; blockquote</td>
+</tr>
+<tr>
+<td style="text-align:left">代码</td>
+<td style="text-align:left">`code`</td>
+</tr>
+<tr>
+<td style="text-align:left">水平线</td>
+<td style="text-align:left">---</td>
+</tr>
+<tr>
+<td style="text-align:left">有序列表</td>
+<td style="text-align:left">1. First item<br>2. Second item<br>3. Third item</td>
+</tr>
+<tr>
+<td style="text-align:left">无序列表</td>
+<td style="text-align:left">- First item<br>- Second item<br>- Third item</td>
+</tr>
+<tr>
+<td style="text-align:left">链接</td>
+<td style="text-align:left">[title](<a href="https://www.example.com" target="_blank" rel="noopener">https://www.example.com</a>)</td>
+</tr>
+<tr>
+<td style="text-align:left">图片</td>
+<td style="text-align:left">![alt text](image.jpg)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="扩展语法"><a class="header-anchor" href="#扩展语法"></a>扩展语法</h2>
+<p>扩展语法通过添加其他功能扩展了基本语法。<br>
+并非所有Markdown应用程序都支持这些元素。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">元素</th>
+<th style="text-align:left">Markdown 语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">表格</td>
+<td style="text-align:left">| Syntax | Description |<br>| - | - |<br>| Header | Title |</td>
+</tr>
+<tr>
+<td style="text-align:left">代码块</td>
+<td style="text-align:left">```<br>{<br> “firstName”: “John”,<br> “lastName”: “Smith”,<br> “age”: 25<br>}<br>```</td>
+</tr>
+<tr>
+<td style="text-align:left">脚注</td>
+<td style="text-align:left">Here’s a sentence with a footnote. [^1] <br> [^1]: This is the footnote.</td>
+</tr>
+<tr>
+<td style="text-align:left">标题 ID</td>
+<td style="text-align:left">### My Great Heading { #custom-id}</td>
+</tr>
+<tr>
+<td style="text-align:left">删除线</td>
+<td style="text-align:left">~~The world is flat.~~</td>
+</tr>
+<tr>
+<td style="text-align:left">任务列表</td>
+<td style="text-align:left">- [x] Write the press release<br>- [ ] Update the website<br>- [ ] Contact the media</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="转义字符"><a class="header-anchor" href="#转义字符"></a>转义字符</h2>
+<p>可以用反斜线“\”进行转义的字符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">感叹号</td>
+<td style="text-align:left">!</td>
+</tr>
+<tr>
+<td style="text-align:left">大括号</td>
+<td style="text-align:left">{}</td>
+</tr>
+<tr>
+<td style="text-align:left">中括号</td>
+<td style="text-align:left">[]</td>
+</tr>
+<tr>
+<td style="text-align:left">小括号</td>
+<td style="text-align:left">()</td>
+</tr>
+<tr>
+<td style="text-align:left">反斜线</td>
+<td style="text-align:left">\</td>
+</tr>
+<tr>
+<td style="text-align:left">下划线</td>
+<td style="text-align:left">_</td>
+</tr>
+<tr>
+<td style="text-align:left">刻度</td>
+<td style="text-align:left">`</td>
+</tr>
+<tr>
+<td style="text-align:left">井号</td>
+<td style="text-align:left">#</td>
+</tr>
+<tr>
+<td style="text-align:left">星号</td>
+<td style="text-align:left">*</td>
+</tr>
+<tr>
+<td style="text-align:left">加号</td>
+<td style="text-align:left">+</td>
+</tr>
+<tr>
+<td style="text-align:left">减号</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">点</td>
+<td style="text-align:left">.</td>
+</tr>
+</tbody>
+</table>
+<p>不可以用反斜线“\”进行转义的字符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">字符</th>
+<th style="text-align:left">实体名称</th>
+<th style="text-align:left">实体编号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">空格</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>&amp;nbsp;</code></td>
+<td style="text-align:left"><code>&amp;#160;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">小于</td>
+<td style="text-align:left">&lt;</td>
+<td style="text-align:left"><code>&amp;lt;</code></td>
+<td style="text-align:left"><code>&amp;#60;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">大于</td>
+<td style="text-align:left">&gt;</td>
+<td style="text-align:left"><code>&amp;gt;</code></td>
+<td style="text-align:left"><code>&amp;#62;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">双引号</td>
+<td style="text-align:left">&quot;</td>
+<td style="text-align:left"><code>&amp;quot;</code></td>
+<td style="text-align:left"><code>&amp;#34;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">单引号</td>
+<td style="text-align:left">’</td>
+<td style="text-align:left"><code>&amp;apos;</code></td>
+<td style="text-align:left"><code>&amp;#39;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">和号</td>
+<td style="text-align:left">&amp;</td>
+<td style="text-align:left"><code>&amp;amp;</code></td>
+<td style="text-align:left"><code>&amp;#38;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">竖线</td>
+<td style="text-align:left">|</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>&amp;#124;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">波浪线</td>
+<td style="text-align:left">~</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>&amp;#126;</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>更多参考：<br>
+<a href="https://www.markdownguide.org/cheat-sheet" target="_blank" rel="noopener">Markdown Guide/Cheat Sheet</a></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hexo-renderer-markdown-it-插件-详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/hexo-renderer-markdown-it-插件-详解/" class="post-title-link" itemprop="url">hexo-renderer-markdown-it 插件 详解</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-28 20:37:53" itemprop="dateCreated datePublished" datetime="2018-04-28T20:37:53+08:00">2018-04-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="简介"><a class="header-anchor" href="#简介"></a>简介</h2>
+<p><code>hexo-renderer-markdown-it</code> 是一款用于 Markdown 解析和渲染的插件。</p>
+<ul>
+<li>用于替换 Hexo 默认自带的 Markdown 渲染器。</li>
+<li>提供了更丰富的 Markdown 解析和渲染。</li>
+</ul>
+<hr>
+<h2 id="安装"><a class="header-anchor" href="#安装"></a>安装</h2>
+<p>注意：请确保你在 Hexo 主目录下进行以下操作。</p>
+<ol>
+<li>卸载 Hexo 默认自带的 Markdown 渲染器</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>安装 <code>hexo-renderer-markdown-it</code> 插件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-markdown-it --save</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="配置"><a class="header-anchor" href="#配置"></a>配置</h2>
+<p>方便的是，<code>hexo-renderer-markdown-it</code> 的所有配置，均在 Hexo 的站点配置文件 <code>_config.yml</code> 中进行配置。<br>
+配置的方式，主要分为：</p>
+<ul>
+<li>简单配置（支持三种配置级别，开箱即用）</li>
+<li>高级配置（更详细的定制，渲染器、插件、锚）</li>
+</ul>
+<h3 id="简单配置"><a class="header-anchor" href="#简单配置"></a>简单配置</h3>
+<p><code>hexo-renderer-markdown-it</code> 提供三种简单配置方式（配置级别）<code>zero</code>、<code>default</code>、<code>commonmark</code>。<br>
+在 Hexo 的 <code>_config.yml</code> 文件中配置以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Markdown-it config</span><br><span class="line">#markdown: &apos;zero&apos;</span><br><span class="line">#markdown: &apos;default&apos;</span><br><span class="line">markdown: &apos;commonmark&apos;</span><br></pre></td></tr></table></figure>
+<p>每种简单配置有其默认的一些设置。更多个性化配置，请参考：高级配置。</p>
+<ul>
+<li>zero：禁用大多数解析器功能。仅支持斜体和粗体，甚至不支持所有原始Markdown功能。</li>
+<li>default（GFM）：解析器的行为类似于github规范。</li>
+<li>commonmark：提供比Zero预设更多的功能。 此设置将强制插件使用最新的CommonMark规范。</li>
+</ul>
+<p>警告：选择一种简单配置，将阻止您使用任何附带的插件。</p>
+<h3 id="高级配置"><a class="header-anchor" href="#高级配置"></a>高级配置</h3>
+<p><code>hexo-renderer-markdown-it</code> 提供的高级配置，是对简单配置的详细定制。<br>
+在 Hexo 的 <code>_config.yml</code> 文件中配置以下内容（官方提供的完整配置，没有特殊需要不用再次修改）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># Markdown-it config</span><br><span class="line">markdown:</span><br><span class="line">  render:</span><br><span class="line">    html: true</span><br><span class="line">    xhtmlOut: false</span><br><span class="line">    breaks: true</span><br><span class="line">    linkify: true</span><br><span class="line">    typographer: true</span><br><span class="line">    quotes: &apos;“”‘’&apos;</span><br><span class="line">  plugins:</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-ins</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">  anchors:</span><br><span class="line">    level: 2</span><br><span class="line">    collisionSuffix: &apos;v&apos;</span><br><span class="line">    permalink: true</span><br><span class="line">    permalinkClass: header-anchor</span><br><span class="line">    permalinkSymbol: ¶</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="高级配置详解"><a class="header-anchor" href="#高级配置详解"></a>高级配置详解</h3>
+<h4 id="渲染器-render"><a class="header-anchor" href="#渲染器-render"></a>渲染器（render）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Markdown-it config</span><br><span class="line">markdown:</span><br><span class="line">  render:</span><br><span class="line">    html: true</span><br><span class="line">    xhtmlOut: false</span><br><span class="line">    breaks: true</span><br><span class="line">    linkify: true</span><br><span class="line">    typographer: true</span><br><span class="line">    quotes: &apos;“”‘’&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>html：定义文档中的HTML内容是否应转义或传递给最终结果。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">html: true # 不转义 HTML 内容</span><br><span class="line">html: false # 转义 HTML 内容，使标签作为文本输出</span><br></pre></td></tr></table></figure>
+<ul>
+<li>xhtmlOut：定义解析器是否将导出完全兼容XHTML的标记。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xhtmlOut: true # 必须使用完全的 XHTML 代码，换行必须为 &lt;br/&gt;</span><br><span class="line">xhtmlOut: false # 不必必使用完全的 XHTML 代码，换行可以为 &lt;br&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>breaks：使源文件中的换行符被解析为&lt;br&gt;标记。每次按Enter键都会创建换行符。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">breaks: true # 每次会车换行相当于一个 &lt;br/&gt; 标签</span><br><span class="line">breaks: false # Pa每次会车换行会被忽略</span><br></pre></td></tr></table></figure>
+<ul>
+<li>linkify：解析器能够将直接粘贴到文本中的链接内联。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">linkify: true # 类似链接的文本，作为链接输出</span><br><span class="line">linkify: false # 类似链接的文本，依然作为文本输出</span><br></pre></td></tr></table></figure>
+<ul>
+<li>typographer：可以替换常见的排版元素。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typographer: true # 替换常见的排版元素</span><br><span class="line">typographer: false # 不替换常见的排版元素</span><br></pre></td></tr></table></figure>
+<ul>
+<li>quotes：单引号、双引号如何被替换</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">quotes: &apos;“”‘’&apos; # &apos;single&apos;、&quot;double&quot; 变成 ‘single’、“double”</span><br><span class="line">quotes: &apos;«»“”&apos; # &apos;single&apos;、&quot;double&quot; 变成 “single”、«single»</span><br></pre></td></tr></table></figure>
+<h4 id="插件-plugins"><a class="header-anchor" href="#插件-plugins"></a>插件（plugins）</h4>
+<p><code>hexo-renderer-markdown-it</code> 默认集成5个 <code>markdown-it</code> 插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Markdown-it config</span><br><span class="line">markdown:</span><br><span class="line">  plugins:</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-ins</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-sup</span><br></pre></td></tr></table></figure>
+<ul>
+<li>markdown-it-abbr：缩写插件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*[HTML]: Hyper Text Markup Language</span><br><span class="line">*[W3C]:  World Wide Web Consortium</span><br><span class="line"></span><br><span class="line">The HTML specification</span><br><span class="line">is maintained by the W3C.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>markdown-it-footnote：脚注插件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">basic footnote[^1]</span><br><span class="line">here is an inline footnote[^2](inline footnote)</span><br><span class="line">and another one[^3]</span><br><span class="line">and another one[^4]</span><br><span class="line"></span><br><span class="line">[^1]: basic footnote content</span><br><span class="line">[^3]: paragraph</span><br><span class="line">footnote</span><br><span class="line">content</span><br><span class="line">[^4]: footnote content with some [markdown](https://en.wikipedia.org/wiki/Markdown)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>markdown-it-ins：插入插件（下划线插件）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">++inserted++ =&gt; &lt;ins&gt;inserted&lt;/ins&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>markdown-it-sub：下标插件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H~2~0 =&gt; H&lt;sub&gt;2&lt;/sub&gt;O</span><br></pre></td></tr></table></figure>
+<ul>
+<li>markdown-it-sup：上标插件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">29^th^ =&gt; 29&lt;sup&gt;th&lt;/sup&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="锚-anchors"><a class="header-anchor" href="#锚-anchors"></a>锚（anchors）</h4>
+<p>可能自己不会用，因此，没太关注这个功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Markdown-it config</span><br><span class="line">markdown:</span><br><span class="line">  anchors:</span><br><span class="line">    level: 2</span><br><span class="line">    collisionSuffix: &apos;v&apos;</span><br><span class="line">    permalink: true</span><br><span class="line">    permalinkClass: header-anchor</span><br><span class="line">    permalinkSymbol: ¶</span><br></pre></td></tr></table></figure>
+<ul>
+<li>level：生成 Heading ID 的标题等级</li>
+<li>collisionSuffix：Heading ID 重复时，数字的后缀</li>
+<li>permalink：‘true’，则创建一个锚标记，除标题外还有一个固定链接</li>
+<li>permalinkClass：用于固定链接锚标记的样式</li>
+<li>permalinkSymbol：用于固定链接标记的符号</li>
+</ul>
+<hr>
+<p>参考：<br>
+<a href="https://github.com/markdown-it" target="_blank" rel="noopener">markdown-it 插件 GitHub主页</a><br>
+<a href="https://github.com/hexojs/hexo-renderer-markdown-it/wiki" target="_blank" rel="noopener">hexo-renderer-markdown-it GitHub Wiki</a></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hexo-renderer-markdown-it-插件-快速配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/hexo-renderer-markdown-it-插件-快速配置/" class="post-title-link" itemprop="url">hexo-renderer-markdown-it 插件 快速配置</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-28 17:54:24" itemprop="dateCreated datePublished" datetime="2018-04-28T17:54:24+08:00">2018-04-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="简介"><a class="header-anchor" href="#简介"></a>简介</h2>
+<p><code>hexo-renderer-markdown-it</code> 是一款用于 Markdown 解析和渲染的插件。</p>
+<ul>
+<li>用于替换 Hexo 默认自带的 Markdown 渲染器。</li>
+<li>提供了更丰富的 Markdown 解析和渲染。</li>
+</ul>
+<h2 id="安装"><a class="header-anchor" href="#安装"></a>安装</h2>
+<p>Hexo 主文件目录下：</p>
+<ol>
+<li>卸载 Hexo 默认自带的 Markdown 渲染器</li>
+<li>安装 <code>hexo-renderer-markdown-it</code> 插件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm i hexo-renderer-markdown-it --save</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="配置"><a class="header-anchor" href="#配置"></a>配置</h2>
+<p>Hexo 主配置文件 <code>_config.yml</code> 中添加以下配置内容（官方提供的完整配置，没有特殊需要不用再次修改）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># Markdown-it config</span><br><span class="line">markdown:</span><br><span class="line">  render:</span><br><span class="line">    html: true</span><br><span class="line">    xhtmlOut: false</span><br><span class="line">    breaks: true</span><br><span class="line">    linkify: true</span><br><span class="line">    typographer: true</span><br><span class="line">    quotes: &apos;“”‘’&apos;</span><br><span class="line">  plugins:</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-ins</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">  anchors:</span><br><span class="line">    level: 2</span><br><span class="line">    collisionSuffix: &apos;v&apos;</span><br><span class="line">    permalink: true</span><br><span class="line">    permalinkClass: header-anchor</span><br><span class="line">    permalinkSymbol: ¶</span><br></pre></td></tr></table></figure>
+<hr>
+<p>更多参考：<br>
+<a href="https://idukelu.github.io/Hexo/hexo-renderer-markdown-it%20%E6%8F%92%E4%BB%B6%20%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener">hexo-renderer-markdown-it 插件 详解</a></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Homebrew-入门及常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Homebrew-入门及常用命令/" class="post-title-link" itemprop="url">Homebrew 入门及常用命令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-21 14:24:48" itemprop="dateCreated datePublished" datetime="2018-04-21T14:24:48+08:00">2018-04-21</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="简介"><a class="header-anchor" href="#简介"></a>简介</h2>
+<p><code>Hombrew</code> 是 macOS系统下的一款缺失软件包的管理器。</p>
+<ul>
+<li>完全基于 Git 和 Ruby</li>
+<li>将软件包安装到独立目录，并将其文件软链接至 /usr/local/bin</li>
+<li>安装到独立目录，使得软件包易于卸载</li>
+<li>通过软链接的方式，意味着不用再去配置环境变量</li>
+<li>易于管理软件包，省去安装配置繁琐的过程</li>
+</ul>
+<blockquote>
+<p>在Homebrew中，软件包分为 CLI 软件包和 GUI 软件包：<br>
+  CLI 的软件包称为 <code>formula</code>，被安装至 <code>/usr/local/Cellar</code>，如 git、maven 等<br>
+  GUI 的软件包称为 <code>cask</code>，被安装至 <code>/usr/local/Caskroom</code>，如 QQ、WeChat 等</p>
+</blockquote>
+<hr>
+<h2 id="安装和卸载"><a class="header-anchor" href="#安装和卸载"></a>安装和卸载</h2>
+<p>Mac 默认集成了 Ruby，直接运行以下 Ruby 脚步即可</p>
+<ul>
+<li>安装</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+<p>安装之后，<code>Homebrew</code> 会为你自动设置环境变量，以使用提供的命令</p>
+<ul>
+<li>卸载</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</span><br></pre></td></tr></table></figure>
+<p>卸载之后，<code>Homebrew</code> 在安装时创建的目录、下载的软件包及软件包的软链接均会被删除</p>
+<hr>
+<h2 id="基本使用"><a class="header-anchor" href="#基本使用"></a>基本使用</h2>
+<p>Homebrew 最常用的几个操作便是软件包的搜索、下载、卸载、更新以及查看</p>
+<h3 id="通用操作"><a class="header-anchor" href="#通用操作"></a>通用操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 搜索查询</span><br><span class="line">brew search [text | /regex/] // 无参：查找所有可安装的软件包；有参：根据字符串搜索软件包，/regex/表示正则</span><br><span class="line"></span><br><span class="line">// 清理</span><br><span class="line">brew cleanup [formula | cask] // 无参：删除所有 formula 和 cask 过时版本；无参：删除指定 formula 或 cask 过时版本；</span><br><span class="line"></span><br><span class="line">// 更新</span><br><span class="line">brew update // 更新 Homebrew</span><br></pre></td></tr></table></figure>
+<h3 id="对-formula-的操作"><a class="header-anchor" href="#对-formula-的操作"></a>对 <code>formula</code> 的操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 安装、卸载、重装、更新</span><br><span class="line">brew install (formula) // 安装指定 formula</span><br><span class="line">brew reinstall (formula) // 重装指定 formula</span><br><span class="line">brew uninstall (formula) // 卸载指定 formula</span><br><span class="line">brew upgrade [formula] // 无参：更新所有已安装 formula；有参：更新指定 formula</span><br><span class="line"></span><br><span class="line">// 查看</span><br><span class="line">brew list [formula] // 无参：列出所有已安装 formula；有参：列出指定 formula 的相关列表</span><br><span class="line">brew info [formula] // 无参：列出已安装 formula 综合信息；有参：列出指定 formula 的信息</span><br><span class="line">brew home [formula] // 无参: 打开 Homebrew 官网；有参：列出指定 formula 的官网</span><br><span class="line">brew outdated // 列出已过时的 formula</span><br><span class="line">brew deps (formula) // 列出指定 formula 的依赖项</span><br><span class="line"></span><br><span class="line">brew doctor 检查配置问题</span><br></pre></td></tr></table></figure>
+<h3 id="对-cask-的操作"><a class="header-anchor" href="#对-cask-的操作"></a>对 <code>cask</code> 的操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 安装、卸载、重装、更新</span><br><span class="line">brew cask install (formula) // 安装指定 cask</span><br><span class="line">brew cask reinstall (formula) // 重装指定 cask</span><br><span class="line">brew cask uninstall (formula) // 卸载指定 cask</span><br><span class="line">brew cask upgrade [formula] // 无参：更新所有已安装 cask；有参：更新指定 cask</span><br><span class="line"></span><br><span class="line">// 查看</span><br><span class="line">brew cask list [formula] // 无参：列出所有已安装 cask；有参：列出指定 cask 的相关列表</span><br><span class="line">brew cask info [formula] // 无参：列出已安装 cask 综合信息；有参：列出指定 cask 的信息</span><br><span class="line">brew cask home [formula] // 无参: 打开 Homebrew 官网；有参：列出指定 cask 的官网</span><br><span class="line">brew cask outdated // 列出已过时的 cask</span><br><span class="line"></span><br><span class="line">brew cask doctor 检查配置问题</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="关于-homebrew-的目录"><a class="header-anchor" href="#关于-homebrew-的目录"></a>关于 Homebrew 的目录</h2>
+<ul>
+<li><code>/usr/local/Homebrew</code>：<code>Homebrew</code> 程序本身的安装目录</li>
+<li><code>/usr/local/Cellar</code>：存放<code>formula</code> 的目录</li>
+<li><code>/usr/local/Caskroom</code>：存放<code>cask</code> 的目录</li>
+<li><code>/usr/local/opt</code>：所有包忽略版本的存放目录</li>
+<li><code>/usr/local/bin</code>：所有包二进制目录</li>
+<li><code>/usr/local/etc</code>：所有包配置文件目录</li>
+<li><code>/usr/local/lib</code>：所有包依赖库目录</li>
+<li><code>/usr/local/share</code>：所有包文档文件目录</li>
+</ul>
+<hr>
+<h2 id="解决-homebrew-每次命令自动更新"><a class="header-anchor" href="#解决-homebrew-每次命令自动更新"></a>解决 Homebrew 每次命令自动更新</h2>
+<p>在环境变量文件（.bash_profile 或者 .zshrc）中设置：<code>export HOMEBREW_NO_AUTO_UPDATE=true</code></p>
+<hr>
+<p>更多参考：<br>
+<a href="https://brew.sh" target="_blank" rel="noopener">https://brew.sh</a><br>
+<a href="https://docs.brew.sh/Manpage" target="_blank" rel="noopener">https://docs.brew.sh/Manpage</a></p>
 
           
         
@@ -320,6 +2414,9 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
           </div>
@@ -351,8 +2448,69 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
