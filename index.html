@@ -704,6 +704,139 @@ Calico 的默认网段：192.168.0.0/16，Flannel 的默认网段：10.244.0.0/1
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/访问-Redis，提示进入保护模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/访问-Redis，提示进入保护模式/" class="post-title-link" itemprop="url">MySQL 8.0 安装（CentOS 7）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-18 19:28:43" itemprop="dateCreated datePublished" datetime="2019-03-18T19:28:43+08:00">2019-03-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="问题"><a class="header-anchor" href="#问题"></a>问题</h2>
+<p>Redis protected-mode 是3.2 之后加入的新特性，通过参考配置文件上的说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># When protected mode is on and if:</span><br><span class="line"># 1) The server is not binding explicitly to a set of addresses using the &quot;bind&quot; directive.</span><br><span class="line"># 2) No password is configured.</span><br></pre></td></tr></table></figure>
+<p>可以知道，以下两种情况回开启保护模式：</p>
+<ol>
+<li>服务器没有使用“bind”指令显式绑定到一组地址</li>
+<li>没有配置密码</li>
+</ol>
+<p>而不能进行远程连接，否则就会有以下提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-DENIED Redis is running in protected mode because protected mode is enabled, no bind address was specified, no authentication password is requested to clients. In this mode connections are only accepted from the loopback interface. If you want to connect from external computers to Redis you may adopt one of the following solutions: 1) Just disable protected mode sending the command &apos;CONFIG SET protected-mode no&apos; from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. 2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to &apos;no&apos;, and then restarting the server. 3) If you started the server manually just for testing, restart it with the &apos;--protected-mode no&apos; option. 4) Setup a bind address or an authentication password. NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside.</span><br><span class="line">Connection closed by foreign host.</span><br></pre></td></tr></table></figure>
+<h2 id="解决"><a class="header-anchor" href="#解决"></a>解决</h2>
+<p>在问题描述中，已经给出了相应的解决方案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1) Just disable protected mode sending the command &apos;CONFIG SET protected-mode no&apos; from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. </span><br><span class="line">2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to &apos;no&apos;, and then restarting the server. </span><br><span class="line">3) If you started the server manually just for testing, restart it with the &apos;--protected-mode no&apos; option. </span><br><span class="line">4) Setup a bind address or an authentication password. </span><br><span class="line">NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>发送命令 <code>CONFIG SET protected-mode no</code> ，但这种设置不上永久的，可以修改配置文件使之永久生效（这个…发送命令，我也不知道怎么弄）</li>
+<li>修改配置文件 <code>/etc/redis.conf</code> ，将 <code>protected-mode yes</code> 设置为 <code>no</code></li>
+<li>启动时添加选项 <code>--protected-mode no</code></li>
+<li>绑定地址或者设置认证密码<br>
+提示：您只需要执行上述操作之一，服务器就可以开始接受来自外部的连接</li>
+</ol>
+</blockquote>
+<p>其实有用的就 2 和 4 两种方式：</p>
+<ol>
+<li>修改配置文件 <code>/etc/redis.conf</code> ，将 <code>protected-mode yes</code> 设置为 <code>no</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protected-mode no</span><br></pre></td></tr></table></figure>
+<p>注意：若设置了绑定地址或者认证密码，即使关闭保护模式，仍需满足绑定地址和认证密码的条件，才能访问 redis 服务</p>
+<ol start="2">
+<li>绑定地址或者设置认证密码</li>
+</ol>
+<ul>
+<li>绑定地址：不设置，默认均可访问</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># bind 可绑定多个主机地址，类似过滤器的作用</span><br><span class="line"># 当配置为 0.0.0.0 时，允许任何主机访问</span><br><span class="line">bind 127.0.0.1 # 允许本机访问</span><br><span class="line">bind 45.123.77.99 # 允许 45.123.77.99 的主机访问</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置认证密码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 官方提示：密码应该足够强壮，不然很容易被破解</span><br><span class="line">requirepass idukelu</span><br></pre></td></tr></table></figure>
+<p>注意：即绑定了地址，又设置了认证密码，需要满足两者才能访问 redis 服务</p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/MySQL-8-0-安装（CentOS-7）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -850,139 +983,6 @@ Calico 的默认网段：192.168.0.0/16，Flannel 的默认网段：10.244.0.0/1
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd —zone=public —add-port=3306/tcp —permanent -—添加3306端口</span><br><span class="line">firewall-cmd —reload --重启防火墙规则</span><br></pre></td></tr></table></figure>
 <hr>
 <p>参考：<a href="https://blog.csdn.net/baidu_27055141/article/details/80974701" target="_blank" rel="noopener">Centos7安装Mysql8.0.11 - baidu_27055141的博客 - CSDN博客</a></p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/访问-Redis，提示进入保护模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Duke Lu">
-      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="山外小楼">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/访问-Redis，提示进入保护模式/" class="post-title-link" itemprop="url">MySQL 8.0 安装（CentOS 7）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-18 19:28:43" itemprop="dateCreated datePublished" datetime="2019-03-18T19:28:43+08:00">2019-03-18</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
-              </span>
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h2 id="问题"><a class="header-anchor" href="#问题"></a>问题</h2>
-<p>Redis protected-mode 是3.2 之后加入的新特性，通过参考配置文件上的说明：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># When protected mode is on and if:</span><br><span class="line"># 1) The server is not binding explicitly to a set of addresses using the &quot;bind&quot; directive.</span><br><span class="line"># 2) No password is configured.</span><br></pre></td></tr></table></figure>
-<p>可以知道，以下两种情况回开启保护模式：</p>
-<ol>
-<li>服务器没有使用“bind”指令显式绑定到一组地址</li>
-<li>没有配置密码</li>
-</ol>
-<p>而不能进行远程连接，否则就会有以下提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-DENIED Redis is running in protected mode because protected mode is enabled, no bind address was specified, no authentication password is requested to clients. In this mode connections are only accepted from the loopback interface. If you want to connect from external computers to Redis you may adopt one of the following solutions: 1) Just disable protected mode sending the command &apos;CONFIG SET protected-mode no&apos; from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. 2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to &apos;no&apos;, and then restarting the server. 3) If you started the server manually just for testing, restart it with the &apos;--protected-mode no&apos; option. 4) Setup a bind address or an authentication password. NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside.</span><br><span class="line">Connection closed by foreign host.</span><br></pre></td></tr></table></figure>
-<h2 id="解决"><a class="header-anchor" href="#解决"></a>解决</h2>
-<p>在问题描述中，已经给出了相应的解决方案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1) Just disable protected mode sending the command &apos;CONFIG SET protected-mode no&apos; from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. </span><br><span class="line">2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to &apos;no&apos;, and then restarting the server. </span><br><span class="line">3) If you started the server manually just for testing, restart it with the &apos;--protected-mode no&apos; option. </span><br><span class="line">4) Setup a bind address or an authentication password. </span><br><span class="line">NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>发送命令 <code>CONFIG SET protected-mode no</code> ，但这种设置不上永久的，可以修改配置文件使之永久生效（这个…发送命令，我也不知道怎么弄）</li>
-<li>修改配置文件 <code>/etc/redis.conf</code> ，将 <code>protected-mode yes</code> 设置为 <code>no</code></li>
-<li>启动时添加选项 <code>--protected-mode no</code></li>
-<li>绑定地址或者设置认证密码<br>
-提示：您只需要执行上述操作之一，服务器就可以开始接受来自外部的连接</li>
-</ol>
-</blockquote>
-<p>其实有用的就 2 和 4 两种方式：</p>
-<ol>
-<li>修改配置文件 <code>/etc/redis.conf</code> ，将 <code>protected-mode yes</code> 设置为 <code>no</code></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protected-mode no</span><br></pre></td></tr></table></figure>
-<p>注意：若设置了绑定地址或者认证密码，即使关闭保护模式，仍需满足绑定地址和认证密码的条件，才能访问 redis 服务</p>
-<ol start="2">
-<li>绑定地址或者设置认证密码</li>
-</ol>
-<ul>
-<li>绑定地址：不设置，默认均可访问</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># bind 可绑定多个主机地址，类似过滤器的作用</span><br><span class="line"># 当配置为 0.0.0.0 时，允许任何主机访问</span><br><span class="line">bind 127.0.0.1 # 允许本机访问</span><br><span class="line">bind 45.123.77.99 # 允许 45.123.77.99 的主机访问</span><br></pre></td></tr></table></figure>
-<ul>
-<li>设置认证密码</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 官方提示：密码应该足够强壮，不然很容易被破解</span><br><span class="line">requirepass idukelu</span><br></pre></td></tr></table></figure>
-<p>注意：即绑定了地址，又设置了认证密码，需要满足两者才能访问 redis 服务</p>
 
           
         
@@ -2491,9 +2491,10 @@ TRACE：消息正文包含服务器收到的请求消息</p>
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Duke Lu</span>
-  <a href="http://http://www.miit.gov.cn">蜀ICP备20004821号-1</a> 
+
 </div>
 
+<a href="http://http://www.miit.gov.cn">蜀ICP备20004821号-1</a> 
         
 <div class="busuanzi-count">
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
