@@ -231,6 +231,107 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Kubernetes-Pod-样例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Kubernetes-Pod-样例/" class="post-title-link" itemprop="url">Kubernetes Pod 样例</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-04 16:11:24 / 修改时间：17:17:28" itemprop="dateCreated datePublished" datetime="2019-08-04T16:11:24+08:00">2019-08-04</time>
+            </span>
+          
+            
+
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>Pod 配置大致如下，主要包括：<br>
+容器：containers</p>
+<ul>
+<li>镜像及相关配置：<code>image</code>、<code>imagePullPolicy</code>、<code>args</code>、<code>command</code>、<code>workingDir</code> 、<code>env</code>、<code>ports</code></li>
+<li>生命周期：<code>lifecycle</code></li>
+<li>探针：<code>livenessProbe</code>、<code>readinessProbe</code></li>
+<li>资源：<code>resources</code></li>
+<li>挂载卷：<code>volumeMounts</code><br>
+重启策略：<code>restartPolicy</code><br>
+node 选择器：<code>nodeSelector</code><br>
+主机网络：<code>hostNetwork</code><br>
+镜像拉取密钥：<code>imagePullSecrets</code><br>
+卷：<code>volumes</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: string</span><br><span class="line">  namespace: string</span><br><span class="line">  labels:</span><br><span class="line">    name1: string</span><br><span class="line">    name2: string</span><br><span class="line">  annotations:</span><br><span class="line">    name1: string</span><br><span class="line">    name2: string</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: string</span><br><span class="line">      image: string</span><br><span class="line">      imagePullPolicy: [Always | Never | IfNotPresent]</span><br><span class="line">      args: [string]</span><br><span class="line">      command: [string]</span><br><span class="line">      workingDir: string</span><br><span class="line">      env:</span><br><span class="line">        - name: string</span><br><span class="line">          value: string</span><br><span class="line">      ports:</span><br><span class="line">        - name: string</span><br><span class="line">          containerPort: int</span><br><span class="line">          hostPort: int</span><br><span class="line">          protocol: string</span><br><span class="line">      lifecycle:</span><br><span class="line">        postStart:</span><br><span class="line">        preStop:</span><br><span class="line">      livenessProbe:</span><br><span class="line">        exec:</span><br><span class="line">          command: [string]</span><br><span class="line">        httpGet:</span><br><span class="line">          path: string</span><br><span class="line">          port: number</span><br><span class="line">          host: string</span><br><span class="line">          scheme: string</span><br><span class="line">          httpHeaders:</span><br><span class="line">            - name: string</span><br><span class="line">              value: string</span><br><span class="line">        tcpSocket:</span><br><span class="line">          port: number</span><br><span class="line">      readinessProbe:</span><br><span class="line">        exec:</span><br><span class="line">          command: [string]</span><br><span class="line">        httpGet:</span><br><span class="line">          path: string</span><br><span class="line">          port: number</span><br><span class="line">          host: string</span><br><span class="line">          scheme: string</span><br><span class="line">          httpHeaders:</span><br><span class="line">            - name: string</span><br><span class="line">              value: string</span><br><span class="line">        tcpSocket:</span><br><span class="line">          port: number</span><br><span class="line">      resources:</span><br><span class="line">        limits:</span><br><span class="line">          cpu: string</span><br><span class="line">          memory: string</span><br><span class="line">        requests:</span><br><span class="line">          cpu: string</span><br><span class="line">          memory: string</span><br><span class="line">      volumeMounts:</span><br><span class="line">        - name: string</span><br><span class="line">          mountPath: string</span><br><span class="line">          readOnly: boolean</span><br><span class="line">  restartPolicy: [Always | Never | OnFailure]</span><br><span class="line">  nodeSelector: object</span><br><span class="line">  hostNetwork: boolean</span><br><span class="line">  imagePullSecrets:</span><br><span class="line">    - name: string</span><br><span class="line">  volumes:</span><br><span class="line">    - name: string</span><br><span class="line">      emptyDir: &#123;&#125;</span><br><span class="line">      hostPath:</span><br><span class="line">        path: string</span><br><span class="line">      secret:</span><br><span class="line">        secretName: string</span><br><span class="line">        items:</span><br><span class="line">          - key: string</span><br><span class="line">            path: string</span><br><span class="line">      configMap:</span><br><span class="line">        name: string</span><br><span class="line">        items:</span><br><span class="line">          - key: string</span><br><span class="line">            path: string</span><br></pre></td></tr></table></figure>
+<hr>
+<p>参考：<br>
+<a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods" target="_blank" rel="noopener">https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods</a></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/Kubernetes-v1-15-0-集群的安装部署（详细版）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2263,154 +2364,6 @@ TRACE：消息正文包含服务器收到的请求消息</p>
   </article>
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Homebrew-入门及常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Duke Lu">
-      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="山外小楼">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Homebrew-入门及常用命令/" class="post-title-link" itemprop="url">Homebrew 入门及常用命令</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-21 14:24:48" itemprop="dateCreated datePublished" datetime="2018-04-21T14:24:48+08:00">2018-04-21</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
-              </span>
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h2 id="简介"><a class="header-anchor" href="#简介"></a>简介</h2>
-<p><code>Hombrew</code> 是 macOS系统下的一款缺失软件包的管理器。</p>
-<ul>
-<li>完全基于 Git 和 Ruby</li>
-<li>将软件包安装到独立目录，并将其文件软链接至 /usr/local/bin</li>
-<li>安装到独立目录，使得软件包易于卸载</li>
-<li>通过软链接的方式，意味着不用再去配置环境变量</li>
-<li>易于管理软件包，省去安装配置繁琐的过程</li>
-</ul>
-<blockquote>
-<p>在Homebrew中，软件包分为 CLI 软件包和 GUI 软件包：<br>
-  CLI 的软件包称为 <code>formula</code>，被安装至 <code>/usr/local/Cellar</code>，如 git、maven 等<br>
-  GUI 的软件包称为 <code>cask</code>，被安装至 <code>/usr/local/Caskroom</code>，如 QQ、WeChat 等</p>
-</blockquote>
-<hr>
-<h2 id="安装和卸载"><a class="header-anchor" href="#安装和卸载"></a>安装和卸载</h2>
-<p>Mac 默认集成了 Ruby，直接运行以下 Ruby 脚步即可</p>
-<ul>
-<li>安装</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
-<p>安装之后，<code>Homebrew</code> 会为你自动设置环境变量，以使用提供的命令</p>
-<ul>
-<li>卸载</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</span><br></pre></td></tr></table></figure>
-<p>卸载之后，<code>Homebrew</code> 在安装时创建的目录、下载的软件包及软件包的软链接均会被删除</p>
-<hr>
-<h2 id="基本使用"><a class="header-anchor" href="#基本使用"></a>基本使用</h2>
-<p>Homebrew 最常用的几个操作便是软件包的搜索、下载、卸载、更新以及查看</p>
-<h3 id="通用操作"><a class="header-anchor" href="#通用操作"></a>通用操作</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 搜索查询</span><br><span class="line">brew search [text | /regex/] // 无参：查找所有可安装的软件包；有参：根据字符串搜索软件包，/regex/表示正则</span><br><span class="line"></span><br><span class="line">// 清理</span><br><span class="line">brew cleanup [formula | cask] // 无参：删除所有 formula 和 cask 过时版本；无参：删除指定 formula 或 cask 过时版本；</span><br><span class="line"></span><br><span class="line">// 更新</span><br><span class="line">brew update // 更新 Homebrew</span><br></pre></td></tr></table></figure>
-<h3 id="对-formula-的操作"><a class="header-anchor" href="#对-formula-的操作"></a>对 <code>formula</code> 的操作</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 安装、卸载、重装、更新</span><br><span class="line">brew install (formula) // 安装指定 formula</span><br><span class="line">brew reinstall (formula) // 重装指定 formula</span><br><span class="line">brew uninstall (formula) // 卸载指定 formula</span><br><span class="line">brew upgrade [formula] // 无参：更新所有已安装 formula；有参：更新指定 formula</span><br><span class="line"></span><br><span class="line">// 查看</span><br><span class="line">brew list [formula] // 无参：列出所有已安装 formula；有参：列出指定 formula 的相关列表</span><br><span class="line">brew info [formula] // 无参：列出已安装 formula 综合信息；有参：列出指定 formula 的信息</span><br><span class="line">brew home [formula] // 无参: 打开 Homebrew 官网；有参：列出指定 formula 的官网</span><br><span class="line">brew outdated // 列出已过时的 formula</span><br><span class="line">brew deps (formula) // 列出指定 formula 的依赖项</span><br><span class="line"></span><br><span class="line">brew doctor 检查配置问题</span><br></pre></td></tr></table></figure>
-<h3 id="对-cask-的操作"><a class="header-anchor" href="#对-cask-的操作"></a>对 <code>cask</code> 的操作</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 安装、卸载、重装、更新</span><br><span class="line">brew cask install (formula) // 安装指定 cask</span><br><span class="line">brew cask reinstall (formula) // 重装指定 cask</span><br><span class="line">brew cask uninstall (formula) // 卸载指定 cask</span><br><span class="line">brew cask upgrade [formula] // 无参：更新所有已安装 cask；有参：更新指定 cask</span><br><span class="line"></span><br><span class="line">// 查看</span><br><span class="line">brew cask list [formula] // 无参：列出所有已安装 cask；有参：列出指定 cask 的相关列表</span><br><span class="line">brew cask info [formula] // 无参：列出已安装 cask 综合信息；有参：列出指定 cask 的信息</span><br><span class="line">brew cask home [formula] // 无参: 打开 Homebrew 官网；有参：列出指定 cask 的官网</span><br><span class="line">brew cask outdated // 列出已过时的 cask</span><br><span class="line"></span><br><span class="line">brew cask doctor 检查配置问题</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="关于-homebrew-的目录"><a class="header-anchor" href="#关于-homebrew-的目录"></a>关于 Homebrew 的目录</h2>
-<ul>
-<li><code>/usr/local/Homebrew</code>：<code>Homebrew</code> 程序本身的安装目录</li>
-<li><code>/usr/local/Cellar</code>：存放<code>formula</code> 的目录</li>
-<li><code>/usr/local/Caskroom</code>：存放<code>cask</code> 的目录</li>
-<li><code>/usr/local/opt</code>：所有包忽略版本的存放目录</li>
-<li><code>/usr/local/bin</code>：所有包二进制目录</li>
-<li><code>/usr/local/etc</code>：所有包配置文件目录</li>
-<li><code>/usr/local/lib</code>：所有包依赖库目录</li>
-<li><code>/usr/local/share</code>：所有包文档文件目录</li>
-</ul>
-<hr>
-<h2 id="解决-homebrew-每次命令自动更新"><a class="header-anchor" href="#解决-homebrew-每次命令自动更新"></a>解决 Homebrew 每次命令自动更新</h2>
-<p>在环境变量文件（.bash_profile 或者 .zshrc）中设置：<code>export HOMEBREW_NO_AUTO_UPDATE=true</code></p>
-<hr>
-<p>更多参考：<br>
-<a href="https://brew.sh" target="_blank" rel="noopener">https://brew.sh</a><br>
-<a href="https://docs.brew.sh/Manpage" target="_blank" rel="noopener">https://docs.brew.sh/Manpage</a></p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
@@ -2448,7 +2401,7 @@ TRACE：消息正文包含服务器收到的请求消息</p>
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2509,7 +2462,9 @@ TRACE：消息正文包含服务器收到的请求消息</p>
         
           
         
-        <span class="site-state-item-count">23</span>
+          
+        
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -2531,11 +2486,12 @@ TRACE：消息正文包含服务器收到的请求消息</p>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Duke Lu</span>
+  <a href="http://http://www.miit.gov.cn">蜀ICP备20004821号-1</a> 
 </div>
 
         

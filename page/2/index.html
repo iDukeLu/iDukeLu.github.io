@@ -231,6 +231,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Homebrew-入门及常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duke Lu">
+      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山外小楼">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/Homebrew-入门及常用命令/" class="post-title-link" itemprop="url">Homebrew 入门及常用命令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-21 14:24:48" itemprop="dateCreated datePublished" datetime="2018-04-21T14:24:48+08:00">2018-04-21</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="简介"><a class="header-anchor" href="#简介"></a>简介</h2>
+<p><code>Hombrew</code> 是 macOS系统下的一款缺失软件包的管理器。</p>
+<ul>
+<li>完全基于 Git 和 Ruby</li>
+<li>将软件包安装到独立目录，并将其文件软链接至 /usr/local/bin</li>
+<li>安装到独立目录，使得软件包易于卸载</li>
+<li>通过软链接的方式，意味着不用再去配置环境变量</li>
+<li>易于管理软件包，省去安装配置繁琐的过程</li>
+</ul>
+<blockquote>
+<p>在Homebrew中，软件包分为 CLI 软件包和 GUI 软件包：<br>
+  CLI 的软件包称为 <code>formula</code>，被安装至 <code>/usr/local/Cellar</code>，如 git、maven 等<br>
+  GUI 的软件包称为 <code>cask</code>，被安装至 <code>/usr/local/Caskroom</code>，如 QQ、WeChat 等</p>
+</blockquote>
+<hr>
+<h2 id="安装和卸载"><a class="header-anchor" href="#安装和卸载"></a>安装和卸载</h2>
+<p>Mac 默认集成了 Ruby，直接运行以下 Ruby 脚步即可</p>
+<ul>
+<li>安装</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+<p>安装之后，<code>Homebrew</code> 会为你自动设置环境变量，以使用提供的命令</p>
+<ul>
+<li>卸载</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</span><br></pre></td></tr></table></figure>
+<p>卸载之后，<code>Homebrew</code> 在安装时创建的目录、下载的软件包及软件包的软链接均会被删除</p>
+<hr>
+<h2 id="基本使用"><a class="header-anchor" href="#基本使用"></a>基本使用</h2>
+<p>Homebrew 最常用的几个操作便是软件包的搜索、下载、卸载、更新以及查看</p>
+<h3 id="通用操作"><a class="header-anchor" href="#通用操作"></a>通用操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 搜索查询</span><br><span class="line">brew search [text | /regex/] // 无参：查找所有可安装的软件包；有参：根据字符串搜索软件包，/regex/表示正则</span><br><span class="line"></span><br><span class="line">// 清理</span><br><span class="line">brew cleanup [formula | cask] // 无参：删除所有 formula 和 cask 过时版本；无参：删除指定 formula 或 cask 过时版本；</span><br><span class="line"></span><br><span class="line">// 更新</span><br><span class="line">brew update // 更新 Homebrew</span><br></pre></td></tr></table></figure>
+<h3 id="对-formula-的操作"><a class="header-anchor" href="#对-formula-的操作"></a>对 <code>formula</code> 的操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 安装、卸载、重装、更新</span><br><span class="line">brew install (formula) // 安装指定 formula</span><br><span class="line">brew reinstall (formula) // 重装指定 formula</span><br><span class="line">brew uninstall (formula) // 卸载指定 formula</span><br><span class="line">brew upgrade [formula] // 无参：更新所有已安装 formula；有参：更新指定 formula</span><br><span class="line"></span><br><span class="line">// 查看</span><br><span class="line">brew list [formula] // 无参：列出所有已安装 formula；有参：列出指定 formula 的相关列表</span><br><span class="line">brew info [formula] // 无参：列出已安装 formula 综合信息；有参：列出指定 formula 的信息</span><br><span class="line">brew home [formula] // 无参: 打开 Homebrew 官网；有参：列出指定 formula 的官网</span><br><span class="line">brew outdated // 列出已过时的 formula</span><br><span class="line">brew deps (formula) // 列出指定 formula 的依赖项</span><br><span class="line"></span><br><span class="line">brew doctor 检查配置问题</span><br></pre></td></tr></table></figure>
+<h3 id="对-cask-的操作"><a class="header-anchor" href="#对-cask-的操作"></a>对 <code>cask</code> 的操作</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 安装、卸载、重装、更新</span><br><span class="line">brew cask install (formula) // 安装指定 cask</span><br><span class="line">brew cask reinstall (formula) // 重装指定 cask</span><br><span class="line">brew cask uninstall (formula) // 卸载指定 cask</span><br><span class="line">brew cask upgrade [formula] // 无参：更新所有已安装 cask；有参：更新指定 cask</span><br><span class="line"></span><br><span class="line">// 查看</span><br><span class="line">brew cask list [formula] // 无参：列出所有已安装 cask；有参：列出指定 cask 的相关列表</span><br><span class="line">brew cask info [formula] // 无参：列出已安装 cask 综合信息；有参：列出指定 cask 的信息</span><br><span class="line">brew cask home [formula] // 无参: 打开 Homebrew 官网；有参：列出指定 cask 的官网</span><br><span class="line">brew cask outdated // 列出已过时的 cask</span><br><span class="line"></span><br><span class="line">brew cask doctor 检查配置问题</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="关于-homebrew-的目录"><a class="header-anchor" href="#关于-homebrew-的目录"></a>关于 Homebrew 的目录</h2>
+<ul>
+<li><code>/usr/local/Homebrew</code>：<code>Homebrew</code> 程序本身的安装目录</li>
+<li><code>/usr/local/Cellar</code>：存放<code>formula</code> 的目录</li>
+<li><code>/usr/local/Caskroom</code>：存放<code>cask</code> 的目录</li>
+<li><code>/usr/local/opt</code>：所有包忽略版本的存放目录</li>
+<li><code>/usr/local/bin</code>：所有包二进制目录</li>
+<li><code>/usr/local/etc</code>：所有包配置文件目录</li>
+<li><code>/usr/local/lib</code>：所有包依赖库目录</li>
+<li><code>/usr/local/share</code>：所有包文档文件目录</li>
+</ul>
+<hr>
+<h2 id="解决-homebrew-每次命令自动更新"><a class="header-anchor" href="#解决-homebrew-每次命令自动更新"></a>解决 Homebrew 每次命令自动更新</h2>
+<p>在环境变量文件（.bash_profile 或者 .zshrc）中设置：<code>export HOMEBREW_NO_AUTO_UPDATE=true</code></p>
+<hr>
+<p>更多参考：<br>
+<a href="https://brew.sh" target="_blank" rel="noopener">https://brew.sh</a><br>
+<a href="https://docs.brew.sh/Manpage" target="_blank" rel="noopener">https://docs.brew.sh/Manpage</a></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/阿里巴巴-Java-开发手册/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1814,146 +1962,6 @@ Wget、Tree、Git、Node、[Maven、Tomcat、Gradle]</p>
   </article>
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java-集合框架(Deque-接口)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Duke Lu">
-      <meta itemprop="description" content="Stay Hungry. Stay Foolish. Think Different.">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="山外小楼">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/Java-集合框架(Deque-接口)/" class="post-title-link" itemprop="url">Java 集合框架(Deque 接口)</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-09-16 20:11:24" itemprop="dateCreated datePublished" datetime="2017-09-16T20:11:24+08:00">2017-09-16</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-03 17:36:14" itemprop="dateModified" datetime="2019-08-03T17:36:14+08:00">2019-08-03</time>
-              </span>
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h2 id="deque-接口简介"><a class="header-anchor" href="#deque-接口简介"></a>Deque 接口简介</h2>
-<p>对于 Deque 接口，Java的官方文档这样提到：</p>
-<blockquote>
-<p>Usually pronounced as deck, a deque is a double-ended-queue. A double-ended-queue is a linear collection of elements that supports the insertion and removal of elements at both end points. The Deque interface is a richer abstract data type than both Stack and Queue because it implements both stacks and queues at the same time. The Deque interface, defines methods to access the elements at both ends of the Deque instance. Methods are provided to insert, remove, and examine the elements. Predefined classes like ArrayDeque and LinkedList implement the Deque interface.<br>
-Note that the Deque interface can be used both as last-in-first-out stacks and first-in-first-out queues.</p>
-</blockquote>
-<p>简单点来说就是：</p>
-<ul>
-<li><code>Deque</code> 是双端队列，支持从两端插入、删除、检查元素</li>
-<li><code>Deque</code> 是比 <code>Stack</code> 和 <code>Deque</code> 更丰富的数据类型</li>
-<li><code>Deque</code> 同时实现了堆栈和队列，既可用作后进先出堆栈，也可用作先进先出队列</li>
-</ul>
-<h2 id="deque-接口相关操作"><a class="header-anchor" href="#deque-接口相关操作"></a>Deque 接口相关操作</h2>
-<p><code>Deque</code> 接口的方法和 <code>Queue</code> 接口类似，每种方法也有两种形式：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"><strong>Type of Operation</strong></th>
-<th style="text-align:center"><strong>First Element (Beginning of the Deque instance)</strong></th>
-<th style="text-align:center"><strong>Last Element (End of the Deque instance)</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>Insert</strong></td>
-<td style="text-align:center"><code>addFirst(e)</code> <br> <code>offerFirst(e)</code></td>
-<td style="text-align:center"><code>addLast(e)</code> <br> <code>offerLast(e)</code></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>Remove</strong></td>
-<td style="text-align:center"><code>removeFirst()</code> <br> <code>pollFirst()</code></td>
-<td style="text-align:center"><code>removeLast()</code> <br> <code>pollLast()</code></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>Examine</strong></td>
-<td style="text-align:center"><code>getFirst()</code> <br> <code>peekFirst()</code></td>
-<td style="text-align:center"><code>getLast()</code><br><code>peekLast()</code></td>
-</tr>
-</tbody>
-</table>
-<p>这里也不在多累述，大概就是这样：</p>
-<ul>
-<li><code>add()</code>、<code>remove()</code>、<code>get()</code> 操作失败，抛出异常</li>
-<li><code>offer()</code> 、<code>poll()</code>、<code>peek()</code> 操作失败，返回一个特殊的值(<code>null</code> 或 <code>false</code>)</li>
-</ul>
-<hr>
-<p>更多参考：<a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/deque.html" target="_blank" rel="noopener">The Deque Interface (The Java™ Tutorials &gt; Collections &gt; Interfaces)</a></p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
@@ -1991,7 +1999,7 @@ Note that the Deque interface can be used both as last-in-first-out stacks and f
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2052,7 +2060,9 @@ Note that the Deque interface can be used both as last-in-first-out stacks and f
         
           
         
-        <span class="site-state-item-count">23</span>
+          
+        
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -2074,11 +2084,12 @@ Note that the Deque interface can be used both as last-in-first-out stacks and f
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Duke Lu</span>
+  <a href="http://http://www.miit.gov.cn">蜀ICP备20004821号-1</a> 
 </div>
 
         
