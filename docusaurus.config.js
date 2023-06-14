@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: '一心净土',
   tagline: 'Plane of Euthymia',
-  favicon: 'img/favicon.ico',
+  favicon: 'https://github.com/idukelu.png',
 
   // Set the production url of your site here
   url: 'https://idukelu.com',
@@ -90,7 +90,7 @@ const config = {
         title: '一心净土',
         logo: {
           alt: 'Plane of Euthymia',
-          src: 'img/logo.svg',
+          src: 'https://github.com/idukelu.png',
         },
         items: [
           {
