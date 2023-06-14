@@ -1,6 +1,41 @@
 # plane-euthymia
 基于 Docusaurus 搭建的静态文档站。
 
+## 添加插件
+### 搜索插件
+使用支持中文搜索的插件：https://github.com/easyops-cn/docusaurus-search-local
+
+1. 安装插件
+```
+npm install --save @easyops-cn/docusaurus-search-local
+# or
+yarn add @easyops-cn/docusaurus-search-local
+```
+
+2. 配置插件
+```
+// In your `docusaurus.config.js`:
+module.exports = {
+  // ... Your other configurations.
+  themes: [
+    // ... Your other themes.
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      ({
+        // ... Your options.
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        hashed: true,
+        // For Docs using Chinese, The `language` is recommended to set to:
+        // ```
+        // language: ["en", "zh"],
+        // ```
+      }),
+    ],
+  ],
+};
+```
+
 ## 部署 GitHub Pages
 
 ### 部署配置
