@@ -1,4 +1,7 @@
-
+---
+id: head-metadata
+title: Head Metadata
+---
 
 ```go {10,12,13} showLineNumbers title="/src/components/HelloCodeTitle.js"
 package sample
@@ -19,3 +22,4 @@ func TestSample(t *testing.T) {
 ```
 
 ![](https://github.com/iDukeLu/image-host/blob/main/kubernetes/cover.jpg?raw=true)
+<!-- <img src="https://github.com/iDukeLu/image-host/blob/main/kubernetes/cover.jpg?raw=true"/> -->

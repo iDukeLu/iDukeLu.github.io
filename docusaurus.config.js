@@ -65,9 +65,7 @@ const config = {
   ],
 
   plugins: [
-    ['docusaurus-plugin-yandex-metrica', {
-      counterID: '86645179',
-    }],
+    'plugin-image-zoom'
   ],
 
   themes: [
@@ -126,6 +124,14 @@ const config = {
             line: 'This will error',
           }
         ]
+      },
+      imageZoom: {
+        selector: '.markdown img',
+        options: {
+          margin: 24,
+          background: '#80808099',
+          scrollOffset: 100,
+        },
       },
     }),
 };
