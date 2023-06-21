@@ -118,10 +118,11 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['ebnf'],
         magicComments: [
           {
             className: "code-block-highlighting-line",
-            line: 'This will error',
+            line: 'This will highlighting',
           }
         ]
       },

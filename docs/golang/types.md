@@ -1,7 +1,29 @@
 # 类型
 
+## 定义
+在 Go 语言规范中，是这样定义类型的：
+> A type determines a set of values together with operations and methods specific to those values.
 
-基础类型、复合类型
+翻译过来就是，类型定义了一组值，以及可以在这些值上执行的特定操作和方法。<br/>
+咋一看有点熟悉，这 TM 不就和数据结构中类型的概率一模一样。<br/>
+说人话就是：类型对数据进行了分类，并且赋予了<u>这些数据</u>特定的操作和方法。（这些数据: 即前面所说的一组值）
+
+除此之外，官方也用 [EBNF（Extended Backus-Naur Form，扩展巴科斯-诺尔范式）语法规则](https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F)，描述了类型：
+```ebnf showLineNumbers
+Type      = TypeName [ TypeArgs ] | TypeLit | "(" Type ")" .
+TypeName  = identifier | QualifiedIdent .
+TypeArgs  = "[" TypeList [ "," ] "]" .
+TypeList  = Type { "," Type } .
+TypeLit   = ArrayType | StructType | PointerType | FunctionType | InterfaceType |
+            SliceType | MapType | ChannelType .
+```
+让我们逐个解读：
+
+
+
+
+## 类型分类
+按类型的复杂性和构造方法划分：基础类型、复合类型
 预定义类型、自定义类型
 命名类型、未命名类型
 
@@ -12,39 +34,32 @@
 除了预定义类型外，其余类型均通过类型声明和类型参数列表引入？
 预定义类型外，都是非命名类型？
 
-## 定义
-在 Go 语言规范中，是这样定义类型的：
-> A type determines a set of values together with operations and methods specific to those values.
 
-类型确定一组值以及特定于这些值的操作和方法。该如何理解这句话呢，其实
 
 ## 基础类型（Basic Types）
-在 Go 语言的规范中，基本类型（Basic types）包括以下几种：
-1. 布尔类型：`bool`
-2. 数字类型：
-   - 整型：`int`, `int8`, `int16`, `int32`, `int64`, `uint`, `uint8`, `uint16`, `uint32`, `uint64`, `uintptr`
-   - 浮点型：`float32`, `float64`
-   - 复数类型：`complex64`, `complex128`
-   - 字节类型：`byte`（`uint8`的别名）
-   - 符文类型：`rune`（`int32`的别名）
-3. 字符串类型：`string`
+在 Go 语言的规范中，基本类型包括：布尔类型、数字类型、字符串类型。<br/>
+其中，数字类型由整型、浮点、复数组成。
+1. **布尔类型（Boolean Types）**：bool
+2. **字符串类型（String  Types）**：string
+3. **数字类型（Numeric Types）**：
+   - 无符号整型：uint、uint8、uint16、uint32、uint64、byte（alias for uint8）、uintptr
+   - 有符号整型：int、int8、int16、int32、int64、rune（alias for int32）
+   - 浮点型：float32、float64 
+   - 复数类型：complex64、complex128
 
 |类型|长度|默认值|说明|
 |:-|:-|:-|:-|
 |bool|1|false|布尔类型|
-|string||""|字符串类型|
 |uint8、uint16、uint32、uint64|1、2、4、8|0|无符号整型，范围：0 ~ 2^n - 1|
 |int8、int16、int32、int64|1、2、4、8|0|有符号整型，范围：-2^(n-1) ~2^(n-1) - 1 |
 |float32、float64|4、8|0.0|IEEE-754 标准的浮点数|
 |complex64、complex128|0.0|||
 |byte|1|0|字节类型，uint8 的别名|
 |rune|4|0|符文类型，int32 的别名|
-
-|类型|长度|默认值|说明|
-|:-|:-|:-|:-|
-|uint|1|||
-|int|1|||
-|uintptr|1|||
+|uint|1|4、8|无符号整型。依据平台 32 或 64 位|
+|int|1|4、8|有符号整型。依据平台 32 或 64 位|
+|uintptr|4、8|0|足以存储指针的无符号整数|
+|string||""|字符串类型|
 
 
 
