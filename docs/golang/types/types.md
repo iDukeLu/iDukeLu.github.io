@@ -1,3 +1,8 @@
+---
+sidebar_position: 1
+sidebar_label: 类型
+---
+
 # 类型
 
 ## 定义
@@ -5,8 +10,8 @@
 > A type determines a set of values together with operations and methods specific to those values.
 
 翻译过来就是，类型定义了一组值，以及可以在这些值上执行的特定操作和方法。<br/>
-咋一看有点熟悉，这 TM 不就和数据结构中类型的概率一模一样。<br/>
-说人话就是：类型对数据进行了分类，并且赋予了<u>这些数据</u>特定的操作和方法。（这些数据: 即前面所说的一组值）
+可以发现和数据结构中类型的概率一模一样。<br/>
+即：类型对数据进行了分类，并且赋予了<u>这些数据</u>特定的操作和方法。（这些数据: 即前面所说的一组值）
 
 除此之外，官方也用 [EBNF（Extended Backus-Naur Form，扩展巴科斯-诺尔范式）语法规则](https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F)，描述了类型：
 ```ebnf showLineNumbers
@@ -17,9 +22,28 @@ TypeList  = Type { "," Type } .
 TypeLit   = ArrayType | StructType | PointerType | FunctionType | InterfaceType |
             SliceType | MapType | ChannelType .
 ```
-让我们逐个解读：
 
+- `Type = TypeName [ TypeArgs ] | TypeLit | "(" Type ")"` <br/>
+一个类型（Type）可以是 TypeName（可能带有类型参数 TypeArgs），或者是一个 TypeLit（类型字面量），或者是另一个类型加上括号。
+xxx
 
+- `TypeName = identifier | QualifiedIdent` <br/>
+一个类型名（TypeName）可以是一个标识符（identifier，即你自定义的类型名），或者是一个有限定的标识符（QualifiedIdent，即含有包名的类型名，比如 fmt.Stringer）。
+
+- `TypeArgs = "[" TypeList [ "," ] "]"`  <br/>
+类型参数（TypeArgs）是用方括号包围的一个或多个类型的列表，类型之间用逗号分隔。在 Go 1.18 及更高版本中，Go 支持了泛型，这里的类型参数就是用来支持泛型的。
+
+- `TypeList = Type { "," Type }` <br/>
+类型列表（TypeList）是一个或多个类型，用逗号分隔。
+
+- `TypeLit = ArrayType | StructType | PointerType | FunctionType | InterfaceType | SliceType | MapType | ChannelType` <br/>
+类型字面量（TypeLit）是一种复合类型，它可以是数组、结构体、指针、函数、接口、切片、映射或通道。
+
+> Comments serve as program documentation. There are two forms:
+
+Line comments start with the character sequence // and stop at the end of the line.
+General comments start with the character sequence /* and stop with the first subsequent character sequence */.
+A comment cannot start inside a rune or string literal, or inside a comment. A general comment containing no newlines acts like a space. Any other comment acts like a newline.
 
 
 ## 类型分类
