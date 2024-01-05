@@ -21,7 +21,7 @@ tags: [markdown]
 | 水平线   | \-\-\-                                             |
 | 有序列表 | 1. First item<br/>2. Second item<br/>3. Third item |
 | 无序列表 | - First item<br/>- Second item<br/>- Third item    |
-| 链接     | \[title\]\(https://www.example.com\)               |
+| 链接     | `[title](https://www.example.com)`               |
 | 图片     | \!\[alt text\]\(image.jpg\)                        |
 
 

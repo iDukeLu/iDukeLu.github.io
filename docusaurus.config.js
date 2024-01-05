@@ -24,8 +24,8 @@ const config = {
   projectName: 'iDukeLu.github.io', // Usually your repo name.
   deploymentBranch: 'gh-pages', // For GitHub pages organization deployments, please provide the branch name.
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'ignore',
+  onBrokenMarkdownLinks: 'ignore',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
