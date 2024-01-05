@@ -38,3 +38,33 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
+/* 调整侧边栏标题的样式 */
+.sidebar-item {
+  white-space: nowrap;     /* 防止标题换行 */
+  overflow: hidden;        /* 隐藏溢出部分 */
+  text-overflow: ellipsis; /* 使用省略号表示溢出部分 */
+  max-width: 100%;         /* 限制最大宽度 */
+  display: inline-block;   /* 内联块元素，以避免标题占据整行 */
+}
+
+
+/* 调整表格的宽度 */
+.markdown table {
+  width: 100%; /* 表格宽度为父容器的100% */
+  max-width: 800px; /* 表格最大宽度，根据需要调整 */
+  margin-bottom: 16px; /* 可选：调整表格与其他元素的间距 */
+}
+
+/* 调整表格中第一列的宽度，根据内容变化 */
+.markdown table td:first-child,
+.markdown table th:first-child {
+  width: auto;
+}
+
+/* 调整表格中后面列的宽度，等分父容器的剩余空间 */
+.markdown table td:not(:first-child),
+.markdown table th:not(:first-child) {
+  width: 1fr;
+  padding: 8px; /* 可选：调整单元格内边距 */
+  box-sizing: border-box; /* 可选：确保边框和内边距不会增加单元格的实际宽度 */
+}

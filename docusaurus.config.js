@@ -1,13 +1,15 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+// `@type` JSDoc annotations allow editor autocompletion and type checking
+// (when paired with `@ts-check`).
+// There are various equivalent ways to declare your Docusaurus config.
+// See: https://docusaurus.io/docs/api/docusaurus-config
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '一心净土',
-  tagline: 'Plane of Euthymia',
+  title: '黄昏别馆',
+  tagline: "Sunset Manor",
   favicon: 'https://github.com/idukelu.png',
 
   // Set the production url of your site here
@@ -25,9 +27,9 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans'],
@@ -39,33 +41,32 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: './sidebars.js',
+          breadcrumbs: true, 
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          blogTitle: 'Docusaurus blog!',
-          blogDescription: 'A Docusaurus powered blog!',
-          postsPerPage: 'ALL',
-          blogSidebarTitle: '全部博文',
+          blogTitle: '随笔',
+          blogDescription: '随笔',
+          postsPerPage: 3,
+          blogSidebarTitle: '全部随笔',
           blogSidebarCount: 'ALL',
-          showReadingTime: true, // When set to false, the "x min read" won't be shown
-          readingTime: ({content, frontMatter, defaultReadingTime}) =>
-            defaultReadingTime({content, options: {wordsPerMinute: 300}}),
+          showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: './src/css/custom.css',
         },
       }),
     ],
   ],
 
   plugins: [
-    'plugin-image-zoom'
+    require.resolve('docusaurus-plugin-image-zoom')
   ],
 
   themes: [
@@ -85,7 +86,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: '一心净土',
+        title: '黄昏别馆',
         logo: {
           alt: 'Plane of Euthymia',
           src: 'https://github.com/idukelu.png',
@@ -93,22 +94,22 @@ const config = {
         items: [
           {
             type: 'dropdown',
-            label: '学习',
-            position: 'right',
+            label: '笔记',
+            position: 'left',
             items: [
               {
                 type: 'docSidebar',
                 sidebarId: 'golangSidebar',
                 label: 'Golang',
               },
+              {
+                type: 'docSidebar',
+                sidebarId: 'javaSidebar',
+                label: 'Java',
+              },
             ],
           },
-          {to: '/blog', label: '随笔', position: 'right'},
-          // {
-          //   href: 'https://github.com/iDukeLu',
-          //   label: 'GitHub',
-          //   position: 'right',
-          // },
+          {to: '/blog', label: '随笔', position: 'left'},
         ],
       },
       footer: {
@@ -116,8 +117,8 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} iDukeLu, Inc.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
         additionalLanguages: ['ebnf'],
         magicComments: [
           {
@@ -126,15 +127,17 @@ const config = {
           }
         ]
       },
-      imageZoom: {
-        selector: '.markdown img',
-        options: {
-          margin: 24,
-          background: '#80808099',
-          scrollOffset: 100,
+      zoom: {
+        selector: '.markdown :not(em) > img',
+        background: {
+          light: 'rgb(255, 255, 255)',
+          dark: 'rgb(50, 50, 50)'
         },
-      },
+        config: {
+          // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+        }
+      }
     }),
 };
 
-module.exports = config;
+export default config;
