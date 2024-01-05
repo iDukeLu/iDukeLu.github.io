@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunki_duke_lu_github_io=self.webpackChunki_duke_lu_github_io||[]).push([[3961],{380:e=>{e.exports=JSON.parse('{"label":"homebrew","permalink":"/blog/tags/homebrew","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

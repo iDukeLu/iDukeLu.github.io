@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunki_duke_lu_github_io=self.webpackChunki_duke_lu_github_io||[]).push([[3066],{3615:e=>{e.exports=JSON.parse('{"label":"jvm","permalink":"/blog/tags/jvm","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

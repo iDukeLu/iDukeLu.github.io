@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunki_duke_lu_github_io=self.webpackChunki_duke_lu_github_io||[]).push([[1],{2638:e=>{e.exports=JSON.parse('{"permalink":"/blog/page/2","page":2,"postsPerPage":3,"totalPages":5,"totalCount":14,"previousPage":"/blog","nextPage":"/blog/page/3","blogDescription":"\u968f\u7b14","blogTitle":"\u968f\u7b14"}')}}]);

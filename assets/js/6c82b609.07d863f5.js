@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunki_duke_lu_github_io=self.webpackChunki_duke_lu_github_io||[]).push([[7884],{2359:e=>{e.exports=JSON.parse('{"label":"hexo","permalink":"/blog/tags/hexo","allTagsPath":"/blog/tags","count":2,"unlisted":false}')}}]);

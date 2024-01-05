@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunki_duke_lu_github_io=self.webpackChunki_duke_lu_github_io||[]).push([[7495],{5430:a=>{a.exports=JSON.parse('{"label":"mac","permalink":"/blog/tags/mac","allTagsPath":"/blog/tags","count":2,"unlisted":false}')}}]);

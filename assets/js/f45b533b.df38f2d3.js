@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunki_duke_lu_github_io=self.webpackChunki_duke_lu_github_io||[]).push([[2645],{3491:s=>{s.exports=JSON.parse('{"label":"oh-my-zsh","permalink":"/blog/tags/oh-my-zsh","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunki_duke_lu_github_io=self.webpackChunki_duke_lu_github_io||[]).push([[6192],{6628:e=>{e.exports=JSON.parse('{"label":"hexo-plugin","permalink":"/blog/tags/hexo-plugin","allTagsPath":"/blog/tags","count":2,"unlisted":false}')}}]);
