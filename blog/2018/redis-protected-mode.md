@@ -1,7 +1,7 @@
 ---
 title: 访问 Redis，提示进入保护模式
 authors: Duke Lu
-date: 2018-04-15
+date: 2018-04-22
 tags: [redis]
 ---
 

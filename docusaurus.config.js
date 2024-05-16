@@ -88,28 +88,46 @@ const config = {
       navbar: {
         title: '黄昏别馆',
         logo: {
-          alt: 'Plane of Euthymia',
+          alt: 'Sunset Manor',
           src: 'https://github.com/idukelu.png',
         },
         items: [
           {
+            type: 'docSidebar',
+            sidebarId: 'GolangSidebar',
+            label: 'Golang',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'CloudNativeSidebar',
+            label: '云原生',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'DatabaseSidebar',
+            label: '数据库',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'AlgorithmsSidebar',
+            label: '算法',
+          },
+          {to: '/blog', label: '随笔', position: 'left'},
+          {
             type: 'dropdown',
-            label: '笔记',
+            label: '其他',
             position: 'left',
             items: [
               {
                 type: 'docSidebar',
-                sidebarId: 'golangSidebar',
-                label: 'Golang',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'javaSidebar',
+                sidebarId: 'JavaSidebar',
                 label: 'Java',
               },
             ],
           },
-          {to: '/blog', label: '随笔', position: 'left'},
         ],
       },
       footer: {
