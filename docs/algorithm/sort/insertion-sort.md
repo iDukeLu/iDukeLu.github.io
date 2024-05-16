@@ -1,7 +1,7 @@
 ---
 title: 插入排序
 authors: Duke Lu
-date: 2024-05-15
+date: 2024-05-16
 tags: [算法, 排序]
 sidebar_position: 3
 ---
@@ -14,6 +14,12 @@ sidebar_position: 3
 1. 将数组视为已排序和未排序两部分，初始时已排序部分只包含第一个元素，未排序部分包含剩余的元素。
 2. 从未排序部分依次取出一个元素，将其插入到已排序部分的适当位置，使得已排序部分仍然保持有序。
 3. 重复步骤2，直到所有元素都插入到已排序部分。
+
+<center>
+
+![](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/excalidraw/sort/selection_sort.excalidraw.png?raw=true)
+
+</center>
 
 插入排序可以使用两种方式实现：一种是从前往后逐个遍历未排序部分，逐步将其插入到已排序部分中；另一种是从后往前遍历已排序部分，找到插入位置后再进行插入操作。
 
