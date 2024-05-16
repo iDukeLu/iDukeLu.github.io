@@ -15,6 +15,12 @@ sidebar_position: 1
 3. 继续遍历下一对相邻元素，重复步骤2。
 4. 重复以上步骤，直到没有任何一对元素需要交换为止。
 
+<center>
+
+![](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/excalidraw/sort/bubble_sort.excalidraw.png?raw=true)
+
+</center>
+
 冒泡排序的特点是简单易懂，但效率较低，特别是对于大型数据集。其时间复杂度为 O(n<sup>2</sup>)，其中n是待排序元素的数量，因此在实践中通常不适用于大规模数据的排序。
 
 ## 优缺点
@@ -122,7 +128,7 @@ func BubbleSortStep[T Number](arr []T) {
 }
 ```
 
-## 总结：
+## 总结
 冒泡排序：依次比较和交换相邻的两个元素，将较大的元素逐个冒泡到尾部。
 
 复杂度：
