@@ -137,7 +137,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['ebnf'],
+        additionalLanguages: ['go', 'bash', 'ebnf'],
         magicComments: [
           {
             className: "code-block-highlighting-line",
