@@ -1,7 +1,7 @@
 ---
 title: Linux/Mac 配置环境变量
 authors: Duke Lu
-date: 2018-04-28
+date: 2018-05-26
 tags: [linux, mac]
 ---
 

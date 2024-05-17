@@ -1,7 +1,7 @@
 ---
 title: Java 虚拟机运行时的数据区域（简单理解）
 authors: Duke Lu
-date: 2018-04-28
+date: 2018-06-03
 tags: [java, jvm]
 ---
 

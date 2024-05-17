@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.15.0 集群的安装部署（详细版）
 authors: Duke Lu
-date: 2018-04-28
+date: 2018-06-17
 tags: [kubernetes]
 ---
 

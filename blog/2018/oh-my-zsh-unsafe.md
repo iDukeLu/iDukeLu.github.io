@@ -1,7 +1,7 @@
 ---
 title: oh-my-zsh 报错：提示检测到不安全的完成相关目录
 authors: Duke Lu
-date: 2018-04-15
+date: 2018-05-05
 tags: [oh-my-zsh]
 ---
 

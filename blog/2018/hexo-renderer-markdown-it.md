@@ -1,7 +1,7 @@
 ---
 title: Hexo 插件详解：hexo-renderer-markdown-it
 authors: Duke Lu
-date: 2018-04-14
+date: 2018-04-21
 tags: [hexo, hexo-plugin]
 ---
 

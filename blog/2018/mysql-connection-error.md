@@ -1,7 +1,7 @@
 ---
 title: 连接 MySQL 报错：2059 - authentication plugin 'caching_sha2_password' cannot be loaded...
 authors: Duke Lu
-date: 2018-04-08
+date: 2018-05-20
 tags: [mysql]
 ---
 

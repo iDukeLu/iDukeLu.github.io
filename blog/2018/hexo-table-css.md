@@ -1,7 +1,7 @@
 ---
 title: Hexo 表格样式调整
 authors: Duke Lu
-date: 2018-04-14
+date: 2018-04-20
 tags: [hexo, hexo-plugin]
 ---
 

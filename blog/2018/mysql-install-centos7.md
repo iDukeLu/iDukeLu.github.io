@@ -1,7 +1,7 @@
 ---
 title: MySQL 8.0 安装（CentOS 7）
 authors: Duke Lu
-date: 2018-04-08
+date: 2018-05-19
 tags: [markdown]
 ---
 

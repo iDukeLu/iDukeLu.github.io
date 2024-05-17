@@ -1,7 +1,7 @@
 ---
 title: Linux/Mac 配置 Java 环境
 authors: Duke Lu
-date: 2018-04-28
+date: 2018-05-27
 tags: [linux, mac, java]
 ---
 

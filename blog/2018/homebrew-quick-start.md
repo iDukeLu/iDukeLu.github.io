@@ -1,7 +1,7 @@
 ---
 title: Homebrew 入门及常用命令
 authors: Duke Lu
-date: 2018-04-21
+date: 2018-04-14
 tags: [homebrew]
 ---
 
