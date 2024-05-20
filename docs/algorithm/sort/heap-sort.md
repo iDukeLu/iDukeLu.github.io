@@ -16,7 +16,7 @@ sidebar_position: 4
 
 <center>
 
-![](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/excalidraw/sort/heap_sort.excalidraw.png?raw=true)
+![](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/static/excalidraw/sort/heap_sort.excalidraw.png?raw=true)
 
 </center>
 

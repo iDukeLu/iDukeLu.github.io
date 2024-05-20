@@ -17,7 +17,7 @@ sidebar_position: 2
 
 <center>
 
-![](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/excalidraw/sort/selection_sort.excalidraw.png?raw=true)
+![](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/static/excalidraw/sort/selection_sort.excalidraw.png?raw=true)
 
 </center>
 
