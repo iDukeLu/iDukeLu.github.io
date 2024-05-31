@@ -6,6 +6,10 @@ tags: [云原生, Docker]
 sidebar_position: 3
 ---
 
+:::tip
+本文的使用 Docker 安装的软件为最简化安装，主要为了快速启动应用进行本地开发和测试。
+:::
+
 ## MySQL 安装
 ```shell
 docker run -d \
@@ -50,4 +54,4 @@ docker run -d \
 --name etcd \
 bitnami/etcd:3.4
 ```
-更多参考：[Redis Official Images | Docker Hub](https://hub.docker.com/_/mongo)
+更多参考：[Bitnami package for ETCD | Docker Hub](https://hub.docker.com/r/bitnami/etcd)

@@ -50,4 +50,6 @@ Docker 是一个开源的轻量级的虚拟化容器管理引擎，旨在简化�
 
 ---
 
-参考：[Docker overview](https://docs.docker.com/get-started/overview/#the-underlying-technology)
+参考：
+- [Docker overview](https://docs.docker.com/get-started/overview/#the-underlying-technology)
+- [容器和虚拟机之间有什么区别？](https://www.alibabacloud.com/zh/knowledge/difference-between-container-and-virtual-machine?_p_lc=1)
