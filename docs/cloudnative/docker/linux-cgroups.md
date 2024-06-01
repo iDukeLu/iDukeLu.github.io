@@ -211,7 +211,7 @@ systemd
 ```
 
 查看对应容器的 cgroup 节点
-```sh {1,6,78}
+```sh {1,6,7,8}
 ~ ll /sys/fs/cgroup/memory/docker/93aa71954a4693dbbf6c406b8f8562f9463875eae2e2b713921ae3268d521858/
 cgroup.clone_children
 cgroup.event_control
