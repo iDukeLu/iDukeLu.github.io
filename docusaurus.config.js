@@ -23,6 +23,7 @@ const config = {
   organizationName: 'iDukeLu', // Usually your GitHub org/user name.
   projectName: 'iDukeLu.github.io', // Usually your repo name.
   deploymentBranch: 'gh-pages', // For GitHub pages organization deployments, please provide the branch name.
+  trailingSlash: true,
 
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'ignore',
