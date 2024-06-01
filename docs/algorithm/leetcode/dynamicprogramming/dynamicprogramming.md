@@ -4,7 +4,7 @@ sidebar_label: 动态规划
 authors: Duke Lu
 date: 2024-05-14
 tags: [算法, 动态规划]
-sidebar_position: 9
+sidebar_position: 999
 ---
 
 ## 什么是动态规划
