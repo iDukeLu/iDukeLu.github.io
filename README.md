@@ -139,7 +139,7 @@ module.exports = {
   baseUrl: '/plane-euthymia',        // For GitHub pages deployment, it is often '/<projectName>/'
   organizationName: 'iDukeLu',       // Usually your GitHub org/user name.
   projectName: 'plane-euthymia',     // Usually your repo name.
-  trailingSlash: false,
+  trailingSlash: true,
   // ...
 };
 ```
@@ -162,7 +162,7 @@ module.exports = {
   baseUrl: '/',        // For GitHub pages deployment, it is often '/<projectName>/'
   organizationName: 'iDukeLu',       // Usually your GitHub org/user name.
   projectName: 'plane-euthymia',     // Usually your repo name.
-  trailingSlash: false,
+  trailingSlash: true,
   // ...
 };
 ```
