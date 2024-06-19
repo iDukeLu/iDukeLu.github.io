@@ -1,5 +1,5 @@
 ---
-title: 安装 Docker 
+title: Docker 的安装与卸载
 authors: Duke Lu
 date: 2024-05-17
 tags: [云原生, Docker]
@@ -110,6 +110,18 @@ yum remove docker-ce \
 ## 删除 镜像、容器、卷
 rm -rf /var/lib/docker
 rm -rf /var/lib/containerd
+```
+
+在上述的命令执行后，仅是删除了 Docker 及其镜像、容器、卷，还需手动删除 Docker 创建的网卡
+```sh
+## 找到状态为 DOWN 的网卡
+~ ip address show | grep DOWN
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
+21: br-f39d5850fc97: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
+
+## 删除 Docker 创建的网卡
+ip link delete docker0
+ip link delete br-f39d5850fc97
 ```
 
 ---
