@@ -73,69 +73,69 @@ Linux Namespaces 提供了一组 API，使得开发者能够创建、操作和�
 我们启动一个容器，看看 Docker 是如何通过 Namespace 隔离相关资源的：
 ```sh {2}
 ~ docker run -d nginx
-93aa71954a4693dbbf6c406b8f8562f9463875eae2e2b713921ae3268d521858
+c4ac920a44697897447ee0325f13926298193be2eddb0aa56f397352fe437fec
 ```
 
 通过容器找到进程在宿主机的 PID
 ```sh
-～ docker inspect --format '{{.State.Pid}}' 93aa71954a4693dbbf6c406b8f8562f9463875eae2e2b713921ae3268d521858
-379225
+～ docker inspect --format '{{.State.Pid}}' c4ac920a4469
+551330
 
-## 找一下 379225 的父 PID
-～ ps -o ppid= -p 379225
-379205
+## 找一下 551330 的父 PID
+～ ps -o ppid= -p 551330
+551307
 
-## 看一下 379205 的进程树
-～ pstree -p 379205
-containerd-shim(379205)───nginx(379225)─┬─nginx(379267)
-                                        └─nginx(379268)
+## 看一下父 PID 551307 的进程树
+～ pstree -p 551307
+containerd-shim(551307)───nginx(551330)─┬─nginx(551374)
+                                        └─nginx(551375)
 
-## 看一下 379205、379225、379267、379268 具体的进程
-~ ps -p 379205 379225 379267 379268
+## 看一下 551307、551330、551374、551375 具体的进程
+~ ps -p 551307 551330 551374 551375
     PID TTY      STAT   TIME COMMAND
- 379205 ?        Sl     0:00 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 93aa71954a4693dbbf6c406b8f8562f9463875eae2e2b713921ae3268d521858 -address /run/containerd/containerd.sock
- 379225 ?        Ss     0:00 nginx: master process nginx -g daemon off;
- 379267 ?        S      0:00 nginx: worker process
- 379268 ?        S      0:00 nginx: worker process
-
-## PID 379205 确实是由 Docker 启动的 nginx 进程
+ 551307 ?        Sl     0:03 /usr/bin/containerd-shim-runc-v2 -namespace moby -id c4ac920a44697897447ee0325f13926298193be2eddb0aa56f397352fe437fec -address /run/containe
+ 551330 ?        Ss     0:00 nginx: master process nginx -g daemon off;
+ 551374 ?        S      0:00 nginx: worker process
+ 551375 ?        S      0:00 nginx: worker process
 ```
+可以看出，PID 551330 确实是由 Docker 启动的 nginx 进程
+<br/>
 
-查看容器进程 (宿主机的PID为 379205) 的 Linux Namespace
-```sh
-~ ll /proc/379225/ns
-ipc -> ipc:[4026532245]
-mnt -> mnt:[4026532243]
-net -> net:[4026532249]
-pid -> pid:[4026532247]
-user -> user:[4026531837]
-uts -> uts:[4026532244]
+查看当前主机的 namespace 情况：
+```sh {11-15}
+## 查看 namespace 列表
+~ lsns
+        NS TYPE  NPROCS    PID USER   COMMAND
+4026531836 pid       86      1 root   /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+4026531837 user      89      1 root   /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+4026531838 uts       86      1 root   /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+4026531839 ipc       86      1 root   /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+4026531840 mnt       84      1 root   /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+4026531856 mnt        1     18 root   kdevtmpfs
+4026531956 net       86      1 root   /usr/lib/systemd/systemd --switched-root --system --deserialize 22
+4026532160 mnt        1    559 chrony /usr/sbin/chronyd
+4026532308 mnt        3 551330 root   nginx: master process nginx -g daemon off
+4026532309 uts        3 551330 root   nginx: master process nginx -g daemon off
+4026532310 ipc        3 551330 root   nginx: master process nginx -g daemon off
+4026532311 pid        3 551330 root   nginx: master process nginx -g daemon off
+4026532313 net        3 551330 root   nginx: master process nginx -g daemon off
 
-## 查看 PID 1 的 Linux Namespace
-~ ll /proc/1/ns
-ipc -> ipc:[4026531839]
-mnt -> mnt:[4026531840]
-net -> net:[4026531956]
-pid -> pid:[4026531836]
-user -> user:[4026531837]
-uts -> uts:[4026531838]
-
-## 查看 PID 2 的 Linux Namespace
-~ ll /proc/2/ns
-ipc -> ipc:[4026531839]
-mnt -> mnt:[4026531840]
-net -> net:[4026531956]
-pid -> pid:[4026531836]
-user -> user:[4026531837]
-uts -> uts:[4026531838]
+## 确认 PID 551330 下是否有这些 namespace
+~ ll /proc/551330/ns
+lrwxrwxrwx 1 root root 0 6月  23 13:21 ipc -> ipc:[4026532310]
+lrwxrwxrwx 1 root root 0 6月  23 13:21 mnt -> mnt:[4026532308]
+lrwxrwxrwx 1 root root 0 6月  23 01:22 net -> net:[4026532313]
+lrwxrwxrwx 1 root root 0 6月  23 01:23 pid -> pid:[4026532311]
+lrwxrwxrwx 1 root root 0 6月  23 13:21 user -> user:[4026531837]
+lrwxrwxrwx 1 root root 0 6月  23 13:21 uts -> uts:[4026532309]
 ```
-可以看出，Docker 会为每个容器中的进程创建新的 namespace，并通过这个新的 namespace 实现资源的隔离。
-- PID 1、2 的 Linux Namespace 相同，即 PID 1、2 都处于宿主机的 Namespace
-- PID 379225 与 PID 1、2 的 Linux Namespace 不同，即 Docker 为 PID 379225 创建了新的 Namespace
+可以看出，Docker 为 nginx 容器创建了新的 namespace (mnt、uts、ipc、pid、net)，并将 PID 为 551330 的进程加入了这些 namespace。
+
 
 ## 总结
 
 Linux Namespace：Linux 内核提供的一种机制，一种轻量级的虚拟化技术，用于**隔离和虚拟化系统资源**。
+
 
 8 种全局资源的虚拟化（内核版本不同，支持的 Namespace 可能不同）：
 - Mount: 隔离文件挂载点
@@ -152,7 +152,7 @@ Linux Namespace：Linux 内核提供的一种机制，一种轻量级的虚拟�
 - 特殊情况下，有一些因素可能会使得即使没有成员进程，namespace 依然存在。
 
 Linux Namespace 在 Docker 中的应用：
-- Docker 会为每个容器中的进程创建新的 namespace，并通过这个新的 namespace 实现资源的隔离。
+- Docker 会为每个容器中的进程创建新的 namespace，并启动的进程加入这些新的 namespace，最后通过这些 namespace 实现资源的隔离。
 
 ---
 

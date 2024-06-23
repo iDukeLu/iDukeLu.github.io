@@ -12,7 +12,7 @@ sidebar_position: 99
 
 Cgroups（Control Groups）是 linux 内核提供的一种机制，用来对一组进程及未来子进程的资源进行限制和管理。这些资源包括CPU、内存、存储、网络等。通过Cgroups，可以方便地限制某个进程的资源占用，并且可以实时地监控进程的监控和统计信息。
 
-:::tip
+:::info
 Cgroups（Control Groups）是 Linux 内核提供的一种机制，用于限制和记录进程组的资源使用情况（如 CPU、内存、磁盘 I/O 等。
 :::
 
@@ -31,7 +31,7 @@ Cgroups（Control Groups）是 Linux 内核提供的一种机制，用于限制�
 Cgroup 与进程的相似之处在于：它们是分层的，并且子 cgroup 从其父 cgroup 继承某些属性。
 多个单独的 cgroup 层次结构是必要的，因为每个层次结构都附加到一个或多个子系统。 子系统代表单个资源，例如 CPU 时间或内存等。
 
-:::tip
+:::info
 可以简单理解为：
 - cgroups 使用多个树形的 *层次结构(hierarchy)* 来组织和管理资源
 - 一个 *层次结构(hierarchy)* 是由多个 *子 cgroup* 节点组成的树形结构
@@ -47,7 +47,7 @@ Cgroup 与进程的相似之处在于：它们是分层的，并且子 cgroup �
 
 cgroups 控制器的层级结构 (hierarchy) 是通过在 cgroup 文件系统中创建、删除和重命名子目录来定义的。在层级的每一级，可以定义属性（如限制）。这些限制和控制会影响到该 cgroup 及其子层级。因此，设置在上层 cgroup 的限制会影响到所有下级 cgroup，下级 cgroup 无法超越上层的限制。
 
-:::tip
+:::info
 层次结构(hierarchy): 由多个 *子 cgroup* 节点组成的树形结构。
 :::
 
@@ -115,7 +115,7 @@ cgroups 控制器的层级结构 (hierarchy) 是通过在 cgroup 文件系统中
 
 子系统 (subsystem) 是内核组件，用于修改 cgroup 中进程的行为。不同的子系统实现了多种功能，例如限制 cgroup 可用的 CPU 时间和内存量、记录 cgroup 使用的 CPU 时间，以及冻结和恢复 cgroup 中进程的执行。子系统有时也称为资源控制器（或简称控制器）。
 
-:::tip
+:::info
 子系统(subsystem): 用于限制和监控某种特定资源的模块。
 :::
 
@@ -239,13 +239,13 @@ tasks
 
 ## 总结
 
-Cgroups: Linux 内核提供的一种机制，用于**限制和记录进程组的资源使用情况**。
+Linux Cgroups: Linux 内核提供的一种机制，用于**限制和记录进程组的资源使用情况**。
 
-Cgroups 组成：层次结构(hierarchy) + 子系统(subsystem)
+Linux Cgroups 组成：层次结构(hierarchy) + 子系统(subsystem)
 - 层次结构(hierarchy): 由多个 *子 cgroup* 节点组成的树形结构。
 - 子系统(subsystem): 用于限制和监控某种特定资源的模块。
 
-Cgroups 在 Docker 中的应用：
+Linux Cgroups 在 Docker 中的应用：
 - 使用 `docker run` 命令时，指定对应的 flag 限制相关资源
 - Docker 会为每个容器创建 cgroup 节点，并通过 cgroup 配置实现资源的限制和监控
 - 相关容器的 cgroup 节点在 `/sys/fs/cgroup/{资源类型}/docker/{容器ID}`

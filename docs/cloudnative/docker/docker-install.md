@@ -39,11 +39,21 @@ yum remove docker \
 ```
 
 ### 添加 Docker 软件源
-
+<Tabs>
+<TabItem value="Offical" label="官方源">
 ```sh
 yum install -y yum-utils
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
+</TabItem>
+<TabItem value="AliYun" label="阿里云源">
+```sh
+yum install -y yum-utils
+yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+sed -i 's+download.docker.com+mirrors.aliyun.com/docker-ce+' /etc/yum.repos.d/docker-ce.repo
+```
+</TabItem>
+</Tabs>
 
 ### 使用 yum 安装 Docker
 
@@ -51,7 +61,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 <TabItem value="Latest" label="最新版本">
 
 ```sh
-yum install docker-ce
+yum install -y docker-ce
 ```
 </TabItem>
 <TabItem value="Specific Version" label="指定版本">
@@ -72,7 +82,7 @@ yum install -y docker-ce-18.06.2.ce-3.el7
 </Tabs>
 
 :::info
-通常官方的命令会安装 *docker-ce*、*docker-ce-cli*、*containerd.io*、*docker-buildx-plugin* 、*docker-compose-plugin* 等多个组件。
+通常官方会推荐使用 `yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin` 命令来进行安装，下面是这些这组件的说明：
 
 - *docker-ce*：提供了 Docker Engine，用于构建、运行和管理容器化应用程序。
 - *docker-ce-cli*：命令行界面工具，用于与 Docker Engine 进行交互。
@@ -80,9 +90,18 @@ yum install -y docker-ce-18.06.2.ce-3.el7
 - *docker-buildx-plugin*：：Docker Build 扩展插件，用于多平台和多架构的容器镜像构建。
 - *docker-compose-plugin*：Docker Compose 插件，用于定义和运行多容器的应用程序。
 
-通常仅需安装 *docker-ce* 即可，因为在安装 *docker-ce* 时会自动安装 *docker-ce-cli*、*containerd.io*。<br/>
-*docker-buildx-plugin*：考虑需要跨平台构建镜像时安装。<br/>
-*docker-compose-plugin*：考虑后续会使用 Docker Compose 时安装。
+但其实仅需安装 *docker-ce* 即可，因为其他组件将作为 docker-ce 的依赖被自动安装：
+```
+已安装:
+  docker-ce.x86_64 3:26.1.4-1.el7
+
+作为依赖被安装:
+  containerd.io.x86_64 0:1.6.33-3.1.el7
+  docker-buildx-plugin.x86_64 0:0.14.1-1.el7
+  docker-ce-cli.x86_64 1:26.1.4-1.el7
+  docker-ce-rootless-extras.x86_64 0:26.1.4-1.el7
+  docker-compose-plugin.x86_64 0:2.27.1-1.el7
+```
 :::
 
 ### 启动 Docker，验证是否安装成功
@@ -96,7 +115,7 @@ systemctl start docker && systemctl enable docker
 docker -v
 ```
 
-### 卸载 Docker
+## 卸载 Docker
 
 ```sh
 ## 删除 Docker
@@ -120,8 +139,8 @@ rm -rf /var/lib/containerd
 21: br-f39d5850fc97: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
 
 ## 删除 Docker 创建的网卡
-ip link delete docker0
-ip link delete br-f39d5850fc97
+~ ip link delete docker0
+~ ip link delete br-f39d5850fc97
 ```
 
 ---
