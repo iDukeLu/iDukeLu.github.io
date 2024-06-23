@@ -235,7 +235,7 @@ tasks
 4296704
 ```
 
-可以看出，Docker 会为每个容器创建 cgroup 节点，并通过 cgroup 配置实现资源的限制和监控。
+可以看出，Docker 会为 nginx 容器创建 cgroup 节点，并通过 cgroup 配置实现资源的限制和监控。
 
 ## 总结
 
