@@ -85,6 +85,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: 'support_us',
+        content:'历史博客逐步迁移中... 敬请期待！',
+        backgroundColor: '#f15757',
+        textColor: '#091E42',
+        isCloseable: false,
+      },
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
