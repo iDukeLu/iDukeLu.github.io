@@ -2,8 +2,8 @@
 title: Linux Veth Pair
 authors: Duke Lu
 date: 2024-05-20
-tags: [云原生, Docker]
-sidebar_position: 100
+tags: [云原生, Docker, Linux]
+sidebar_position: 99
 ---
 
 ## 什么是 Linux Veth Pair
@@ -15,29 +15,27 @@ veth 设备是虚拟以太网设备。它们可以充当网络命名空间之间
 
 在对中的一个设备上传输的数据包会立即在另一个设备上接收。当任一设备关闭时，该对的链路状态为关闭。
 
-:::info
+:::info[总结]
 可以简单理解为 Linux Veth Pair 是一根虚拟的网线，从一端发出的数据包，可以在另一端接收到。<br/>
 通常，可以将这根网线的两端发在不同的网络空间 (Network Namespace)，从而实现网络命名空间之间的通信。
 :::
 
 ## 通过一个示例演示
 
+我创建两个网络空间和一个虚拟网卡对，并虚拟网卡对的两端将分别移动到两个网络空间中，最后我们通过一个网络空间 ping 另一个网络空间。最终的网络拓扑图如下：
+
 <center>
 
-![](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/static/excalidraw/docker/linux_veth_pair.excalidraw.png?raw=true)
+![网络拓扑图](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/static/excalidraw/docker/linux_veth_pair.excalidraw.png?raw=true)
 
 </center>
 
-- 创建两个网络空间 ntns1、ntns2
-- 创建虚拟网卡对 veth0、veth1
-- 并将 veth0、veth1 分别移动到 ntns1、ntns2
-
 ```sh
-## 创建两个 Network Namespace：ntns1、ntns2
+## 创建 2 个网络空间：ntns1、ntns2
 ~ ip netns add ntns1
 ~ ip netns add ntns2
 
-## 创建一对 Linux Veth Pair：veth0、veth1
+## 创建一个虚拟网卡对：veth0/veth1
 ~ ip link add veth0 type veth peer name veth1
 
 ## 将虚拟网卡 veth0 移动到 ntns1 网络空间
@@ -54,8 +52,9 @@ veth 设备是虚拟以太网设备。它们可以充当网络命名空间之间
 ~ ip netns exec ntns2 ifconfig veth1 10.10.10.11/24 up
 ~ ip netns exec ntns2 route add default dev veth1
 ```
+<br/>
 
-通过上面的一顿操作后，让我们看看 ntns1、ntns2 下的网卡：
+通过上面的一系列操作后，让我们看看 ntns1、ntns2 下的网卡：
 ```sh
 ## 查看 ntns1 的网卡
 ~ ip netns exec ntns1 ip addr show
@@ -79,6 +78,7 @@ veth 设备是虚拟以太网设备。它们可以充当网络命名空间之间
     inet6 fe80::1848:b7ff:febd:f924/64 scope link
     valid_lft forever preferred_lft forever
 ```
+<br/>
 
 最后，我们在 ntns1 中通过 veth0 ping veth1 的 IP
 ```sh
@@ -92,6 +92,7 @@ PING 10.10.10.11 (10.10.10.11) 56(84) bytes of data.
 3 packets transmitted, 3 received, 0% packet loss, time 1999ms
 rtt min/avg/max/mdev = 0.054/0.058/0.064/0.007 ms
 ```
+<br/>
 
 在新的终端中，我们也看到 ntns2 的 veth1 确实有接收到从 veth0 发出的数据包
 ```sh
@@ -115,11 +116,14 @@ c4ac920a44697897447ee0325f13926298193be2eddb0aa56f397352fe437fec
 <br/>
 
 查看下容器内的网卡信息：
-:::tip
-由于原本的 nginx 中没有 `ip` 命令，记得先使用 `apt-get update && apt-get install -y iproute2` 命令进行安装。
+:::warning[注意]
+由于原本的 nginx 中没有 `ip` 命令，使用以下命令进行安装即可：
+```sh
+apt-get update && apt-get install -y iproute2
+```
 :::
 ```sh {8-11}
-~ docker exec -it c4ac920a4469 ip addr show
+~ docker exec c4ac920a4469 ip addr show
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -143,14 +147,15 @@ c4ac920a44697897447ee0325f13926298193be2eddb0aa56f397352fe437fec
     inet6 fe80::e4d5:5aff:fec5:d06/64 scope link
        valid_lft forever preferred_lft forever
 ```
-可以看到，主机上确实存在 ID 为 84 的网卡，和容器内 ID 为 83 的网卡组成一对。
+可以看到，主机上确实存在 ID 为 84 的网卡，和容器内 ID 为 83 的网卡组成一对。此时的网络拓扑图如下：
 
 <center>
 
-![](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/static/excalidraw/docker/linux_veth_pair_in_docker.excalidraw.png?raw=true)
+![网络拓扑图](https://github.com/iDukeLu/iDukeLu.github.io/blob/main/static/excalidraw/docker/linux_veth_pair_in_docker.excalidraw.png?raw=true)
 
 </center>
 
+由此可以看出，Docker 会为每个容器创建新一个虚拟网卡对，虚拟网卡对的一端在主机上，一端在容器内，从而实现容器和主机的网络通信。
 
 ## 总结
 

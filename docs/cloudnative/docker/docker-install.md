@@ -81,7 +81,7 @@ yum install -y docker-ce-18.06.2.ce-3.el7
 </TabItem>
 </Tabs>
 
-:::info
+:::tip[说明]
 通常官方会推荐使用 `yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin` 命令来进行安装，下面是这些这组件的说明：
 
 - *docker-ce*：提供了 Docker Engine，用于构建、运行和管理容器化应用程序。

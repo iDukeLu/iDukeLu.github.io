@@ -2,8 +2,8 @@
 title: Linux Namespace
 authors: Duke Lu
 date: 2024-05-20
-tags: [云原生, Docker]
-sidebar_position: 98
+tags: [云原生, Docker, Linux]
+sidebar_position: 97
 ---
 
 ## 什么是 Linux Namespace ？
@@ -11,6 +11,10 @@ sidebar_position: 98
 > A namespace wraps a global system resource in an abstraction that makes it appear to the processes within the namespace that they have their own isolated instance of the global resource. Changes to the global resource are visible to other processes that are members of the namespace, but are invisible to other processes. One use of namespaces is to implement containers.
 
 Linux Namespace 是 Linux 内核提供的一种轻量级的虚拟化技术，用于隔离和虚拟化系统资源，它们可以将全局系统资源隔离到不同的独立空间，使不同的进程组拥有各自独立的资源视图。每个命名空间的目的是将特定的全局系统资源包装在抽象中，使命名空间内的进程看起来拥有自己的全局资源的隔离实例。 命名空间的总体目标之一是支持容器的实现，容器是一种用于轻量级虚拟化（以及其他目的）的工具，它为一组进程提供了它们是系统上唯一进程的错觉。
+
+:::info[总结]
+Linux Namespace 是 Linux 内核提供的一种机制，一种轻量级的虚拟化技术，用于**隔离和虚拟化系统资源**。
+:::
 
 ## Linux Namespace 分类
 
@@ -152,7 +156,7 @@ Linux Namespace：Linux 内核提供的一种机制，一种轻量级的虚拟�
 - 特殊情况下，有一些因素可能会使得即使没有成员进程，namespace 依然存在。
 
 Linux Namespace 在 Docker 中的应用：
-- Docker 会为每个容器中的进程创建新的 namespace，并启动的进程加入这些新的 namespace，最后通过这些 namespace 实现资源的隔离。
+- Docker 会为每个容器中的进程创建新的 namespace，并将启动的进程加入这些新的 namespace，最后通过这些 namespace 实现资源的隔离。
 
 ---
 
