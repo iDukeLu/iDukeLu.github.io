@@ -1,7 +1,7 @@
 # blog
 
 ## 快速建站
-
+参考：https://vitepress.dev/zh/guide/getting-started
 ```shell
 ## 创建站点目录
 blog_site=iDukeLu.github.io
@@ -34,4 +34,11 @@ yarn vitepress init
 
 ## 本地调试
 yarn docs:dev
+```
+
+## 部署 Github Pages
+参考：https://vitepress.dev/zh/guide/deploy#github-pages
+```shell
+mkdir -p .github/workflows
+touch deploy.yml ## 文件内容请参考链接
 ```

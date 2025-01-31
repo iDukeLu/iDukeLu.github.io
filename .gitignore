@@ -1,0 +1,9 @@
+# Dependencies
+/node_modules
+
+# Generated files
+/docs/.vitepress/cache
+/docs/.vitepress/dist
+
+# Misc
+.DS_Store
