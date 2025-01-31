@@ -1,0 +1,107 @@
+---
+title: Golang 下载安装
+---
+
+## 下载安装
+
+### 手动安装
+
+手动安装时，通过官方站点查看和下载对应版本的压缩包即可：
+
+- 官方英文站: [https://go.dev/dl/](https://go.dev/dl/)
+- 官方中文站: [https://golang.google.cn/dl/]( https://golang.google.cn/dl/)
+- 阿里云站点: [https://mirrors.aliyun.com/golang/](https://mirrors.aliyun.com/golang/)
+
+::: code-group
+
+```shell [wget]
+wget https://golang.google.cn/dl/go1.23.0.linux-amd64.tar.gz
+tar -zxvf go1.23.0.linux-amd64.tar.gz -C /usr/local/
+```
+
+```shell [curl]
+curl -OL# https://golang.google.cn/dl/go1.23.0.linux-amd64.tar.gz
+tar -zxvf go1.23.0.linux-amd64.tar.gz -C /usr/local/
+```
+
+:::
+
+### 包管理器安装
+
+::: code-group
+
+```shell [MacOS]
+brew install golang
+```
+
+```shell [CentOS]
+dnf install -y golang
+```
+
+```shell [Ubuntu]
+apt-get install -y golang
+```
+
+:::
+
+## 配置环境变量
+
+编辑 `~/.bashrc` 文件，添加如下环境变量：
+
+```shell
+export GOROOT=/usr/local/go
+export GOPATH=/$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH:$GOBIN
+```
+
+环境变量说明：
+
+- `GOROOT`: Go 语言的安装目录，包含 Go 语言的标准库和工具链。
+- `GOPATH`: Go 语言的工作目录，包含用户的源代码、依赖包和可执行文件。
+- `GOBIN`: Go 语言的可执行文件安装目录，`go install` 命令下载的可执行文件的存放位置。
+
+## 配置国内源
+
+众所周知，国内用户在访问国外资源时常常会遇到不稳定的情况，这可能导致某些外网包无法下载或下载速度极慢。因此，配置国内镜像源显得尤为重要。
+
+::: code-group
+
+```shell [国内社区]
+go env -w  GO111MODULE=on GOPROXY=https://goproxy.cn,direct
+```
+
+```shell [七牛云]
+go env -w  GO111MODULE=on GOPROXY=https://goproxy.io,direct
+```
+
+```shell [阿里云]
+go env -w GO111MODULE=on GOPROXY=https://mirrors.aliyun.com/goproxy,direct
+```
+
+```shell [腾讯云]
+go env -w GO111MODULE=on GOPROXY=https://mirrors.tencent.com/go,direct
+```
+
+```shell [华为云]
+go env -w GO111MODULE=on GOPROXY=https://mirrors.huaweicloud.com/repository/goproxy,direct
+```
+
+:::
+
+环境变量说明：
+
+- `GO111MODULE`：用于控制 Go Modules 的启用状态，可以设置为 `on`、`off`、`auto`。
+  
+  - `off`：go 命令以 GOPATH 模式运行，并将忽略 go.mod 文件。
+  - `on`：go 命令以 GOMODULE 模式运行，即使没有 go.mod 文件也是如此。
+  - `auto`：当前文件夹或父文件夹存在 go.mod 文件，go 命令以 GOMODULE 模式运行。即使不存在 go. mod 文件，go mod 子命令和带有版本的 go install 命令也以 GOMODULE 模式运行。
+
+- `GOPROXY`：用于指定 Go Modules 的代理服务器（GO111MODULE=on 时生效）。它允许 Go 工具在下载依赖时使用代理，从而提高下载速度和可靠性。
+
+---
+
+参考:
+
+- [https://go.dev/doc/install](https://go.dev/doc/install)
+- [https://go.dev/doc/install/source](https://go.dev/doc/install/source)
