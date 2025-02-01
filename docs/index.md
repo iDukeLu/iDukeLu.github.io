@@ -3,23 +3,18 @@
 layout: home
 
 hero:
-  name: "Sunset Manor"
-  text: "Plane of Euthymia"
-  tagline: My great project tagline
+  name: "Duke's Blog"
+  tagline: Document, Accumulate, and Grow.
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Golang
+      link: /golang/basics/go-install
     - theme: alt
-      text: API Examples
+      text: Cloud Native
+      link: /api-examples
+    - theme: alt
+      text: Algorithm
       link: /api-examples
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 

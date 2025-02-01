@@ -1,9 +1,13 @@
 import { defineConfig } from 'vitepress'
+import { DefaultTheme } from 'vitepress';
+import AutoSidebar from 'vite-plugin-vitepress-auto-sidebar';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Sunset Manor",
-  description: "Plane of Euthymia",
+  title: "Duke's Blog",
+  description: "不积跬步，无以至千里",
+  lang: 'zh-CN',
+  cleanUrls: true,
 
   // markdown 配置
   markdown: {
@@ -13,46 +17,54 @@ export default defineConfig({
     },
   },
 
+  vite: {
+    plugins: [
+      // 自动生成侧边栏插件
+      AutoSidebar({
+        titleFromFileByYaml: true,
+        collapsed: true,
+        ignoreIndexItem: true,
+        sideBarItemsResolved: (data: DefaultTheme.SidebarItem[]) => {
+          // 按照数字进行排序
+          return data.sort((a, b) => {
+            // 提取数字
+            const aMatch = a.text?.match(/^(\d+)\./);
+            const bMatch = b.text?.match(/^(\d+)\./);
+            // 按数字排序
+            const aNumber = aMatch ? parseInt(aMatch[1], 10) : 0;
+            const bNumber = bMatch ? parseInt(bMatch[1], 10) : 0;
+            return aNumber - bNumber;
+          });
+        }
+      })
+    ]
+  },
+
   // 主题配置
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: 'https://github.com/idukelu.png',
-    outline: 'deep',
+    outline: [2, 3], // 大纲显示标题级别
+    externalLinkIcon: true, // 链接旁显示外部链接图标
     lastUpdated: {
-      text: 'Updated at',
+      text: '最后更新于',
       formatOptions: {
-        dateStyle: 'full',
-        timeStyle: 'medium'
+        dateStyle: 'medium',
       }
+    },
+    docFooter: {
+      prev: '上一篇',
+      next: '下一篇'
     },
 
     // 导航栏
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Golang', link: '/golang/basics/go-install' }
+      { text: 'Golang', link: '/golang/' },
+      { text: '算法', link: '/algorithm/' },
     ],
 
-    // 侧边栏
-    sidebar: {
-      '/golang/': [
-        {
-          items: [
-            { text: '下载安装', link: '/golang/basics/go-install' },
-            { text: '环境变量', link: '/golang/basics/go-env' },
-            {
-              text: '每日一库',
-              collapsed: true,
-              items: [
-                { text: 'gin', link: '/golang/dailyiku/gin' }
-              ]
-            },
-          ]
-        },
-      ]
-    },
-
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/iDukeLu' }
     ]
   }
 })
