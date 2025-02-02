@@ -8,6 +8,7 @@ export default defineConfig({
   description: "不积跬步，无以至千里",
   lang: 'zh-CN',
   cleanUrls: true,
+  lastUpdated: false,
 
   // markdown 配置
   markdown: {
@@ -21,7 +22,7 @@ export default defineConfig({
     plugins: [
       // 自动生成侧边栏插件
       AutoSidebar({
-        titleFromFileByYaml: true,
+        titleFromFile: true,
         collapsed: false,
         ignoreIndexItem: true,
         sideBarItemsResolved: (data: DefaultTheme.SidebarItem[]) => {
@@ -46,6 +47,21 @@ export default defineConfig({
     logo: 'https://github.com/idukelu.png',
     outline: [2, 3], // 大纲显示标题级别
     externalLinkIcon: true, // 链接旁显示外部链接图标
+    
+    // 头部
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/iDukeLu' }
+    ],
+    nav: [
+      { text: 'Golang', link: '/golang/' },
+      { text: '云原生', link: '/cloudnative/' },
+      { text: '算法', link: '/algorithm/' },
+    ],
+    search: {
+      provider: 'local'
+    },
+    
+    // 尾部
     lastUpdated: {
       text: '最后更新于',
       formatOptions: {
@@ -56,17 +72,9 @@ export default defineConfig({
       prev: '上一篇',
       next: '下一篇'
     },
-
-    // 导航栏
-    nav: [
-      { text: 'Golang', link: '/golang/' },
-      { text: '云原生', link: '/cloudnative/' },
-      { text: '算法', link: '/algorithm/' },
-    ],
-    
-
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/iDukeLu' }
-    ]
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2017-present Duke Lu'
+    },
   }
 })
