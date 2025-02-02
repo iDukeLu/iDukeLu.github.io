@@ -22,7 +22,7 @@ export default defineConfig({
       // 自动生成侧边栏插件
       AutoSidebar({
         titleFromFileByYaml: true,
-        collapsed: true,
+        collapsed: false,
         ignoreIndexItem: true,
         sideBarItemsResolved: (data: DefaultTheme.SidebarItem[]) => {
           // 按照数字进行排序
@@ -60,8 +60,10 @@ export default defineConfig({
     // 导航栏
     nav: [
       { text: 'Golang', link: '/golang/' },
+      { text: '云原生', link: '/cloudnative/' },
       { text: '算法', link: '/algorithm/' },
     ],
+    
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/iDukeLu' }

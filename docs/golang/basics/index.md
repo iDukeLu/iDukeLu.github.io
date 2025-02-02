@@ -1,3 +1,3 @@
 ---
-title: Golang 基础
+title: Go 语言基础
 ---
