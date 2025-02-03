@@ -8,13 +8,14 @@ hero:
   actions:
     - theme: brand
       text: Golang
-      link: /golang/basics/go-install
+      link: /golang
     - theme: alt
       text: Cloud Native
-      link: /api-examples
+      link: /cloudnative
     - theme: alt
       text: Algorithm
-      link: /api-examples
+      link: /algorithm
 
 ---
 
+<BlogList />

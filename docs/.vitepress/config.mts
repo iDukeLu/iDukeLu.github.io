@@ -1,6 +1,7 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vitepress';
 import { DefaultTheme } from 'vitepress';
-import AutoSidebar from 'vite-plugin-vitepress-auto-sidebar';
+import autoSidebar from 'vite-plugin-vitepress-auto-sidebar';
+import { figure } from '@mdit/plugin-figure';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -9,6 +10,10 @@ export default defineConfig({
   lang: 'zh-CN',
   cleanUrls: true,
   lastUpdated: false,
+  appearance: false,
+  sitemap: {
+    hostname: 'https://idukelu.com'
+  },
 
   // markdown 配置
   markdown: {
@@ -16,12 +21,18 @@ export default defineConfig({
     image: {
       lazyLoading: true
     },
+    config: (md) => { 
+      // 图片描述
+      md.use(figure, { figcaption: 'alt', copyAttrs: '^class$', lazy: true }) 
+    },
   },
+
+  
 
   vite: {
     plugins: [
       // 自动生成侧边栏插件
-      AutoSidebar({
+      autoSidebar({
         titleFromFile: true,
         collapsed: false,
         ignoreIndexItem: true,
