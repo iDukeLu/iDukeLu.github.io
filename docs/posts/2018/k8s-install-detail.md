@@ -336,7 +336,7 @@ tags: [kubernetes]
         ```
         kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
         ```
-        参考：Flannel Github - [README.md]([https://github.com/coreos/flannel/](https://github.com/coreos/flannel/))
+        参考：Flannel Github - [README.md](https://github.com/coreos/flannel/)
     
     - Calico 插件
     

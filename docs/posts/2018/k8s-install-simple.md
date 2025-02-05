@@ -262,7 +262,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 ```
 CNI 插件参考：
-- Flannel Github - [README.md]([https://github.com/coreos/flannel/](https://github.com/coreos/flannel/))
+- Flannel Github - [README.md](https://github.com/coreos/flannel/)
 - Calico 官方文档 - [Quickstart for Calico on Kubernetes](https://docs.projectcalico.org/v3.8/getting-started/kubernetes/)
 - 更多可以参考：Kubernetes 官方文档提供的教程 - [ Installing Addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
 
