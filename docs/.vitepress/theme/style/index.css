@@ -1,0 +1,48 @@
+body {
+    /* background-image: url('./47.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+:root {
+    --vp-layout-max-width: 100%;
+    --vp-layout-min-width: 1280px;
+    --vp-header-anchor-symbol: '♣';
+
+     /* 信息框、提示框 背景颜色 */
+    --vp-custom-block-tip-bg: var(--vp-c-green-soft);
+    --vp-custom-block-info-bg: var(--vp-c-indigo-soft);
+}
+  
+/* 信息框 */
+.custom-block.info {
+    border-color: var(--vp-c-indigo-2);
+}
+
+/* 提示框 */
+.custom-block.tip {
+    border-color: var(--vp-c-green-2);
+}
+  
+/* 警告框 */
+.custom-block.warning {
+    border-color: var(--vp-c-yellow-2);
+}
+  
+/* 危险框 */
+.custom-block.danger {
+    border-color: var(--vp-c-red-2);
+}
+
+/* 图片缩放 */
+.medium-zoom-overlay {
+    z-index: 30;
+}
+.medium-zoom-image {
+    /* 给的值是21，但是实测盖不住，直接999 */
+    z-index: 9999 !important; 
+}
+  
+
+  

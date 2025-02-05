@@ -9,8 +9,8 @@ export default defineConfig({
   description: "不积跬步，无以至千里",
   lang: 'zh-CN',
   cleanUrls: true,
-  lastUpdated: false,
-  appearance: false,
+  lastUpdated: true,
+  appearance: true,
   sitemap: {
     hostname: 'https://idukelu.com'
   },
@@ -49,14 +49,24 @@ export default defineConfig({
           });
         }
       })
-    ]
+    ],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
+    },
   },
 
   // 主题配置
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: 'https://github.com/idukelu.png',
-    outline: [2, 3], // 大纲显示标题级别
+    outline: {
+      level: [2, 3], // 右侧边栏标题级别
+      label: '页面导航', // 右侧边栏的标题
+    }, 
     externalLinkIcon: true, // 链接旁显示外部链接图标
     
     // 头部
@@ -74,7 +84,7 @@ export default defineConfig({
     
     // 尾部
     lastUpdated: {
-      text: '最后更新于',
+      text: '最后更新时间',
       formatOptions: {
         dateStyle: 'medium',
       }

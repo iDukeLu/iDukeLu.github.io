@@ -6,10 +6,13 @@
   },
   "devDependencies": {
     "@mdit/plugin-figure": "^0.16.6-cjs.0",
+    "medium-zoom": "^1.1.0",
+    "sass-embedded": "^1.83.4",
     "vitepress": "^1.6.3"
   },
   "dependencies": {
     "@theojs/lumen": "^5.4.0",
+    "tdesign-vue-next": "^1.10.7",
     "vite-plugin-vitepress-auto-sidebar": "^1.7.1"
   }
 }

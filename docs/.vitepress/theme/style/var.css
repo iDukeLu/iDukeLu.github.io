@@ -1,0 +1,8 @@
+/* .vitepress/theme/style/var.css */
+.medium-zoom-overlay {
+z-index: 21;
+}
+.medium-zoom-image {
+z-index: 21 !important;
+}
+  
