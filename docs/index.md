@@ -93,7 +93,7 @@ const onCurrentChange: PaginationProps["onCurrentChange"] = (
   display: inline-block; /* 使 span 表现为块级元素 */
   padding: 0px 4px; /* 内边距 */
   border: 1px solid #ccc; /* 边框 */
-  border-radius: 8px; /* 圆角 */
+  border-radius: 6px; /* 圆角 */
   font-size: 12px; /* 字体大小 */
   background-color:transparent; /* 背景颜色 */
   margin-right: 4px; /* 右侧间距 */
